@@ -5,11 +5,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.PlayerList;
 import net.minecraft.world.entity.Entity;
-//#if MC >= 12111
-//$$ import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrownEnderpearl;
-//#else
 import net.minecraft.world.entity.projectile.ThrownEnderpearl;
-//#endif
 
 import java.util.List;
 import java.util.UUID;
@@ -97,6 +93,9 @@ public final class PearlTraceHandler {
 
     private static boolean isLive(ThrownEnderpearl pearl) {
         ServerLevel level = (ServerLevel) pearl.level();
+        // not a plain rename: on 1.21.10+ getEntity compiles via the EntityGetter
+        // default but only searches the current dimension, while the deliberate
+        // call is the cross-dimension lookup
         //#if MC >= 12110
         //$$ return level.getEntityInAnyDimension(pearl.getUUID()) == pearl;
         //#else

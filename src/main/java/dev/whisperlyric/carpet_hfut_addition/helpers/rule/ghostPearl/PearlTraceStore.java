@@ -7,11 +7,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.storage.LevelResource;
-//#if MC >= 12111
-//$$ import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrownEnderpearl;
-//#else
 import net.minecraft.world.entity.projectile.ThrownEnderpearl;
-//#endif
 
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;

@@ -3,11 +3,7 @@ package dev.whisperlyric.carpet_hfut_addition.mixins.rule.projectileCleanup;
 import dev.whisperlyric.carpet_hfut_addition.HFUTSettings;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.projectile.ShulkerBullet;
-//#if MC >= 12111
-//$$ import net.minecraft.world.entity.projectile.hurtingprojectile.WitherSkull;
-//#else
 import net.minecraft.world.entity.projectile.WitherSkull;
-//#endif
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

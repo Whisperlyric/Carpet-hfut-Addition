@@ -2,11 +2,7 @@ package dev.whisperlyric.carpet_hfut_addition.mixins.rule.ghostPearl;
 
 import dev.whisperlyric.carpet_hfut_addition.helpers.rule.ghostPearl.PearlTraceHandler;
 import net.minecraft.world.entity.Entity;
-//#if MC >= 12111
-//$$ import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrownEnderpearl;
-//#else
 import net.minecraft.world.entity.projectile.ThrownEnderpearl;
-//#endif
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

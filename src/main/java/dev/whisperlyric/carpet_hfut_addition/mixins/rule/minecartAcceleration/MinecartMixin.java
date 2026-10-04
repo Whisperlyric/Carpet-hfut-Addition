@@ -1,10 +1,6 @@
 package dev.whisperlyric.carpet_hfut_addition.mixins.rule.minecartAcceleration;
 
-//#if MC >= 12111
-//$$ import net.minecraft.world.entity.vehicle.minecart.Minecart;
-//#else
 import net.minecraft.world.entity.vehicle.Minecart;
-//#endif
 import dev.whisperlyric.carpet_hfut_addition.HFUTSettings;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;

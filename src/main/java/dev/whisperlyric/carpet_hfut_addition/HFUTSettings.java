@@ -133,4 +133,81 @@ public class HFUTSettings {
     //$$     return MODE_VANILLA;
     //$$ }
     //#endif
+
+    // ------------------------------------------------------------------
+    // Vanilla numeric typos: dig-speed table (fixed in 26.3) and dragon
+    // flight (MC-272431, unfixed everywhere)
+    // ------------------------------------------------------------------
+
+    /**
+     * Fix the mining fatigue dig-speed table: 0.0027 and 8.1E-4 should be
+     * 0.027 and 0.0081, so fatigue III+ digs 10x too slow. 26.3 replaced
+     * the table with 0.3^(amplifier+1).
+     */
+    //#if MC < 260300
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.BUGFIX})
+    public static boolean miningFatigueDigSpeedFix = false;
+    //#endif
+
+    /**
+     * Fix MC-272431: since 19w08b the dragon's vertical acceleration toward
+     * its target node is scaled by 0.01 instead of 0.1 (1.12 had 0.1), so
+     * it can barely climb or dive. Unfixed in every supported version.
+     */
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.BUGFIX})
+    public static boolean enderDragonVerticalVelocityFix = false;
+
+    // ------------------------------------------------------------------
+    // Vanilla feature ports and small features
+    // ------------------------------------------------------------------
+
+    /**
+     * Port of the 26.3 villager trade change: a qualifying trade levels the
+     * villager up and unlocks the next tier instantly, without closing and
+     * reopening the screen.
+     */
+    //#if MC < 260300
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    public static boolean villagerInstantLevelUp = false;
+    //#endif
+
+    /**
+     * Port of the 26.3 live price sync: restocks, demand catch-up, gossip
+     * and player reputation events reprice the offers shown to a player
+     * who is mid-trade, instead of waiting for the next screen open.
+     */
+    //#if MC < 260300
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    public static boolean villagerLivePriceSync = false;
+    //#endif
+
+    /**
+     * Baby mobs keep away from golden dandelions (incl. potted), the way
+     * piglins fear soul fire. Only exists where the block does (26.1.2+).
+     */
+    //#if MC >= 260102
+    //$$ @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    //$$ public static boolean babyMobAvoidGoldenDandelion = false;
+    //#endif
+
+    /** Bone meal on a mature (age 7) melon/pumpkin stem grows the fruit block. */
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    public static boolean bonemealGrowMelons = false;
+
+    /**
+     * Port of the 26.3 map change: off-map player markers rotate with the
+     * player's facing instead of pointing north. In-map markers always did.
+     */
+    //#if MC < 260300
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    public static boolean mapPlayerIconRotation = false;
+    //#endif
+
+    /**
+     * Creative players are neither stopped by entity hitboxes nor pushed
+     * around by them - standing or flying, so landing never re-enables
+     * collision. Block collision is untouched.
+     */
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    public static boolean creativeNoEntityCollision = false;
 }

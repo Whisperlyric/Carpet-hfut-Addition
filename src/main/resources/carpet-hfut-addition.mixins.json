@@ -29,11 +29,24 @@
     "rule.mapLeak.SavedDataCacheAccessor",
     "rule.reloginLeak.ReLoginTaskMixin",
     "rule.reloginLeak.PlayerListSaveSkipMixin",
+    "rule.miningFatigue.PlayerMixin",
+    "rule.enderDragonFlight.EnderDragonMixin",
+    "rule.villagerInstantLevelUp.VillagerMixin",
+    "rule.villagerLivePriceSync.VillagerMixin",
+    "rule.babyMobAvoidGoldenDandelion.AgeableMobMixin",
+    "rule.babyMobAvoidGoldenDandelion.TadpoleMixin",
+    "rule.babyMobAvoidGoldenDandelion.MobGoalSelectorAccessor",
+    "rule.bonemealMelon.StemBlockMixin",
+    "rule.mapPlayerIconRotation.MapItemSavedDataMixin",
+    "rule.creativeNoEntityCollision.EntityMixin",
+    "rule.creativeNoEntityCollision.LivingEntityMixin",
     "compat.guglecarpetaddition.CustomMenuInvoker",
     "compat.guglecarpetaddition.PlayerContainerAccessor",
     "compat.guglecarpetaddition.PlayerEnderChestContainerMixin"
   ],
-  "client": [],
+  "client": [
+    "client.rule.mapPlayerIconRotation.MapDecorationMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }
