@@ -24,7 +24,8 @@ public abstract class ServerPlayerMixin {
     public static abstract class Before {
         @Inject(method = "tick", at = @At("HEAD"))
         private void hfut$cancelCarpetActionPackTicking_before(CallbackInfo ci) {
-            if ((Object) this instanceof EntityPlayerMPFake fake
+            ServerPlayer self = (ServerPlayer) (Object) this;
+            if (self instanceof EntityPlayerMPFake fake
                     && FakePlayerTickStage.effectiveTicksLikeRealPlayer(fake)) {
                 PlayerActionPackCanceller.cancelled.set(true);
                 FakePlayerTicker.getInstance().addActionPackTick(fake, ((ServerPlayerInterface) fake).getActionPack());

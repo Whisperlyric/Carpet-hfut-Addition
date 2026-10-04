@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/License-LGPL%203.0-blue.svg)](https://choosealicense.com/licenses/lgpl-3.0/)
 
-A [Fabric Carpet](https://github.com/gnembon/fabric-carpet) extension developed by HFUT.
+A [Fabric Carpet](https://github.com/gnembon/fabric-carpet) extension developed by HFUT Minecraft Community.
 
 [中文](README.md) | **English**
 

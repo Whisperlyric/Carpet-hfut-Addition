@@ -153,3 +153,101 @@ Fixes the relogin leak on Carpet-Org-Addition's 1.21.x line: the old fake player
 - Categories: `HFUT`, `REMOTE_BUGFIX`
 
 > Requires carpet-org-addition; only 1.21.2 - 1.21.11 is affected (newer ORG fixed itself).
+
+## miningFatigueDigSpeedFix `MC<=26.2`
+
+Fixes the mining fatigue dig-speed table: 0.027 was typed as 0.0027 and 0.0081 as 8.1E-4, so dig speed under fatigue III+ is 10x slower than intended.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `BUGFIX`
+
+> 26.3 fixed this upstream with 0.3^(amplifier+1); this rule only exists below 26.3 and matches that behaviour (levels V+ are command-only and are treated as IV).
+
+## enderDragonVerticalVelocityFix
+
+Fixes the ender dragon's vertical velocity when flying to a target node (MC-272431): since 19w08b (1.14) the vertical acceleration scale is 0.01 instead of 0.1, so the dragon can barely climb or dive and circles its target nodes.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `BUGFIX`
+
+> Restores 1.13-and-earlier flight: perching descends without wandering, charges reach the player; unfixed in every supported version.
+>
+> Also mitigates MC-271336, MC-271337 and MC-197201.
+
+## villagerInstantLevelUp `MC<=26.2`
+
+Port of the 26.3 villager trading: a qualifying trade levels the villager up and unlocks the next tier instantly, without closing and reopening the screen.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`
+
+> Up to 26.2 the level-up is deferred by 40gt and only runs while the villager is not trading, hence the screen dance; 26.3 does it on the spot.
+>
+> Also ports the 10s regen I on level-up and instant special prices on the freshly unlocked tier.
+
+## villagerLivePriceSync `MC<=26.2`
+
+Port of the 26.3 instant villager price recompute: while the trade screen is open, restocks, demand catch-up, gossip spread and player reputation all reprice and correct the offers instantly.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`
+
+> Up to 26.2 vanilla waits for the next screen open to update; this rule makes the new prices apply while the screen is still open.
+
+## babyMobAvoidGoldenDandelion `MC>=26.1.2`
+
+Babies whose growth golden dandelion suppresses steer away from it (incl. potted), piglin-and-soul-fire style; only the 33 growable babies below are affected.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`
+
+> Armadillo, axolotl, bee, camel, cat, chicken, cow, dolphin, donkey, fox, glowing squid, goat, small ghast (happy ghast baby), hoglin, horse, llama, mooshroom, mule, nautilus, ocelot, panda, pig, polar bear, rabbit, sheep, sniffer, squid, strider, sulfur cube, tadpole, trader llama, turtle, wolf.
+>
+> Mobs outside the list (villager children included) and adults are unaffected: a 6-block scan every 20gt, then fleeing 8-12 blocks away. The sulfur cube is a 26.2+ mob, so that entry is inert on 26.1.2.
+
+## bonemealGrowMelons
+
+Bone meal on a mature (age 7) melon/pumpkin stem grows the fruit block.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`
+
+> Vanilla rejects bone meal on mature stems outright, leaving the fruit to random ticks; when on, a mature stem becomes a valid target and fruit placement fully reuses vanilla random-tick logic.
+
+## mapPlayerIconRotation `MC<=26.2`
+
+Port of the 26.3 map change: a player outside the map bounds gets their edge-clamped marker rotated by their facing.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`
+
+> In-map player markers always showed facing; up to 26.2 off-map markers point north, and 26.3 rotates theirs by facing as well.
+>
+> The rotation byte travels in the map data packet, so vanilla clients render it without this mod installed.
+
+## creativeNoEntityCollision
+
+Creative players are no longer stopped by entity hitboxes nor pushed around - including after landing; standing on a boat, shulker or the like simply falls through.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`
+
+> Unlike carpet's own `creativeNoClip` (treats flying creative players as spectators, blocks included, and collision comes back the moment they land): this rule only disables entity collision, keeps block collision, and does not care whether the player is flying.
+>
+> Pushing is inert in both directions (mobs, minecarts and boats neither shove the player nor get shoved); projectile hits, pressure plates and other non-collision interactions are unaffected.

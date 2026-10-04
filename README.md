@@ -4,7 +4,7 @@
 
 **中文** | [English](README_en.md)
 
-基于 [Fabric Carpet](https://github.com/gnembon/fabric-carpet) 的扩展模组，由 HFUT 开发。
+基于 [Fabric Carpet](https://github.com/gnembon/fabric-carpet) 的扩展模组，由 HFUT Minecraft 社区开发。
 
 ## 依赖
 
@@ -14,7 +14,7 @@
 | Fabric API        | 必须 | [FabricMC](https://fabricmc.net/)                                                                                    |
 | MixinExtras       | 内置 | [GitHub](https://github.com/SpongePowered/MixinExtras)                                                               |
 | conditional-mixin | 内置 | [GitHub](https://github.com/Fallen-Breath/conditional-mixin)                                                         |
-| GCA               | 可选 | [GitHub](https://github.com/Gu-ZT/gugle-carpet-addition)（提供假人菜单里的 tick 阶段反转按钮）                                      |
+| GCA               | 可选 | [GitHub](https://github.com/Gu-ZT/gugle-carpet-addition)（提供假人菜单里的 tick 阶段反转按钮）                                       |
 
 ## 版本支持
 
