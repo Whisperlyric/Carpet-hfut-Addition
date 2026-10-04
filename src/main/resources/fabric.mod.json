@@ -1,0 +1,32 @@
+{
+    "schemaVersion": 1,
+    "id": "${id}",
+    "version": "${version}",
+    "name": "${name}",
+    "description": "A Carpet mod extension developed by HFUT",
+    "authors": [
+        "HFUT"
+    ],
+    "contact": {
+        "homepage": "https://github.com/Whisperlyric/Carpet-Hfut-Addition",
+        "sources": "https://github.com/Whisperlyric/Carpet-Hfut-Addition"
+    },
+    "icon": "assets/carpet-hfut-addition/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "dev.whisperlyric.carpet_hfut_addition.HFUTServerMod"
+        ]
+    },
+    "mixins": [
+        "carpet-hfut-addition.mixins.json"
+    ],
+    "accessWidener": "carpet-hfut-addition.accesswidener",
+    "depends": {
+        "fabricloader": ">=0.11.4",
+        "minecraft": "${minecraft_dependency}",
+        "fabric-api": "*",
+        "carpet": "*"
+    },
+    "license": "LGPLv3"
+}

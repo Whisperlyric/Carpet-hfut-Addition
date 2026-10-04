@@ -1,0 +1,84 @@
+plugins {
+	id 'maven-publish'
+	id 'fabric-loom' version '1.17.20' apply false
+	id 'net.fabricmc.fabric-loom-remap' version '1.17.20' apply false
+
+	// https://github.com/ReplayMod/preprocessor (upstream, consumes the mapping files below)
+	id 'com.replaymod.preprocess' version '221276c7'
+}
+
+preprocess {
+	// strict mode parses the link() mapping files in the ExtraMapping format (see versions/mapping-*.txt)
+	strictExtraMappings = true
+
+	// Specify main project (otherwise preprocessor won't know which project is the base)
+	// the upstream plugin reads it from versions/<v>/../mainProject, i.e. versions/mainProject
+
+	// obfuscated (1.21.x) nodes pass 'official', unobfuscated (26.x) nodes must pass null
+	def mc1211  = createNode('1.21.1', 1_21_01, 'official')
+	def mc1213  = createNode('1.21.3', 1_21_03, 'official')
+	def mc1214  = createNode('1.21.4', 1_21_04, 'official')
+	def mc1215  = createNode('1.21.5', 1_21_05, 'official')
+	def mc1218  = createNode('1.21.8', 1_21_08, 'official')
+	def mc12110 = createNode('1.21.10', 1_21_10, 'official')
+	def mc12111 = createNode('1.21.11', 1_21_11, 'official')
+	def mc260102 = createNode('26.1.2', 26_01_02, null)
+	def mc260200 = createNode('26.2', 26_02_00, null)
+	def mc260300 = createNode('26.3', 26_03_00, null)
+
+	mc1211.link(mc1213, file('versions/mapping-1.21.1-1.21.3.txt'))
+	mc1213.link(mc1214, file('versions/mapping-1.21.3-1.21.4.txt'))
+	mc1214.link(mc1215, file('versions/mapping-1.21.4-1.21.5.txt'))
+	mc1215.link(mc1218, file('versions/mapping-1.21.5-1.21.8.txt'))
+	mc1218.link(mc12110, file('versions/mapping-1.21.8-1.21.10.txt'))
+	mc12110.link(mc12111, file('versions/mapping-1.21.10-1.21.11.txt'))
+	mc12111.link(mc260102, file('versions/mapping-1.21.11-26.1.2.txt'))
+	mc260102.link(mc260200, file('versions/mapping-26.1.2-26.2.txt'))
+	mc260200.link(mc260300, file('versions/mapping-26.2-26.3.txt'))
+
+	// the upstream extension does not expose its node list, so publish mcVersion explicitly
+	// (common.gradle reads project.mcVersion before the preprocess plugin applies)
+	[
+		'1.21.1' : 1_21_01,
+		'1.21.3' : 1_21_03,
+		'1.21.4' : 1_21_04,
+		'1.21.5' : 1_21_05,
+		'1.21.8' : 1_21_08,
+		'1.21.10': 1_21_10,
+		'1.21.11': 1_21_11,
+		'26.1.2' : 26_01_02,
+		'26.2'   : 26_02_00,
+		'26.3'   : 26_03_00,
+	].forEach { name, code ->
+		findProject(":$name").ext.mcVersion = code
+	}
+}
+
+tasks.register('buildAndGather') {
+	subprojects {
+		dependsOn project.tasks.named('build').get()
+	}
+	doFirst {
+		println 'Gathering builds'
+		def buildLibs = {
+			p -> p.buildDir.toPath().resolve('libs')
+		}
+		delete fileTree(buildLibs(rootProject)) {
+			include '*'
+		}
+		subprojects {
+			copy {
+				from(buildLibs(project)) {
+					include '*.jar'
+					exclude '*-dev.jar', '*-sources.jar', '*-shadow.jar'
+				}
+				into buildLibs(rootProject)
+				duplicatesStrategy = DuplicatesStrategy.INCLUDE
+			}
+		}
+	}
+}
+
+tasks.withType(JavaCompile) {
+	options.compilerArgs << '-Xlint:-processing'
+}

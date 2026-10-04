@@ -1,0 +1,40 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.whisperlyric.carpet_hfut_addition.mixins",
+  "compatibilityLevel": "{{COMPATIBILITY_LEVEL}}",
+  "plugin": "dev.whisperlyric.carpet_hfut_addition.utils.HFUTMixinConfigPlugin",
+  "mixins": [
+    "ServerPlayerLanguageAccessor",
+    "carpet.CarpetServerMixin",
+    "carpet.PlayerCommandMixin",
+    "rule.tripwireFix.EntityMixin",
+    "rule.tripwireFix.TripWireBlockMixin",
+    "rule.fakePlayerTickStage.EntityPlayerMPFakeMixin",
+    "rule.fakePlayerTickStage.ServerPlayerMixin$Before",
+    "rule.fakePlayerTickStage.ServerPlayerMixin$After",
+    "rule.fakePlayerTickStage.EntityPlayerActionPackMixin",
+    "rule.fakePlayerTickStage.MinecraftServerMixin",
+    "rule.fakePlayerTickStage.ServerConnectionListenerMixin",
+    "rule.fakePlayerTickStage.TisBridgeMixin",
+    "rule.ghostPearl.ServerPlayerMixin",
+    "rule.ghostPearl.PlayerListMixin",
+    "rule.ghostPearl.ThrownEnderpearlMixin",
+    "rule.projectileCleanup.ShulkerBulletMixin",
+    "rule.projectileCleanup.WeakChunkCleanupMixin",
+    "rule.minecartAcceleration.MinecartMixin",
+    "rule.mapLeak.ServerEntityMixin",
+    "rule.mapLeak.PlayerListMixin",
+    "rule.mapLeak.MapItemSavedDataAccessor",
+    "rule.mapLeak.SavedDataCacheAccessor",
+    "rule.reloginLeak.ReLoginTaskMixin",
+    "rule.reloginLeak.PlayerListSaveSkipMixin",
+    "compat.guglecarpetaddition.CustomMenuInvoker",
+    "compat.guglecarpetaddition.PlayerContainerAccessor",
+    "compat.guglecarpetaddition.PlayerEnderChestContainerMixin"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

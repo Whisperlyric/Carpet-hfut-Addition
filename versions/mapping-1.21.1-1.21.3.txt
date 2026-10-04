@@ -1,0 +1,11 @@
+# Extra mappings for preprocessing 1.21.1 -> 1.21.3
+# Parsed in strict ExtraMapping mode (preprocess.strictExtraMappings = true).
+#
+# Syntax: 2-4 whitespace-separated tokens per line, '#' starts a comment.
+#   old.pkg.OldClass new.pkg.NewClass                        class rename
+#   old.pkg.OldClass oldField newField                       field rename
+#   old.pkg.OldClass oldMethod(Desc)V newMethod(Desc)V       method rename
+#   old.pkg.OldClass oldMember new.pkg.NewClass newMember    incl. target class
+#
+# Entries here supplement the mappings derived automatically from the
+# Minecraft jars; add lines only when a rename is not derivable automatically.
