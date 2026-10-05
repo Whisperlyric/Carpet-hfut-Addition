@@ -1,6 +1,7 @@
 package dev.whisperlyric.carpet_hfut_addition.mixins.rule.babyMobAvoidGoldenDandelion;
 
 //#if MC >= 260102
+//$$ import dev.whisperlyric.carpet_hfut_addition.HFUTSettings;
 //$$ import dev.whisperlyric.carpet_hfut_addition.helpers.goldenDandelion.AvoidGoldenDandelionGoal;
 //$$ import net.minecraft.world.entity.PathfinderMob;
 //$$ import net.minecraft.world.level.block.Blocks;
@@ -29,8 +30,10 @@ public abstract class AgeableMobMixin {
         //$$ if (AvoidGoldenDandelionGoal.GOLDEN_DAISY_BABIES.contains(EntityType.getKey(type).getPath())) {
         //$$     ((MobGoalSelectorAccessor) this).hfut$goalSelector().addGoal(3, new AvoidGoldenDandelionGoal(
         //$$             (PathfinderMob) (Object) this,
-        //$$             mob -> mob instanceof AgeableMob ageable && ageable.isBaby(),
-        //$$             state -> state.is(Blocks.GOLDEN_DANDELION) || state.is(Blocks.POTTED_GOLDEN_DANDELION)));
+        //$$             mob -> mob instanceof AgeableMob ageable && ageable.isBaby()
+        //$$                     && (!HFUTSettings.babyMobAvoidGoldenDandelionIgnoreAgeLocked || !ageable.isAgeLocked()),
+        //$$             state -> state.is(Blocks.GOLDEN_DANDELION) || state.is(Blocks.POTTED_GOLDEN_DANDELION),
+        //$$             Blocks.GOLDEN_DANDELION.asItem()));
         //$$ }
         //#endif
     }

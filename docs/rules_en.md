@@ -209,7 +209,7 @@ Port of the 26.3 instant villager price recompute: while the trade screen is ope
 
 ## babyMobAvoidGoldenDandelion `MC>=26.1.2`
 
-Babies whose growth golden dandelion suppresses steer away from it (incl. potted), piglin-and-soul-fire style.
+Babies whose growth golden dandelion suppresses steer away from it (incl. potted, or held by a player), piglin-and-soul-fire style.
 
 - Type: `boolean`
 - Default value: `false`
@@ -219,6 +219,17 @@ Babies whose growth golden dandelion suppresses steer away from it (incl. potted
 > Armadillo, axolotl, bee, camel, cat, chicken, cow, dolphin, donkey, fox, glowing squid, goat, small ghast (happy ghast baby), hoglin, horse, llama, mooshroom, mule, nautilus, ocelot, panda, pig, polar bear, rabbit, sheep, sniffer, squid, strider, sulfur cube, tadpole, trader llama, turtle, wolf.
 >
 > Mobs outside the list (villager children included) and adults are unaffected.
+
+## babyMobAvoidGoldenDandelionIgnoreAgeLocked `MC>=26.1.2`
+
+Babies whose growth is age-locked by a golden dandelion no longer steer away from golden dandelions.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`
+
+> Requires `babyMobAvoidGoldenDandelion` to be on first.
 
 ## bonemealGrowMelons
 

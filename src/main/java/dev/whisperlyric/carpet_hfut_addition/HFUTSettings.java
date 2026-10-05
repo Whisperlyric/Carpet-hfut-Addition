@@ -172,12 +172,22 @@ public class HFUTSettings {
     //#endif
 
     /**
-     * Baby mobs keep away from golden dandelions (incl. potted), the way
-     * piglins fear soul fire. Only exists where the block does (26.1.2+).
+     * Baby mobs keep away from golden dandelions (placed, potted, or held by a
+     * player), the way piglins fear soul fire. Only exists where the block does
+     * (26.1.2+).
      */
     //#if MC >= 260102
     //$$ @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
     //$$ public static boolean babyMobAvoidGoldenDandelion = false;
+    //#endif
+
+    /**
+     * Babies whose growth a golden dandelion already locked (was fed) stop
+     * avoiding it. Inert unless babyMobAvoidGoldenDandelion is on.
+     */
+    //#if MC >= 260102
+    //$$ @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    //$$ public static boolean babyMobAvoidGoldenDandelionIgnoreAgeLocked = false;
     //#endif
 
     /** Bone meal on a mature (age 7) melon/pumpkin stem grows the fruit block. */

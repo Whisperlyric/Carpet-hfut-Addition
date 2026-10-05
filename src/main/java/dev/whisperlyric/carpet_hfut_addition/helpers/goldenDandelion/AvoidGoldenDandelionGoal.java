@@ -7,6 +7,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
@@ -15,11 +17,12 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 /**
- * babyMobAvoidGoldenDandelion: growable babies steer away from the block named
- * by the injected predicate (golden dandelion, 26.1.2+). Entity ids are kept as
- * plain strings, dodging the 26.2 EntityType -> EntityTypes move; ids missing on
- * a version (sulfur_cube on 26.1.2) never match. The rule is checked in
- * canUse/canContinueToUse, so off = one boolean check.
+ * babyMobAvoidGoldenDandelion: growable babies steer away from the golden
+ * dandelion whether it is placed (the injected block predicate) or held by a
+ * player (the injected item). Entity ids are kept as plain strings, dodging the
+ * 26.2 EntityType -> EntityTypes move; ids missing on a version (sulfur_cube on
+ * 26.1.2) never match. The rule is checked in canUse/canContinueToUse, so off =
+ * one boolean check.
  */
 public class AvoidGoldenDandelionGoal extends Goal {
 
@@ -37,13 +40,17 @@ public class AvoidGoldenDandelionGoal extends Goal {
     private final PathfinderMob mob;
     private final Predicate<PathfinderMob> babyCheck;
     private final Predicate<BlockState> scared;
+    private final Item fearItem;
     private BlockPos flowerPos;
+    private Player holder;
     private int scanCooldown;
 
-    public AvoidGoldenDandelionGoal(PathfinderMob mob, Predicate<PathfinderMob> babyCheck, Predicate<BlockState> scared) {
+    public AvoidGoldenDandelionGoal(PathfinderMob mob, Predicate<PathfinderMob> babyCheck,
+                                    Predicate<BlockState> scared, Item fearItem) {
         this.mob = mob;
         this.babyCheck = babyCheck;
         this.scared = scared;
+        this.fearItem = fearItem;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE));
     }
 
@@ -54,8 +61,10 @@ public class AvoidGoldenDandelionGoal extends Goal {
         //$$     return false;
         //$$ }
         //$$ this.scanCooldown = SCAN_INTERVAL;
-        //$$ this.flowerPos = this.findFlower();
-        //$$ return this.flowerPos != null;
+        //$$ this.flowerPos = null;
+        //$$ this.holder = null;
+        //$$ this.findSource();
+        //$$ return this.flowerPos != null || this.holder != null;
         //#else
         return false;
         //#endif
@@ -64,8 +73,14 @@ public class AvoidGoldenDandelionGoal extends Goal {
     @Override
     public boolean canContinueToUse() {
         //#if MC >= 260102
-        //$$ return HFUTSettings.babyMobAvoidGoldenDandelion && this.flowerPos != null && this.babyCheck.test(this.mob)
-        //$$         && this.scared.test(this.mob.level().getBlockState(this.flowerPos));
+        //$$ if (!HFUTSettings.babyMobAvoidGoldenDandelion || !this.babyCheck.test(this.mob)) {
+        //$$     return false;
+        //$$ }
+        //$$ if (this.holder != null) {
+        //$$     return this.holder.level() == this.mob.level() && this.holder.isAlive()
+        //$$             && !this.holder.isRemoved() && this.holdsFearItem(this.holder);
+        //$$ }
+        //$$ return this.flowerPos != null && this.scared.test(this.mob.level().getBlockState(this.flowerPos));
         //#else
         return false;
         //#endif
@@ -83,20 +98,34 @@ public class AvoidGoldenDandelionGoal extends Goal {
         }
     }
 
-    private BlockPos findFlower() {
+    private void findSource() {
         BlockPos base = BlockPos.containing(this.mob.position());
         for (BlockPos pos : BlockPos.betweenClosed(base.offset(-SCAN_RADIUS, -2, -SCAN_RADIUS),
                                                    base.offset(SCAN_RADIUS, 2, SCAN_RADIUS))) {
             if (this.scared.test(this.mob.level().getBlockState(pos))) {
-                return pos.immutable();
+                this.flowerPos = pos.immutable();
+                return;
             }
         }
-        return null;
+        for (Player player : this.mob.level().getEntitiesOfClass(Player.class,
+                this.mob.getBoundingBox().inflate(SCAN_RADIUS, 2.0, SCAN_RADIUS), this::holdsFearItem)) {
+            this.holder = player;
+            return;
+        }
     }
 
-    /** Path to a point roughly away from the flower, with a bit of jitter per attempt. */
+    private boolean holdsFearItem(Player player) {
+        return player.getMainHandItem().getItem() == this.fearItem
+                || player.getOffhandItem().getItem() == this.fearItem;
+    }
+
+    private Vec3 sourcePos() {
+        return this.flowerPos != null ? Vec3.atCenterOf(this.flowerPos) : this.holder.position();
+    }
+
+    /** Path to a point roughly away from the source, with a bit of jitter per attempt. */
     private void moveAway() {
-        Vec3 away = this.mob.position().subtract(Vec3.atCenterOf(this.flowerPos));
+        Vec3 away = this.mob.position().subtract(this.sourcePos());
         if (away.horizontalDistanceSqr() < 1.0E-4) {
             away = new Vec3(this.mob.getRandom().nextDouble() - 0.5, 0.0, this.mob.getRandom().nextDouble() - 0.5);
         }
