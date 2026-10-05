@@ -12,13 +12,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 /**
  * Weak-chunk cleanup for wandering projectiles (shulker bullets, wither skulls
  * incl. charged). Anchored at {@code ServerLevel$EntityCallbacks.onTickingEnd},
- * the exact transition where an entity leaves the entity-ticking list (moved
- * into a weaker section, or its chunk got demoted); discarding there also keeps
- * the projectile out of the weak chunk's saved data.
- *
- * <p>Piggybacking {@code checkDespawn} would be dead code: that loop only sees
- * entities whose section is ENTITY_TICKING. onTickingEnd fires once per
- * transition, so with the rules off the cost is one boolean check.
+ * the transition where an entity leaves the entity-ticking list - the only hook
+ * that also sees demoted chunks, and once per transition, so the cost with the
+ * rules off is one boolean check.
  */
 @Mixin(targets = "net.minecraft.server.level.ServerLevel$EntityCallbacks")
 public abstract class WeakChunkCleanupMixin {

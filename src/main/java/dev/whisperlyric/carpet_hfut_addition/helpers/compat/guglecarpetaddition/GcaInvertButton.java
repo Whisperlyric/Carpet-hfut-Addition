@@ -19,7 +19,6 @@ import java.util.List;
  * tick-stage inversion and reports the resulting value and phase.
  */
 public final class GcaInvertButton {
-    /** GCA's quit ("gca.action.quit") button is at slot 26; we take 25, its left neighbour. */
     public static final int SLOT_INDEX = 25;
 
     private GcaInvertButton() {
@@ -34,7 +33,6 @@ public final class GcaInvertButton {
                 boolText(FakePlayerTickStage.globalTicksLikeRealPlayer())));
         builder.appendTooltip(HFUTText.forLang(lang, "hfut.fakePlayerTickStage.button.click"));
         builder.addTurnOnCallback(button -> {
-            // "invert": back to global if already inverted, otherwise invert
             StageMode newMode = FakePlayerTickStage.modeOf(fake) == StageMode.INVERT
                     ? StageMode.GLOBAL
                     : StageMode.INVERT;

@@ -15,14 +15,12 @@ import org.spongepowered.asm.mixin.Mixin;
 import java.util.Set;
 
 /**
- * mapPlayerIconRotation, client half. 26.3 replaced the off-map player
- * markers' circular textures with rotating arrows, so the rotation the
- * server half now sends is only visible with those textures. The three
- * textures ship in this mod under its own namespace; the decoration atlas
- * stitches every namespace's textures/map/decorations, so getSpriteLocation
- * (the single sprite-id source for both render paths) only needs its three
- * player ids renamed to ours; off = vanilla ids pass through. ResourceLocation
- * renames are left to the preprocessor; 26.3 has the textures natively.
+ * mapPlayerIconRotation, client half: 26.3 swapped the off-map player markers'
+ * circular textures for rotating arrows, so the rotation the server half sends
+ * needs those textures - shipped here and reachable through the decoration
+ * atlas, which stitches every namespace. Only the three player sprite ids are
+ * renamed to ours (off = vanilla ids); ResourceLocation renames stay in the
+ * preprocessor.
  */
 @Mixin(MapDecoration.class)
 public abstract class MapDecorationMixin {

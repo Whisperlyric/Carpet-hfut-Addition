@@ -114,11 +114,8 @@ public abstract class VillagerMixin {
         }
         Player player = ((Villager) (Object) this).getTradingPlayer();
         if (player != null) {
-            // updateSpecialPrices is additive and vanilla only resets at screen
-            // close (stopTrading); reset first so each mid-trade reprice is
-            // idempotent, like 26.3 does inside the method itself. The resend
-            // makes the repriced tier visible in the open screen without
-            // relying on the notifyTradeUpdated ordering of this trade.
+            // reset first so each mid-trade reprice is idempotent (updateSpecialPrices is additive);
+            // the resend makes the repriced tier visible in the open screen
             this.hfut$resetSpecialPrices();
             this.hfut$updateSpecialPrices(player);
             this.hfut$resendOffers();

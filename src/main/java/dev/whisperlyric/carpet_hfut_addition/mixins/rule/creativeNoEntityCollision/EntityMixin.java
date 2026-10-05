@@ -13,12 +13,10 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import java.util.List;
 
 /**
- * creativeNoEntityCollision, movement half: Entity.collide fetches every
- * entity collision shape in one call; for a creative player with the rule
- * on it gets an empty list, so boats, shulkers and crowds are walked and
- * fallen through - flying or landed alike. Block collision happens on a
- * separate path and is not touched. The single call site is identical on
- * every supported version.
+ * creativeNoEntityCollision, movement half: for a creative player with the rule
+ * on, Entity.collide's single fetch of every entity collision shape returns an
+ * empty list, so boats, shulkers and crowds are walked through - flying or
+ * landed alike. Block collision is a separate path and untouched.
  */
 @Mixin(Entity.class)
 public abstract class EntityMixin {

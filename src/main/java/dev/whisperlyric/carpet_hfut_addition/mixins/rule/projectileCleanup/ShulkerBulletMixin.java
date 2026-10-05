@@ -30,7 +30,7 @@ public abstract class ShulkerBulletMixin {
     //$$         return;
     //$$     }
     //$$     ((ShulkerBullet) (Object) this).discard();
-    //$$     ci.cancel(); // cleared; skip the rest of this tick
+    //$$     ci.cancel();
     //$$ }
     //#endif
 }

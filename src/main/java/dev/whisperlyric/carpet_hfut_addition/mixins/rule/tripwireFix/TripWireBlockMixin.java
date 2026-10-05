@@ -37,10 +37,6 @@ public abstract class TripWireBlockMixin {
     //$$ }
     //#endif
 
-    // ------------------------------------------------------------------
-    // entityInside: strip the 26.2+ guard when restoring; apply the
-    // departure criterion when active
-    // ------------------------------------------------------------------
     //#if MC >= 12109
     //$$ @Inject(
     //$$         method = "entityInside(Lnet/minecraft/world/level/block/state/BlockState;"
@@ -75,10 +71,6 @@ public abstract class TripWireBlockMixin {
     //$$ }
     //#endif
 
-    // ------------------------------------------------------------------
-    // scheduleTick inside checkPressed (delay=10 recheck, delay=0 cooldown):
-    // LEGACY drops the cooldown, V263 raises 26.2's 0 to 1
-    // ------------------------------------------------------------------
     //#if MC >= 260200
     //$$ @WrapOperation(
     //$$         method = "checkPressed(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Ljava/util/List;)V",
@@ -94,10 +86,10 @@ public abstract class TripWireBlockMixin {
     //$$     }
     //#if MC < 260300
     //$$     if (mode == HFUTSettings.MODE_V263 && delay == 0) {
-    //$$         delay = 1; // 26.2's 0t → 1t (= the 26.3 fix), guard kept → 26.3 behaviour
+    //$$         delay = 1;
     //$$     }
     //#endif
-    //$$     original.call(instance, pos, block, delay); // the 10gt recheck rhythm passes through
+    //$$     original.call(instance, pos, block, delay);
     //$$ }
     //#endif
 }

@@ -26,14 +26,10 @@ import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 
 /**
  * mapPlayerIconRotation (below 26.3): port of the 26.3 map change - an
- * off-map player marker now carries the player's real rotation
- * (calculateRotation: facing, or the nether spin) instead of a hardcoded 0;
- * in-map markers always rotated and are untouched. On 1.21.2- the decision
- * is inline in addDecoration, so the constructed decoration's 0 byte is
- * recomputed (idempotent for in-bounds callers, but off-map frame/banner
- * markers rotate too - harmless). On 1.21.3+ it lives in
- * playerDecorationTypeAndRotation, whose head is re-implemented. Guarded;
- * 26.3 has it natively.
+ * off-map player marker carries the player's real rotation instead of a
+ * hardcoded 0; in-map markers always rotated and are untouched. The
+ * 1.21.2- decision sits inline in addDecoration, so the constructed 0 byte
+ * is recomputed; 1.21.3+ re-implements playerDecorationTypeAndRotation.
  */
 @Mixin(MapItemSavedData.class)
 public abstract class MapItemSavedDataMixin {

@@ -31,12 +31,10 @@ import static net.minecraft.commands.Commands.argument;
 import static net.minecraft.commands.Commands.literal;
 
 /**
- * {@code /pearltrace} — forensics for ghost ender pearls (MC-306936). Access is
- * gated by {@code commandPearlTrace} (list/show) and {@code commandPearlTracePurge}
- * (purge); recording by {@code ghostEnderPearlTrace}.
- * UUIDs may be full or an unambiguous prefix. Removal is two-step (preview, then
- * {@code confirm}); there is deliberately no "purge all" — a mistaken mass
- * removal of legit pearls would be an accident.
+ * {@code /pearltrace} - forensics for ghost ender pearls (MC-306936): UUIDs may
+ * be full or an unambiguous prefix, removal is two-step (preview, then confirm),
+ * and there is deliberately no "purge all" - a mistaken mass removal would be an
+ * accident. Access is gated by the commandPearlTrace* rules.
  */
 public final class PearlTraceCommand {
     private static final int PAGE_SIZE = 8;
@@ -128,7 +126,6 @@ public final class PearlTraceCommand {
             send(source, "hfut.pearltrace.list.empty");
             return Command.SINGLE_SUCCESS;
         }
-        // newest first
         int pages = (events.size() + PAGE_SIZE - 1) / PAGE_SIZE;
         page = Math.min(page, pages);
         send(source, "hfut.pearltrace.list.header", events.size(), page, pages);
@@ -207,7 +204,6 @@ public final class PearlTraceCommand {
             try {
                 return UUID.fromString(input);
             } catch (IllegalArgumentException ignored) {
-                // fall through to prefix matching
             }
         }
         List<UUID> matches = PearlTraceStore.get().knownUuids().stream()

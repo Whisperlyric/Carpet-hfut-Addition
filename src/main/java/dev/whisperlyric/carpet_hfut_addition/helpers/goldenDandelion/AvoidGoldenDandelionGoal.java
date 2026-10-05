@@ -15,13 +15,11 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 /**
- * babyMobAvoidGoldenDandelion: growable babies steer away from the block the
- * injected predicate names (golden dandelion, 26.1.2+; the predicate lives in
- * the guarded mixin). The baby test is injected too, since tadpoles grow up
- * without being AgeableMob. GOLDEN_DAISY_BABIES holds the affected entity ids
- * as plain strings, dodging the 26.2 EntityType -> EntityTypes move; ids
- * missing on a version (sulfur_cube on 26.1.2) never match. The rule is
- * consulted in canUse/canContinueToUse, so off = one boolean check.
+ * babyMobAvoidGoldenDandelion: growable babies steer away from the block named
+ * by the injected predicate (golden dandelion, 26.1.2+). Entity ids are kept as
+ * plain strings, dodging the 26.2 EntityType -> EntityTypes move; ids missing on
+ * a version (sulfur_cube on 26.1.2) never match. The rule is checked in
+ * canUse/canContinueToUse, so off = one boolean check.
  */
 public class AvoidGoldenDandelionGoal extends Goal {
 

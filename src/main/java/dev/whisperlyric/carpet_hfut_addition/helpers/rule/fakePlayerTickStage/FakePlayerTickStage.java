@@ -12,11 +12,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Per-fake-player tick stage override of the global
- * {@code fakePlayerTicksLikeRealPlayer} rule. Overrides are runtime-only.
- *
- * <p>Without carpet-tis-addition our own rule and mixins implement the move;
- * with it, {@link TisBridge} writes the per-player value into TIS's field for
- * the duration of each overridden tick.
+ * {@code fakePlayerTicksLikeRealPlayer} rule (runtime-only). Without
+ * carpet-tis-addition our own mixins implement the move; with it, TisBridge
+ * writes the per-player value into TIS's field for the overridden tick.
  */
 public class FakePlayerTickStage {
     /** GLOBAL: follow the rule (default); INVERT: opposite; ORIGIN: entity phase; LIKE_REAL: network phase. */
@@ -53,7 +51,6 @@ public class FakePlayerTickStage {
         };
     }
 
-    /** Sets the per-player mode; returns it. */
     public static StageMode setMode(EntityPlayerMPFake fake, StageMode mode) {
         if (mode == StageMode.GLOBAL) {
             MODES.remove(fake.getUUID());

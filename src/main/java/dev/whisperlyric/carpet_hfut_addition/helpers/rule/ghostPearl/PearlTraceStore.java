@@ -60,9 +60,6 @@ public final class PearlTraceStore {
     private final Map<UUID, CountEntry> counts = new ConcurrentHashMap<>();
     private volatile Path filePath;
 
-    // ------------------------------------------------------------------
-    // lifecycle
-    // ------------------------------------------------------------------
     public void attach(MinecraftServer server) {
         this.filePath = server.getWorldPath(LevelResource.ROOT).resolve("data").resolve("ghostpearl_trace.json");
         this.events.clear();
@@ -80,9 +77,6 @@ public final class PearlTraceStore {
         this.recycled.clear();
     }
 
-    // ------------------------------------------------------------------
-    // inputs (called from mixins)
-    // ------------------------------------------------------------------
     public void markOrigin(Entity pearl) {
         if (this.origins.size() > 1024) {
             this.origins.clear(); // session cap; origins only matter briefly after load
@@ -125,9 +119,6 @@ public final class PearlTraceStore {
         saveCounts();
     }
 
-    // ------------------------------------------------------------------
-    // queries (called from /pearltrace)
-    // ------------------------------------------------------------------
     public synchronized List<TeleportEvent> events(String ownerNameFilter, UUID ownerUuidFilter) {
         List<TeleportEvent> result = new ArrayList<>();
         for (TeleportEvent event : this.events) {
@@ -204,9 +195,6 @@ public final class PearlTraceStore {
         return next;
     }
 
-    // ------------------------------------------------------------------
-    // persistence (JSON sidecar in the world dir)
-    // ------------------------------------------------------------------
     private void loadCounts() {
         if (this.filePath == null || !Files.isRegularFile(this.filePath)) {
             return;

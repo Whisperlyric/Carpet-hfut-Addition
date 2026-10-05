@@ -33,10 +33,6 @@ public class HFUTSettings {
     //$$ public static boolean ghostEnderPearlTrace = false;
     //#endif
 
-    // ------------------------------------------------------------------
-    // Wandering projectile cleanup
-    // ------------------------------------------------------------------
-
     /** Discard shulker bullets the moment they stand in a portal. 1.21.2+ only. */
     //#if MC >= 12102
     //$$ @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
@@ -57,9 +53,16 @@ public class HFUTSettings {
     //$$ public static boolean minecartAcceleration = false;
     //#endif
 
-    // ------------------------------------------------------------------
-    // Upstream (remote) bug fixes
-    // ------------------------------------------------------------------
+    /**
+     * Reintroduce MC-311022: swapping equipment quickly leaves attribute
+     * modifiers uncleared for one tick (soul speed's movement_speed is the
+     * most visible case). 26.3+ only - 26.3 hands the captured broken stack
+     * to the removal path instead of re-reading the already-cleared slot.
+     */
+    //#if MC >= 260300
+    //$$ @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.EXPERIMENTAL, RuleCategory.FEATURE})
+    //$$ public static boolean attributeModifierRemovalDelay = false;
+    //#endif
 
     /**
      * Vanilla clears a map's player records, but map optimizations such as
@@ -78,10 +81,6 @@ public class HFUTSettings {
     //$$ public static boolean reloginAvatarLeakFix = true;
     //#endif
     //#endif
-
-    // ------------------------------------------------------------------
-    // Tripwire fixes (MC-305475); behaviour lives in mixins/rule/tripwireFix/
-    // ------------------------------------------------------------------
 
     /**
      * A movement that only departs from the tripwire no longer powers it
@@ -134,11 +133,6 @@ public class HFUTSettings {
     //$$ }
     //#endif
 
-    // ------------------------------------------------------------------
-    // Vanilla numeric typos: dig-speed table (fixed in 26.3) and dragon
-    // flight (MC-272431, unfixed everywhere)
-    // ------------------------------------------------------------------
-
     /**
      * Fix the mining fatigue dig-speed table: 0.0027 and 8.1E-4 should be
      * 0.027 and 0.0081, so fatigue III+ digs 10x too slow. 26.3 replaced
@@ -156,10 +150,6 @@ public class HFUTSettings {
      */
     @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.BUGFIX})
     public static boolean enderDragonVerticalVelocityFix = false;
-
-    // ------------------------------------------------------------------
-    // Vanilla feature ports and small features
-    // ------------------------------------------------------------------
 
     /**
      * Port of the 26.3 villager trade change: a qualifying trade levels the

@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
  * minecartAcceleration (26.3+): when an interaction actually mounted this cart,
- * return PASS like 26.2, so the action is not consumed and the 4gt use cooldown
+ * return PASS like 26.2, so the action is not consumed and the 4t use cooldown
  * never arms — bots can chain-mount carts again.
  */
 @Mixin(Minecart.class)

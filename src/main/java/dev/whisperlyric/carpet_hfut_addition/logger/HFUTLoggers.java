@@ -12,7 +12,6 @@ import java.lang.reflect.Field;
  * manager at game start; the field name becomes the logger name.
  */
 public class HFUTLoggers {
-    // declare @Logger fields here
 
     public static void registerLoggers() {
         for (Field field : HFUTLoggers.class.getDeclaredFields()) {

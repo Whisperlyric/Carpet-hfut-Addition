@@ -23,6 +23,7 @@
     "rule.projectileCleanup.ShulkerBulletMixin",
     "rule.projectileCleanup.WeakChunkCleanupMixin",
     "rule.minecartAcceleration.MinecartMixin",
+    "rule.attributeModifierRemovalDelay.LivingEntityMixin",
     "rule.mapLeak.ServerEntityMixin",
     "rule.mapLeak.PlayerListMixin",
     "rule.mapLeak.MapItemSavedDataAccessor",
