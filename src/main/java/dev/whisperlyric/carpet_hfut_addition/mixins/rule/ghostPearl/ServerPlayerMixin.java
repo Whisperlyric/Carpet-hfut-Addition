@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ServerPlayerMixin {
     //#if MC >= 12102
     //$$ @WrapOperation(
-    //#if MC >= 260102
+    //#if MC >= 260100
     //$$         method = "lambda$loadAndSpawnEnderPearl$0",
     //#elseif MC >= 12105
     //$$         method = {"method_68174", "method_64132"},

@@ -1,6 +1,6 @@
 package dev.whisperlyric.carpet_hfut_addition.mixins.rule.babyMobAvoidGoldenDandelion;
 
-//#if MC >= 260102
+//#if MC >= 260100
 //$$ import dev.whisperlyric.carpet_hfut_addition.HFUTSettings;
 //$$ import dev.whisperlyric.carpet_hfut_addition.helpers.goldenDandelion.AvoidGoldenDandelionGoal;
 //$$ import net.minecraft.world.entity.PathfinderMob;
@@ -26,7 +26,7 @@ public abstract class TadpoleMixin {
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void hfut$fearGoldenDandelion(EntityType<?> type, Level level, CallbackInfo ci) {
-        //#if MC >= 260102
+        //#if MC >= 260100
         //$$ if (AvoidGoldenDandelionGoal.GOLDEN_DAISY_BABIES.contains(EntityType.getKey(type).getPath())) {
         //$$     ((MobGoalSelectorAccessor) this).hfut$goalSelector().addGoal(3, new AvoidGoldenDandelionGoal(
         //$$             (PathfinderMob) (Object) this,

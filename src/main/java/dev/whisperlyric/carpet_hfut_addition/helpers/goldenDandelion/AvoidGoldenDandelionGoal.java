@@ -1,6 +1,6 @@
 package dev.whisperlyric.carpet_hfut_addition.helpers.goldenDandelion;
 
-//#if MC >= 260102
+//#if MC >= 260100
 //$$ import dev.whisperlyric.carpet_hfut_addition.HFUTSettings;
 //#endif
 import net.minecraft.core.BlockPos;
@@ -20,9 +20,9 @@ import java.util.function.Predicate;
  * babyMobAvoidGoldenDandelion: growable babies steer away from the golden
  * dandelion whether it is placed (the injected block predicate) or held by a
  * player (the injected item). Entity ids are kept as plain strings, dodging the
- * 26.2 EntityType -> EntityTypes move; ids missing on a version (sulfur_cube on
- * 26.1.2) never match. The rule is checked in canUse/canContinueToUse, so off =
- * one boolean check.
+ * 26.2 EntityType -> EntityTypes move; ids missing on a version (sulfur_cube
+ * before 26.2) never match. The rule is checked in canUse/canContinueToUse, so
+ * off = one boolean check.
  */
 public class AvoidGoldenDandelionGoal extends Goal {
 
@@ -56,7 +56,7 @@ public class AvoidGoldenDandelionGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        //#if MC >= 260102
+        //#if MC >= 260100
         //$$ if (!HFUTSettings.babyMobAvoidGoldenDandelion || !this.babyCheck.test(this.mob) || --this.scanCooldown > 0) {
         //$$     return false;
         //$$ }
@@ -72,7 +72,7 @@ public class AvoidGoldenDandelionGoal extends Goal {
 
     @Override
     public boolean canContinueToUse() {
-        //#if MC >= 260102
+        //#if MC >= 260100
         //$$ if (!HFUTSettings.babyMobAvoidGoldenDandelion || !this.babyCheck.test(this.mob)) {
         //$$     return false;
         //$$ }

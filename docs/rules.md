@@ -76,8 +76,7 @@
 - 分类: `HFUT`, `BUGFIX`
 
 > 登录时丢弃重复生成的珍珠副本、关服时防止珍珠被区块重复保存、存档时只写入仍存在于世界中的珍珠。
->
-> 装了 carpet-igny-addition 时本规则隐藏，由其同名规则接管。
+> 同时安装 Carpet Igny Addition 时本规则隐藏，由其同名规则接管。
 
 ## 幽灵末影珍珠反查 (ghostEnderPearlTrace) `MC>=1.21.2`
 
@@ -198,7 +197,6 @@
 - 分类: `HFUT`, `FEATURE`
 
 > 26.2- 原版将升级推迟 40 tick 且要求村民不在交易状态，26.3 起原版取消了此限制。
->
 > 同时移植对交易中玩家立即计算并显示新等级的交易折扣。
 
 ## 村民界面价格即时同步 (villagerLivePriceSync) `MC<=26.2`
@@ -210,7 +208,7 @@
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `FEATURE`
 
-## 幼年生物回避金蒲公英 (babyMobAvoidGoldenDandelion) `MC>=26.1.2`
+## 幼年生物回避金蒲公英 (babyMobAvoidGoldenDandelion) `MC>=26.1`
 
 能被金蒲公英抑制成长的幼年生物会逃离金蒲公英（含盆栽、玩家手持），类似猪灵害怕灵魂火。
 
@@ -220,10 +218,9 @@
 - 分类: `HFUT`, `FEATURE`
 
 > 犰狳、美西螈、蜜蜂、骆驼、猫、鸡、牛、海豚、驴、狐狸、发光鱿鱼、山羊、小恶魂（快乐恶魂幼体）、疣猪兽、马、羊驼、哞菇、骡、鹦鹉螺、豹猫、熊猫、猪、北极熊、兔子、绵羊、嗅探兽、鱿鱼、炽足兽、硫方怪、蝌蚪、行商羊驼、海龟、狼。
->
 > 清单外的生物（含幼年村民）与成年个体不受影响。
 
-## 已锁生长的幼年生物不回避金蒲公英 (babyMobAvoidGoldenDandelionIgnoreAgeLocked) `MC>=26.1.2`
+## 已锁生长的幼年生物不回避金蒲公英 (babyMobAvoidGoldenDandelionIgnoreAgeLocked) `MC>=26.1`
 
 被金蒲公英锁住生长的幼年生物不再逃离金蒲公英。
 
@@ -255,7 +252,6 @@
 - 分类: `HFUT`, `FEATURE`
 
 > 地图中玩家的图标一直显示朝向。26.2 及以前图外玩家的标记不可见方向，26.3 起改为同样按朝向旋转。
->
 > 旋转字节随地图数据包下发，原版客户端无需安装本模组即可看到效果。
 
 ## 创造模式无实体碰撞 (creativeNoEntityCollision)
@@ -268,3 +264,30 @@
 - 分类: `HFUT`, `FEATURE`
 
 > 非飞行状态也生效，但投射物命中、压力板触发等非碰撞交互不受影响。
+
+## 风弹不触发红石元件 (windChargeNoRedstoneActivation)
+
+风弹爆炸不再触发按钮、拉杆、门、活板门与栅栏门。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `HFUT`, `FEATURE`
+
+## 风弹不激怒蜂群 (windChargeNoBeehiveAnger) `MC>=1.21.2`
+
+风弹爆炸不再因蜂箱激怒周围的蜜蜂。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `HFUT`, `FEATURE`
+
+## 风弹不吹非生物实体 (windChargeNoNonLivingKnockback)
+
+风弹爆炸不再对非生物实体产生击退。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `HFUT`, `FEATURE`

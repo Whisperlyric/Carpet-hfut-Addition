@@ -1,6 +1,6 @@
 package dev.whisperlyric.carpet_hfut_addition.mixins.rule.babyMobAvoidGoldenDandelion;
 
-//#if MC >= 260102
+//#if MC >= 260100
 //$$ import dev.whisperlyric.carpet_hfut_addition.HFUTSettings;
 //$$ import dev.whisperlyric.carpet_hfut_addition.helpers.goldenDandelion.AvoidGoldenDandelionGoal;
 //$$ import net.minecraft.world.entity.PathfinderMob;
@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * babyMobAvoidGoldenDandelion: registers the avoidance goal only for the
  * whitelisted growable babies (AvoidGoldenDandelionGoal.GOLDEN_DAISY_BABIES,
  * matched by entity id); others pay nothing. Golden dandelion only exists on
- * 26.1.2+, so the registration is guarded. The id check stays string-based
+ * 26.1+, so the registration is guarded. The id check stays string-based
  * because the entity type constants moved to EntityTypes in 26.2.
  */
 @Mixin(AgeableMob.class)
@@ -26,7 +26,7 @@ public abstract class AgeableMobMixin {
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void hfut$fearGoldenDandelion(EntityType<?> type, Level level, CallbackInfo ci) {
-        //#if MC >= 260102
+        //#if MC >= 260100
         //$$ if (AvoidGoldenDandelionGoal.GOLDEN_DAISY_BABIES.contains(EntityType.getKey(type).getPath())) {
         //$$     ((MobGoalSelectorAccessor) this).hfut$goalSelector().addGoal(3, new AvoidGoldenDandelionGoal(
         //$$             (PathfinderMob) (Object) this,

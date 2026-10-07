@@ -76,7 +76,7 @@ public class HFUTSettings {
      * Requires carpet-org-addition; below 26.1 only (ORG v1.46.0+ fixed itself).
      */
     //#if MC >= 12102
-    //#if MC < 260102
+    //#if MC < 260100
     //$$ @Rule(categories = {HFUTRuleCategory.HFUT, HFUTRuleCategory.REMOTE_BUGFIX})
     //$$ public static boolean reloginAvatarLeakFix = true;
     //#endif
@@ -174,9 +174,9 @@ public class HFUTSettings {
     /**
      * Baby mobs keep away from golden dandelions (placed, potted, or held by a
      * player), the way piglins fear soul fire. Only exists where the block does
-     * (26.1.2+).
+     * (26.1+).
      */
-    //#if MC >= 260102
+    //#if MC >= 260100
     //$$ @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
     //$$ public static boolean babyMobAvoidGoldenDandelion = false;
     //#endif
@@ -185,7 +185,7 @@ public class HFUTSettings {
      * Babies whose growth a golden dandelion already locked (was fed) stop
      * avoiding it. Inert unless babyMobAvoidGoldenDandelion is on.
      */
-    //#if MC >= 260102
+    //#if MC >= 260100
     //$$ @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
     //$$ public static boolean babyMobAvoidGoldenDandelionIgnoreAgeLocked = false;
     //#endif
@@ -210,4 +210,22 @@ public class HFUTSettings {
      */
     @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
     public static boolean creativeNoEntityCollision = false;
+
+    /**
+     * Wind charge explosions no longer trigger buttons, levers, doors,
+     * trapdoors or fence gates. No other explosion source is affected.
+     */
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    public static boolean windChargeNoRedstoneActivation = false;
+
+    /** Wind charge explosions no longer anger bees through hives. */
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    public static boolean windChargeNoBeehiveAnger = false;
+
+    /**
+     * Wind charge explosions no longer knock back non-living entities; living
+     * entities, players and the wind-charge jump are unaffected.
+     */
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    public static boolean windChargeNoNonLivingKnockback = false;
 }

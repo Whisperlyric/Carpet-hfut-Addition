@@ -207,7 +207,7 @@ Port of the 26.3 instant villager price recompute: while the trade screen is ope
 - Suggested options: `false`, `true`
 - Categories: `HFUT`, `FEATURE`
 
-## babyMobAvoidGoldenDandelion `MC>=26.1.2`
+## babyMobAvoidGoldenDandelion `MC>=26.1`
 
 Babies whose growth golden dandelion suppresses steer away from it (incl. potted, or held by a player), piglin-and-soul-fire style.
 
@@ -220,7 +220,7 @@ Babies whose growth golden dandelion suppresses steer away from it (incl. potted
 >
 > Mobs outside the list (villager children included) and adults are unaffected.
 
-## babyMobAvoidGoldenDandelionIgnoreAgeLocked `MC>=26.1.2`
+## babyMobAvoidGoldenDandelionIgnoreAgeLocked `MC>=26.1`
 
 Babies whose growth is age-locked by a golden dandelion no longer steer away from golden dandelions.
 
@@ -265,3 +265,30 @@ Creative players no longer take part in entity collision.
 - Categories: `HFUT`, `FEATURE`
 
 > It applies while not flying too, but non-collision interactions such as projectile hits and pressure plates are unaffected.
+
+## windChargeNoRedstoneActivation
+
+Wind charge explosions no longer trigger buttons, levers, doors, trapdoors and fence gates.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`
+
+## windChargeNoBeehiveAnger `MC>=1.21.2`
+
+Wind charge explosions no longer anger nearby bees through beehives.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`
+
+## windChargeNoNonLivingKnockback
+
+Wind charge explosions no longer knock back non-living entities.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`

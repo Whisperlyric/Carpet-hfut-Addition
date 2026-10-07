@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class PlayerListSaveSkipMixin {
 
     //#if MC >= 12102
-    //#if MC < 260102
+    //#if MC < 260100
     //$$ @Inject(method = "save", at = @At("HEAD"), cancellable = true)
     //$$ private void hfut$skipSavingRemovedFakePlayer(ServerPlayer player, CallbackInfo ci) {
     //$$     if (HFUTSettings.reloginAvatarLeakFix && player instanceof EntityPlayerMPFake && player.isRemoved()) {

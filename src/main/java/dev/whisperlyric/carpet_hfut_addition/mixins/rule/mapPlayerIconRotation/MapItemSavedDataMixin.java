@@ -27,16 +27,16 @@ import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 /**
  * mapPlayerIconRotation (below 26.3): port of the 26.3 map change - an
  * off-map player marker carries the player's real rotation instead of a
- * hardcoded 0; in-map markers always rotated and are untouched. The
- * 1.21.2- decision sits inline in addDecoration, so the constructed 0 byte
- * is recomputed; 1.21.3+ re-implements playerDecorationTypeAndRotation.
+ * hardcoded 0; in-map markers always rotated and are untouched. On the
+ * 1.21.1 node the decision sits inline in addDecoration, so the constructed
+ * 0 byte is recomputed; 1.21.2+ re-implements playerDecorationTypeAndRotation.
  */
 @Mixin(MapItemSavedData.class)
 public abstract class MapItemSavedDataMixin {
 
     //#if MC < 260300
 
-    //#if MC >= 12103
+    //#if MC >= 12102
     //$$ @Shadow
     //$$ static boolean isInsideMap(float x, float z) {
     //$$     throw new AssertionError();

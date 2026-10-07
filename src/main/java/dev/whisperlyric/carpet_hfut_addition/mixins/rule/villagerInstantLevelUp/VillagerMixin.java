@@ -2,10 +2,10 @@ package dev.whisperlyric.carpet_hfut_addition.mixins.rule.villagerInstantLevelUp
 
 //#if MC < 260300
 import dev.whisperlyric.carpet_hfut_addition.HFUTSettings;
+import dev.whisperlyric.carpet_hfut_addition.helpers.rule.villagerPricing.VillagerPriceHelper;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.gen.Invoker;
@@ -22,7 +22,9 @@ import org.spongepowered.asm.mixin.Mixin;
  * arms a deferred level-up that runs while NOT trading, hence the "close and
  * reopen" dance; 26.3 levels up right in rewardTradeXp with a 10s regen I and
  * reprices a trading player. Reproduced here; off = passthrough, and 26.3 has
- * it natively so the whole member set is guarded.
+ * it natively so the whole member set is guarded. The pricing triple
+ * (update/reset/resend) lives in VillagerPriceInvoker + VillagerPriceHelper,
+ * shared with villagerLivePriceSync.
  */
 @Mixin(Villager.class)
 public abstract class VillagerMixin {
@@ -38,16 +40,6 @@ public abstract class VillagerMixin {
     @Invoker("increaseMerchantCareer")
     abstract void hfut$increaseMerchantCareer();
     //#endif
-
-    @Invoker("updateSpecialPrices")
-    abstract void hfut$updateSpecialPrices(Player player);
-
-    @Invoker("resetSpecialPrices")
-    abstract void hfut$resetSpecialPrices();
-
-    /** Vanilla's offers-packet push to the trading player (self-guarding); makes the repriced tier visible immediately. */
-    @Invoker("resendOffersToTradingPlayer")
-    abstract void hfut$resendOffers();
 
     /**
      * At the decision point of rewardTradeXp: with the rule on, do the
@@ -68,6 +60,7 @@ public abstract class VillagerMixin {
     }
     //#endif
 
+    @Unique
     private boolean hfut$decide() {
         if (!HFUTSettings.villagerInstantLevelUp) {
             return this.shouldIncreaseLevel();
@@ -108,18 +101,13 @@ public abstract class VillagerMixin {
     }
     //#endif
 
+    @Unique
     private void hfut$applyLivePrices() {
         if (!HFUTSettings.villagerInstantLevelUp) {
             return;
         }
-        Player player = ((Villager) (Object) this).getTradingPlayer();
-        if (player != null) {
-            // reset first so each mid-trade reprice is idempotent (updateSpecialPrices is additive);
-            // the resend makes the repriced tier visible in the open screen
-            this.hfut$resetSpecialPrices();
-            this.hfut$updateSpecialPrices(player);
-            this.hfut$resendOffers();
-        }
+        Villager self = (Villager) (Object) this;
+        VillagerPriceHelper.reprice(self, self.getTradingPlayer());
     }
     //#endif
 }

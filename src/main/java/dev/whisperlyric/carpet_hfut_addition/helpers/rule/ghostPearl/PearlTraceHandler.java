@@ -96,7 +96,7 @@ public final class PearlTraceHandler {
         // not a plain rename: on 1.21.10+ getEntity compiles via the EntityGetter
         // default but only searches the current dimension, while the deliberate
         // call is the cross-dimension lookup
-        //#if MC >= 12110
+        //#if MC >= 12109
         //$$ return level.getEntityInAnyDimension(pearl.getUUID()) == pearl;
         //#else
         return level.getEntity(pearl.getUUID()) == pearl;

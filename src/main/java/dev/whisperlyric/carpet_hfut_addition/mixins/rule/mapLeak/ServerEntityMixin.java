@@ -19,7 +19,7 @@ import carpet.patches.EntityPlayerMPFake;
 @Mixin(ServerEntity.class)
 public abstract class ServerEntityMixin {
 
-    //#if MC >= 260102
+    //#if MC >= 260100
     //$$ @WrapOperation(
     //$$         method = "sendChanges",
     //$$         at = @At(value = "INVOKE",

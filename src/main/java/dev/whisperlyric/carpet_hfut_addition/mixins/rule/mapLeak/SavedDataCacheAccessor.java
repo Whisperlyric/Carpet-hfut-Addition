@@ -11,7 +11,7 @@ import java.util.Map;
  * versions; the caller disambiguates with instanceof.
  */
 @Mixin({
-        //#if MC >= 260102
+        //#if MC >= 260100
         //$$ net.minecraft.world.level.storage.SavedDataStorage.class
         //#else
         net.minecraft.world.level.storage.DimensionDataStorage.class

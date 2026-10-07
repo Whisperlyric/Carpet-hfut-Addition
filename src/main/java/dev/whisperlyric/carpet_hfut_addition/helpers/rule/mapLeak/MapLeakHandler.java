@@ -1,5 +1,6 @@
 package dev.whisperlyric.carpet_hfut_addition.helpers.rule.mapLeak;
 
+import dev.whisperlyric.carpet_hfut_addition.utils.PlayerNames;
 import dev.whisperlyric.carpet_hfut_addition.mixins.rule.mapLeak.MapItemSavedDataAccessor;
 import dev.whisperlyric.carpet_hfut_addition.mixins.rule.mapLeak.SavedDataCacheAccessor;
 import net.minecraft.server.MinecraftServer;
@@ -53,10 +54,6 @@ public final class MapLeakHandler {
     }
 
     private static String playerName(ServerPlayer player) {
-        //#if MC >= 12110
-        //$$ return player.getGameProfile().name();
-        //#else
-        return player.getGameProfile().getName();
-        //#endif
+        return PlayerNames.of(player);
     }
 }

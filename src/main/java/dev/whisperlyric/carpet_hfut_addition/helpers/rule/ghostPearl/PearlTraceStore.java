@@ -3,6 +3,7 @@ package dev.whisperlyric.carpet_hfut_addition.helpers.rule.ghostPearl;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import dev.whisperlyric.carpet_hfut_addition.HFUTServer;
+import dev.whisperlyric.carpet_hfut_addition.utils.PlayerNames;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -242,11 +243,7 @@ public final class PearlTraceStore {
     }
 
     private static String ownerName(ServerPlayer player) {
-        //#if MC >= 12110
-        //$$ return player.getGameProfile().name();
-        //#else
-        return player.getGameProfile().getName();
-        //#endif
+        return PlayerNames.of(player);
     }
 
     private static String playerName(ServerPlayer player) {

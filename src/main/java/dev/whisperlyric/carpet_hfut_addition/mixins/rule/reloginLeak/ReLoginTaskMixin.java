@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public abstract class ReLoginTaskMixin {
 
     //#if MC >= 12102
-    //#if MC < 260102
+    //#if MC < 260100
     //$$ @Redirect(
     //$$         method = "lambda$logoutPlayer$*",
     //$$         at = @At(

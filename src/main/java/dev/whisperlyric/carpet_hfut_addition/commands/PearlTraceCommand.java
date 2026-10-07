@@ -11,6 +11,7 @@ import dev.whisperlyric.carpet_hfut_addition.HFUTSettings;
 import dev.whisperlyric.carpet_hfut_addition.helpers.rule.ghostPearl.PearlTraceStore;
 import dev.whisperlyric.carpet_hfut_addition.helpers.rule.ghostPearl.PearlTraceStore.TeleportEvent;
 import dev.whisperlyric.carpet_hfut_addition.utils.CommandUtil;
+import dev.whisperlyric.carpet_hfut_addition.utils.PlayerNames;
 import dev.whisperlyric.carpet_hfut_addition.utils.HFUTText;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.ClickEvent;
@@ -258,11 +259,7 @@ public final class PearlTraceCommand {
     }
 
     private static String playerName(ServerPlayer player) {
-        //#if MC >= 12110
-        //$$ return player.getGameProfile().name();
-        //#else
-        return player.getGameProfile().getName();
-        //#endif
+        return PlayerNames.of(player);
     }
 
     private static String fullUuid(UUID uuid) {
