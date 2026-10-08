@@ -69,7 +69,7 @@ public class HFUTSettings {
      * Lithium rewrite that path and miss an edge case, so the records leak.
      */
     @Rule(categories = {HFUTRuleCategory.HFUT, HFUTRuleCategory.REMOTE_BUGFIX})
-    public static boolean mapRegistryLeakFix = true;
+    public static boolean mapRegistryLeakFix = false;
 
     /**
      * Fix the relogin avatar leak on Carpet-Org-Addition's 1.21.x line.
@@ -78,7 +78,7 @@ public class HFUTSettings {
     //#if MC >= 12102
     //#if MC < 260100
     //$$ @Rule(categories = {HFUTRuleCategory.HFUT, HFUTRuleCategory.REMOTE_BUGFIX})
-    //$$ public static boolean reloginAvatarLeakFix = true;
+    //$$ public static boolean reloginAvatarLeakFix = false;
     //#endif
     //#endif
 

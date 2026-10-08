@@ -142,20 +142,20 @@ Reintroduces MC-311022: when swapping equipment quickly, attribute modifiers are
 Vanilla clears a map's player records, but map optimizations such as Lithium rewrite that path and miss an edge case, so records pile up and leak.
 
 - Type: `boolean`
-- Default value: `true`
+- Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `HFUT`, `REMOTE_BUGFIX`
 
 > On disconnect the player is removed from every loaded map's list; fake players are never added.
 >
-> On by default, and cheap: it is one pass over the loaded maps per disconnect.
+> Off by default; enable it when needed. Cheap: one pass over the loaded maps per disconnect.
 
 ## reloginAvatarLeakFix `1.21.2~1.21.11`
 
 Fixes the relogin leak on Carpet-Org-Addition's 1.21.x line: the old fake player being logged out by relogin is never properly disconnected and lingers in memory.
 
 - Type: `boolean`
-- Default value: `true`
+- Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `HFUT`, `REMOTE_BUGFIX`
 

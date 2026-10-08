@@ -143,20 +143,20 @@
 原版会清除地图里的玩家记录，但 Lithium 等模组改写了这条清除路径，边缘情况没清掉，导致记录堆积、内存泄漏。
 
 - 类型: `boolean`
-- 默认值: `true`
+- 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `REMOTE_BUGFIX`
 
 > 玩家一下线，就从所有已加载地图的名单中移除；假人不再被记入名单。
 >
-> 默认开启，开销很小：只在玩家下线时清理一次。
+> 默认关闭，需要时手动开启；开销很小：只在玩家下线时清理一次。
 
 ## [26.x-]Relogin泄漏修复 (reloginAvatarLeakFix) `1.21.2~1.21.11`
 
 修复 Carpet-Org-Addition 1.21.x 上的重登泄漏：relogin 下线的旧假人没有真正断开，会一直残留在内存中。
 
 - 类型: `boolean`
-- 默认值: `true`
+- 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `REMOTE_BUGFIX`
 

@@ -51,7 +51,7 @@
   "carpet.rule.mapRegistryLeakFix.desc": "Fix the map player-record leak caused by Lithium and similar mods",
   "carpet.rule.mapRegistryLeakFix.extra.0": "Carpet fake players are no longer added to map holder lists",
   "carpet.rule.mapRegistryLeakFix.extra.1": "The moment a player disconnects, their records are cleared from all loaded maps",
-  "carpet.rule.mapRegistryLeakFix.extra.2": "On by default",
+  "carpet.rule.mapRegistryLeakFix.extra.2": "Off by default; enable it when needed",
   "carpet.rule.reloginAvatarLeakFix.name": "[26.x-] Relogin Leak Fix",
   "carpet.rule.reloginAvatarLeakFix.desc": "[26.x-] Fix the relogin leak on Carpet-Org-Addition's 1.21.x line that keeps the old fake player in memory",
   "carpet.rule.reloginAvatarLeakFix.extra.0": "The logout task skips fake players already marked removed, so the old player's disconnect never runs and it lingers",

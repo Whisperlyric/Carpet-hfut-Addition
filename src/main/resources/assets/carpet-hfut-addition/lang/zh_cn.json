@@ -51,7 +51,7 @@
   "carpet.rule.mapRegistryLeakFix.desc": "修复Lithium等导致的地图玩家记录泄漏源",
   "carpet.rule.mapRegistryLeakFix.extra.0": "carpet 假人不再记入地图玩家记录",
   "carpet.rule.mapRegistryLeakFix.extra.1": "玩家断开的瞬间，清除其在所有已加载地图中的记录",
-  "carpet.rule.mapRegistryLeakFix.extra.2": "默认开启",
+  "carpet.rule.mapRegistryLeakFix.extra.2": "默认关闭，需要时手动开启",
   "carpet.rule.reloginAvatarLeakFix.name": "[26.x-]Relogin泄漏修复",
   "carpet.rule.reloginAvatarLeakFix.desc": "修复 Carpet-Org-Addition 1.21.x 线的 relogin 让旧假人残留在内存中的泄漏",
   "carpet.rule.reloginAvatarLeakFix.extra.0": "下线任务会跳过已标记移除的假人，旧假人的断开流程因此永远不会执行，旧假人便一直残留",
