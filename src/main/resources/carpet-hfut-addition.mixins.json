@@ -48,6 +48,10 @@
     "rule.windChargeNoBeehiveAnger.ServerExplosionMixin",
     "rule.windChargeNoNonLivingKnockback.ExplosionMixin",
     "rule.windChargeNoNonLivingKnockback.ServerExplosionMixin",
+    "rule.soulSpeedNoBootDamage.EnchantmentMixin",
+    "rule.durabilityRng.ItemStackMixin",
+    "rule.durabilityRng.EnchantmentMixin",
+    "rule.namedTrader.WanderingTraderMixin",
     "compat.guglecarpetaddition.CustomMenuInvoker",
     "compat.guglecarpetaddition.PlayerContainerAccessor",
     "compat.guglecarpetaddition.PlayerEnderChestContainerMixin"

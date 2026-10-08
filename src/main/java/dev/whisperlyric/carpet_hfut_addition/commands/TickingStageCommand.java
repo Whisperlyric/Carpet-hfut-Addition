@@ -3,7 +3,6 @@ package dev.whisperlyric.carpet_hfut_addition.commands;
 import carpet.patches.EntityPlayerMPFake;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import dev.whisperlyric.carpet_hfut_addition.HFUTSettings;
 import dev.whisperlyric.carpet_hfut_addition.helpers.compat.guglecarpetaddition.GcaInvertButton;

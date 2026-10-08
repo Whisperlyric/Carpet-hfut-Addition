@@ -31,7 +31,7 @@ Who may use `/pearltrace purge` to remove ghost pearls from online players.
 
 > The read-only `list`/`show` are controlled by `commandPearlTrace`; purging rewrites player data, so it gets its own, tighter permission.
 
-## tripwireIgnoreDepartures `MC>=1.21.9`
+## tripwireIgnoreDepartures `🐛Beta` `MC>=1.21.9`
 
 Fixes, in a fairly aggressive way, the tripwire firing its rising edge multiple times as entities pass through it (MC-305475).
 
@@ -77,7 +77,7 @@ Fixes several main symptoms of the ghost ender pearl bug (MC-306936).
 
 > Hidden when carpet-igny-addition is installed; its same-name rule takes over.
 
-## ghostEnderPearlTrace `MC>=1.21.2`
+## ghostEnderPearlTrace `🐛Beta` `MC>=1.21.2`
 
 Records every pearl teleport and its origin and counts teleports per pearl UUID; inspect or purge with `/pearltrace` (see [commands](commands_en.md)).
 
@@ -117,7 +117,7 @@ Trigger-style cleanup of wither skulls (including charged/blue) sitting in weakl
 - Suggested options: `false`, `true`
 - Categories: `HFUT`, `FEATURE`
 
-## minecartAcceleration `MC>=26.3`
+## minecartAcceleration `🐛Beta` `MC>=26.3`
 
 Reintroduces the 1.21.5-26.2 minecart acceleration: bots can chain-mount carts and get ticked multiple times per tick.
 
@@ -292,3 +292,52 @@ Wind charge explosions no longer knock back non-living entities.
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `HFUT`, `FEATURE`
+
+## soulSpeedNoBootDamage
+
+Soul Speed no longer consumes boot durability when in use.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`
+
+## durabilityRngFollowsPlayer `🐛Beta`
+
+Unbreaking's durability loss roll uses the player's own random sequence instead of the world's.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`
+
+## tradeSeqEnabled `🐛Beta` `MC>=26.1`
+
+Enables `/tradeseq`, which reads and moves the named random sequence a villager's trade refresh draws from.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`
+
+## commandTradeSeq `MC>=26.1`
+
+Controls who may manipulate trade sequences with `/tradeseq`.
+
+- Type: `string`
+- Default value: `ops`
+- Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- Categories: `HFUT`, `COMMAND`
+
+## namedWanderingTraderPersistence
+
+A wandering trader named with a matching custom name no longer despawns naturally.
+
+- Type: `string`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`
+
+- `false`: disabled
+- `true`: any custom-named trader persists
+- any other value: only traders named with that exact string persist

@@ -31,7 +31,7 @@
 
 > 只读的 `list`/`show` 由 `commandPearlTrace` 控制；清除会改写玩家数据，因此单独用一个更严的权限。
 
-## 绊线行为修复 (tripwireIgnoreDepartures) `MC>=1.21.9`
+## 绊线行为修复 (tripwireIgnoreDepartures) `🐛Beta` `MC>=1.21.9`
 
 用较为激进的方式修复绊线在实体穿过时多次触发上升沿的问题（MC-305475）。
 
@@ -78,7 +78,7 @@
 > 登录时丢弃重复生成的珍珠副本、关服时防止珍珠被区块重复保存、存档时只写入仍存在于世界中的珍珠。
 > 同时安装 Carpet Igny Addition 时本规则隐藏，由其同名规则接管。
 
-## 幽灵末影珍珠反查 (ghostEnderPearlTrace) `MC>=1.21.2`
+## 幽灵末影珍珠反查 (ghostEnderPearlTrace) `🐛Beta` `MC>=1.21.2`
 
 记录每次珍珠传送及其来源并按珍珠 UUID 累计次数，可用 `/pearltrace` 查看或清除（见[命令](commands.md)）。
 
@@ -97,7 +97,6 @@
 - 分类: `HFUT`, `FEATURE`
 
 > 潜影弹的制导目标是跨维度解析的，过门后会朝切换维度前的坐标飞行。
->
 > 在传送发生前清除，同时免去目的侧的区块加载。
 
 ## 清除弱加载区块潜影弹 (shulkerBulletWeakChunkCleanup)
@@ -283,7 +282,7 @@
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `FEATURE`
 
-## 风弹不吹非生物实体 (windChargeNoNonLivingKnockback)
+## 风弹不影响非生物实体 (windChargeNoNonLivingKnockback)
 
 风弹爆炸不再对非生物实体产生击退。
 
@@ -291,3 +290,52 @@
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `FEATURE`
+
+## 灵魂疾行不消耗靴子耐久 (soulSpeedNoBootDamage)
+
+灵魂疾行附魔不再在使用时消耗靴子耐久。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `HFUT`, `FEATURE`
+
+## 耐久序列回归玩家 (durabilityRngFollowsPlayer) `🐛Beta`
+
+耐久附魔的耐久损耗判定使用玩家自己的随机序列而非世界随机序列。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `HFUT`, `FEATURE`
+
+## 交易序列操纵 (tradeSeqEnabled) `🐛Beta` `MC>=26.1`
+
+启用 `/tradeseq`，用于查询与移动村民交易刷新所用的命名随机序列。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `HFUT`, `FEATURE`
+
+## 交易序列指令权限 (commandTradeSeq) `MC>=26.1`
+
+设置谁可以使用 `/tradeseq` 操纵交易序列。
+
+- 类型: `string`
+- 默认值: `ops`
+- 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- 分类: `HFUT`, `COMMAND`
+
+## 命名流浪商人不消失 (namedWanderingTraderPersistence)
+
+被命名为指定字符串的流浪商人不会自然消失。
+
+- 类型: `string`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `HFUT`, `FEATURE`
+
+- `false`：关闭
+- `true`：任意自定义命名的流浪商人不消失
+- 其他值：仅名称与该值完全相同的流浪商人不消失

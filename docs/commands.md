@@ -1,8 +1,8 @@
 # 命令
 
-本模组注册了 `/hfut`、`/pearltrace` 两个命令，并向 Carpet 自带的 `/player` 注入了一个子命令。
+本模组注册了 `/hfut`、`/pearltrace`、`/tradeseq` 三个命令，并向 Carpet 自带的 `/player` 注入了一个子命令。
 
-能否使用由权限规则控制（见[规则](rules.md)）：`commandPlayerTickingStage` 管 `/player ... tickingStage`，`commandPearlTrace` 管 `/pearltrace` 的查验（`list`/`show`），`commandPearlTracePurge` 管清除（`purge`）。取值：`false`（禁用）、`true`（所有人）、`ops`（权限等级 2 及以上）、`0`～`4`（指定的最低权限等级）。
+能否使用由权限规则控制（见[规则](rules.md)）：`commandPlayerTickingStage` 管 `/player ... tickingStage`，`commandPearlTrace` 管 `/pearltrace` 的查验（`list`/`show`），`commandPearlTracePurge` 管清除（`purge`），`commandTradeSeq` 管 `/tradeseq`。取值：`false`（禁用）、`true`（所有人）、`ops`（权限等级 2 及以上）、`0`～`4`（指定的最低权限等级）。
 
 ## 调整假人 tick 阶段 (`/player <假人> tickingStage`)
 
@@ -37,6 +37,24 @@
     - 控制台 / 命令方块同样需要先预览再确认。
     - 仅支持在线玩家；离线玩家的残留会在其下次登录时自动清理。
     - 没有「一次清空全部」的用法。
+
+## 交易序列操纵 (`/tradeseq`) `MC>=26.1` `🐛Beta`
+
+### 语法
+- `/tradeseq <职业> <等级> status`
+- `/tradeseq <职业> <等级> set <数字>`
+- `/tradeseq <职业> <等级> rollback <数字>`
+- `/tradeseq <职业> <等级> skip <数字>`
+
+`<职业>` 为村民职业（提供补全），`<等级>` 为 1-5；二者对应 vanilla 命名随机序列 `minecraft:trade_set/<职业>/level_<等级>`（如 `librarian 4` 即 `minecraft:trade_set/librarian/level_4`）。
+
+### 效果
+- 同一职业同等级的所有村民**共享同一条序列**，谁先刷新谁先消耗；操纵序列即可控制该批村民后续的刷取结果。
+- `status` 显示序列当前的 128 位状态（`lo:hi` 十六进制）。
+- `set <数字>` 将序列重置到起始状态后再前进 `<数字>` 步（0 ≤ `<数字>` ≤ 100000；`set 0` 即从头，下一次刷新为第 1 个结果）。
+- `rollback <数字>` 沿 Xoroshiro128++ 逆变换回退 `<数字>` 步（1 ≤ `<数字>` ≤ 100000）。
+- `skip <数字>` 向前步进 `<数字>` 步，跳过不要的刷取结果（1 ≤ `<数字>` ≤ 100000）。
+- 需要 op 权限（受 `commandTradeSeq` 控制）；仅 26.1+ 存在（交易序列机制随数据驱动交易引入）。
 
 ## 查看版本 (`/hfut version`)
 

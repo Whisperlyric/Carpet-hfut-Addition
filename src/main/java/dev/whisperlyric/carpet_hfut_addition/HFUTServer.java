@@ -7,6 +7,9 @@ import carpet.api.settings.SettingsManager;
 import com.mojang.brigadier.CommandDispatcher;
 import dev.whisperlyric.carpet_hfut_addition.commands.HFUTCommand;
 import dev.whisperlyric.carpet_hfut_addition.commands.PearlTraceCommand;
+//#if MC >= 260100
+//$$ import dev.whisperlyric.carpet_hfut_addition.commands.TradeSeqCommand;
+//#endif
 import dev.whisperlyric.carpet_hfut_addition.helpers.rule.fakePlayerTickStage.FakePlayerTickStage;
 import dev.whisperlyric.carpet_hfut_addition.helpers.rule.fakePlayerTickStage.TisBridge;
 import dev.whisperlyric.carpet_hfut_addition.helpers.rule.ghostPearl.GhostPearlGuard;
@@ -75,6 +78,9 @@ public class HFUTServer implements CarpetExtension {
     ) {
         HFUTCommand.register(dispatcher, commandBuildContext);
         PearlTraceCommand.register(dispatcher);
+        //#if MC >= 260100
+        //$$ TradeSeqCommand.register(dispatcher);
+        //#endif
     }
 
     @Override

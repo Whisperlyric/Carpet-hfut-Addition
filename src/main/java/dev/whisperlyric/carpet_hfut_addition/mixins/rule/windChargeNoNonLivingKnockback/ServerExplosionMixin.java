@@ -23,8 +23,7 @@ import org.spongepowered.asm.mixin.Mixin;
  * windChargeNoNonLivingKnockback, 1.21.2+ shape: skips hurtEntities' velocity
  * write for non-living entities - setDeltaMovement on 1.21.2-1.21.3, push on
  * 1.21.4-26.2, pushFromExplosion on 26.3 - plus the 1.21.9+ projectile-owner
- * claim, which only ever hits projectiles. All members carry //$$ since the
- * main project (1.21.1) compiles the raw source directly.
+ * claim, which only ever hits projectiles.
  */
 @Restriction(require = @Condition(value = "minecraft", versionPredicates = ">=1.21.2"))
 @Mixin(targets = "net.minecraft.world.level.ServerExplosion")

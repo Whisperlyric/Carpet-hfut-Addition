@@ -228,4 +228,28 @@ public class HFUTSettings {
      */
     @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
     public static boolean windChargeNoNonLivingKnockback = false;
+
+    /** Soul Speed no longer consumes boot durability. */
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    public static boolean soulSpeedNoBootDamage = false;
+
+    /** Unbreaking's durability RNG rolls come from the player's own random sequence instead of the world's. */
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    public static boolean durabilityRngFollowsPlayer = false;
+
+    //#if MC >= 260100
+    //$$ /** Enables /tradeseq, which reads and moves a villager trade refresh sequence. */
+    //$$ @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    //$$ public static boolean tradeSeqEnabled = false;
+    //$$
+    //$$ /** Permission for /tradeseq: true/false/ops/0-4. */
+    //$$ @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.COMMAND},
+    //$$       options = {"true", "ops", "0", "1", "2", "3", "4", "false"}, strict = true)
+    //$$ public static String commandTradeSeq = "ops";
+    //#endif
+
+    /** Wandering trader persistence: "false" = off, "true" = any custom-named trader, else only the exact name. */
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE},
+          options = {"false", "true"}, strict = false)
+    public static String namedWanderingTraderPersistence = "false";
 }

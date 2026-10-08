@@ -1,8 +1,8 @@
 # Commands
 
-This mod registers `/hfut` and `/pearltrace`, and injects one subcommand into Carpet's own `/player`.
+This mod registers `/hfut`, `/pearltrace` and `/tradeseq`, and injects one subcommand into Carpet's own `/player`.
 
-Who may use them is controlled by permission rules (see [rules](rules_en.md)): `commandPlayerTickingStage` for `/player ... tickingStage`, `commandPearlTrace` for the read-only `/pearltrace` `list`/`show`, and `commandPearlTracePurge` for `purge`. Values: `false` (disabled), `true` (everyone), `ops` (permission level 2 or above), `0`-`4` (a minimum permission level).
+Who may use them is controlled by permission rules (see [rules](rules_en.md)): `commandPlayerTickingStage` for `/player ... tickingStage`, `commandPearlTrace` for the read-only `/pearltrace` `list`/`show`, `commandPearlTracePurge` for `purge`, and `commandTradeSeq` for `/tradeseq`. Values: `false` (disabled), `true` (everyone), `ops` (permission level 2 or above), `0`-`4` (a minimum permission level).
 
 ## Change a fake player's tick stage (`/player <name> tickingStage`)
 
@@ -38,6 +38,24 @@ Who may use them is controlled by permission rules (see [rules](rules_en.md)): `
     - Online players only; leftovers of offline players are cleaned up automatically on their next login.
     - There is no "clear everything" form.
 
+## `/tradeseq` `🐛Beta` `MC>=26.1`
+
+### Syntax
+- `/tradeseq <profession> <level> status`
+- `/tradeseq <profession> <level> set <number>`
+- `/tradeseq <profession> <level> rollback <number>`
+- `/tradeseq <profession> <level> skip <number>`
+
+`<profession>` is a villager profession (with suggestions), `<level>` is 1-5; together they map to the vanilla named random sequence `minecraft:trade_set/<profession>/level_<level>` (e.g. `librarian 4` is `minecraft:trade_set/librarian/level_4`).
+
+### Effect
+- All villagers of the same profession and level **share one sequence**, first refresh first served; controlling it controls the next refresh results of that whole batch.
+- `status` shows the current 128-bit state (`lo:hi`, hex).
+- `set <number>` re-seeds the sequence to its fresh state and then advances it `<number>` draws (`<number>` >= 0, up to 100000; `set 0` is the start, so the next refresh is result #1).
+- `rollback <number>` applies the invertible Xoroshiro128++ backward transition `<number>` times (`<number>` >= 1, up to 100000).
+- `skip <number>` advances forward by `<number>` draws to jump past unwanted results (`<number>` >= 1, up to 100000).
+- Requires op (gated by `commandTradeSeq`); only exists on 26.1+ (the sequence mechanism came with data-driven trades).
+
 ## Version (`/hfut version`)
 
 ### Syntax
@@ -53,3 +71,4 @@ With [GugleCarpetAddition](https://github.com/Gu-ZT/gugle-carpet-addition) (GCA)
 - The tooltip shows the current value (T/F and its phase) and the global value.
 - Clicking toggles between `invert` and `global`, the same as `/player <name> tickingStage invert`.
 - Without GCA the button simply does not exist; nothing else is affected.
+

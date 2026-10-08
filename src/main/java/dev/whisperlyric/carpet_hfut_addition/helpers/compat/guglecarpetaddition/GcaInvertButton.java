@@ -11,8 +11,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.ChestMenu;
 
-import java.util.List;
-
 /**
  * The invert-tick-stage button in GCA's fake player menu, at slot 25 next to
  * GCA's "quit" button at slot 26. Clicking it flips that fake player's

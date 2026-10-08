@@ -119,5 +119,20 @@
   "hfut.pearltrace.purge.no_pending": "No removal pending (or the preview expired) - run the preview without confirm first",
   "hfut.pearltrace.purge.expired": "The preview timed out (60s) - preview again, then confirm",
   "hfut.pearltrace.purge.stale": "The pearl's teleport count changed since the preview - the preview is void, run it again",
-  "hfut.pearltrace.purge.done": "Removed %s pearl(s) from %s"
+  "hfut.pearltrace.purge.done": "Removed %s pearl(s) from %s",
+  "carpet.rule.soulSpeedNoBootDamage.name": "Soul Speed Doesn't Damage Boots",
+  "carpet.rule.soulSpeedNoBootDamage.desc": "Soul Speed no longer consumes boot durability when in use",
+  "carpet.rule.durabilityRngFollowsPlayer.name": "Durability RNG Follows Player",
+  "carpet.rule.durabilityRngFollowsPlayer.desc": "Unbreaking's durability loss roll uses the player's own random sequence instead of the world's",
+  "hfut.tradeseq.status": "Random sequence %s is at state %s:%s",
+  "hfut.tradeseq.set": "Reset random sequence %s and advanced %s draw(s) (state %s:%s)",
+  "hfut.tradeseq.rolled_back": "Rolled random sequence %s back %s step(s) (state %s:%s)",
+  "hfut.tradeseq.skipped": "Advanced random sequence %s by %s step(s)",
+  "carpet.rule.tradeSeqEnabled.name": "Trade Sequence Control",
+  "carpet.rule.tradeSeqEnabled.desc": "Enables the /tradeseq villager trade sequence control command",
+  "carpet.rule.commandTradeSeq.name": "Trade Sequence Command Permission",
+  "carpet.rule.commandTradeSeq.desc": "Permission for manipulating trade sequences with /tradeseq",
+  "carpet.rule.commandTradeSeq.extra.0": "true: everyone; ops: permission level 2+; false: disabled; or a minimum permission level 0-4",
+  "carpet.rule.namedWanderingTraderPersistence.name": "Named Wandering Trader Persistence",
+  "carpet.rule.namedWanderingTraderPersistence.desc": "false = disabled; true = any custom-named trader persists; any other value = only traders named with that exact string persist"
 }

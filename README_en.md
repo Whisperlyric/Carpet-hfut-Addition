@@ -77,7 +77,7 @@ Carpet-Hfut-Addition-master/
     │   ├── HFUTSettings.java       # Carpet rules (@Rule annotations)
     │   ├── FakePlayerTickStageSettings.java  # TIS same-name rule, registered separately
     │   ├── GhostPearlFixSettings.java        # IGNY same-name rule, registered separately
-    │   ├── commands/               # /hfut and /pearltrace registration + /player tickingStage injection
+    │   ├── commands/               # /hfut, /pearltrace and /tradeseq registration + /player tickingStage injection
     │   ├── helpers/                # per-rule handling logic and the GCA menu-button compat
     │   ├── logger/                 # annotation-driven /log framework
     │   │   ├── HFUTLoggers.java    #   declare a @Logger field to register

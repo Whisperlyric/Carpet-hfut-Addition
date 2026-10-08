@@ -2,7 +2,6 @@ package dev.whisperlyric.carpet_hfut_addition.mixins.rule.mapLeak;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import dev.whisperlyric.carpet_hfut_addition.HFUTSettings;
 import net.minecraft.server.level.ServerEntity;
 import net.minecraft.world.entity.decoration.ItemFrame;
 import net.minecraft.world.entity.player.Player;

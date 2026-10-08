@@ -28,8 +28,7 @@ import org.spongepowered.asm.mixin.Mixin;
 
 /**
  * windChargeNoRedstoneActivation, 1.21.2+ shape: filters the five redstone
- * components in ServerExplosion.interactWithBlocks. All members carry //$$
- * since the main project (1.21.1) compiles the raw source directly.
+ * components in ServerExplosion.interactWithBlocks.
  */
 @Restriction(require = @Condition(value = "minecraft", versionPredicates = ">=1.21.2"))
 @Mixin(targets = "net.minecraft.world.level.ServerExplosion")

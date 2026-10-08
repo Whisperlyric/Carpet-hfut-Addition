@@ -22,6 +22,7 @@ import net.minecraft.server.level.ServerPlayer;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -238,7 +239,7 @@ public final class PearlTraceCommand {
         } else {
             send(source, "hfut.pearltrace.show.no_event");
         }
-        List<String> holders = java.util.Collections.emptyList();
+        List<String> holders = Collections.emptyList();
         //#if MC >= 12102
         //$$ holders = PearlTraceStore.get().remainingCopies(source.getServer(), uuid);
         //#endif
