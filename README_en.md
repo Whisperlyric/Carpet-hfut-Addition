@@ -28,6 +28,7 @@ A [Fabric Carpet](https://github.com/gnembon/fabric-carpet) extension developed 
 
 - [Rules](docs/rules_en.md)
 - [Commands](docs/commands_en.md)
+- [API](docs/api_en.md)
 
 ## Download
 
@@ -62,7 +63,7 @@ Carpet-Hfut-Addition-master/
 ├── settings.json           # supported version list
 ├── gradle.properties       # basic mod info
 ├── libs/                   # local dependency jars (GCA, compile-time via flatDir)
-├── docs/                   # rule and command docs (zh/en)
+├── docs/                   # rule / command / API docs (zh/en)
 ├── .github/workflows/      # CI: dev builds / mixin audit / multi-version release
 ├── versions/
 │   ├── mainProject         # main version name (1.21.1)
@@ -77,6 +78,7 @@ Carpet-Hfut-Addition-master/
     │   ├── HFUTSettings.java       # Carpet rules (@Rule annotations)
     │   ├── FakePlayerTickStageSettings.java  # TIS same-name rule, registered separately
     │   ├── GhostPearlFixSettings.java        # IGNY same-name rule, registered separately
+    │   ├── api/                    # public API for other mods
     │   ├── commands/               # /hfut, /pearltrace and /tradeseq registration + /player tickingStage injection
     │   ├── helpers/                # per-rule handling logic and the GCA menu-button compat
     │   ├── logger/                 # annotation-driven /log framework

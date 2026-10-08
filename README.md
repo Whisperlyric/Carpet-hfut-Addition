@@ -28,6 +28,7 @@
 
 - [规则](docs/rules.md)
 - [命令](docs/commands.md)
+- [API](docs/api.md)
 
 ## 下载
 
@@ -62,7 +63,7 @@ Carpet-Hfut-Addition-master/
 ├── settings.json           # 支持的版本列表
 ├── gradle.properties       # 模组基本信息
 ├── libs/                   # 本地依赖 jar（GCA，编译期经 flatDir 引用）
-├── docs/                   # 规则与命令文档（中英）
+├── docs/                   # 规则 / 命令 / API 文档（中英）
 ├── .github/workflows/      # CI：dev 构建 / mixin 审计 / 多版本发布
 ├── versions/
 │   ├── mainProject         # 主版本名（1.21.1）
@@ -77,6 +78,7 @@ Carpet-Hfut-Addition-master/
     │   ├── HFUTSettings.java       # Carpet 规则（@Rule 注解）
     │   ├── FakePlayerTickStageSettings.java  # 与 TIS 同名规则，拆分单独注册
     │   ├── GhostPearlFixSettings.java        # 与 IGNY 同名规则，拆分单独注册
+    │   ├── api/                    # 供其他模组调用的公开 API
     │   ├── commands/               # /hfut、/pearltrace、/tradeseq 注册与 /player tickingStage 注入
     │   ├── helpers/                # 各规则的处理逻辑，及 GCA 菜单按钮兼容
     │   ├── logger/                 # 注解式 /log 日志框架

@@ -8,6 +8,7 @@ package dev.whisperlyric.carpet_hfut_addition.commands;
 //$$ import com.mojang.brigadier.suggestion.Suggestions;
 //$$ import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 //$$ import dev.whisperlyric.carpet_hfut_addition.HFUTSettings;
+//$$ import dev.whisperlyric.carpet_hfut_addition.api.RandomSequenceApi;
 //$$ import dev.whisperlyric.carpet_hfut_addition.mixins.rule.tradeSeq.Xor128Accessor;
 //$$ import dev.whisperlyric.carpet_hfut_addition.mixins.rule.tradeSeq.XoroshiroRandomSourceAccessor;
 //$$ import dev.whisperlyric.carpet_hfut_addition.utils.CommandUtil;
@@ -126,18 +127,6 @@ public class TradeSeqCommand {
     //$$     return Identifier.fromNamespaceAndPath("minecraft", "trade_set/" + profession + "/level_" + level);
     //$$ }
     //$$
-    //$$ /** The villager sequences are wrapped in a dirty-marking delegate, so the raw source must come from {@code forAllSequences}. */
-    //$$ private static XoroshiroRandomSource hfut$source(MinecraftServer server, Identifier id) {
-    //$$     server.getRandomSequence(id); // make sure the sequence exists before reaching into the map
-    //$$     XoroshiroRandomSource[] found = new XoroshiroRandomSource[1];
-    //$$     server.getRandomSequences().forAllSequences((key, sequence) -> {
-    //$$         if (key.equals(id)) {
-    //$$             found[0] = (XoroshiroRandomSource) sequence.random();
-    //$$         }
-    //$$     });
-    //$$     return found[0];
-    //$$ }
-    //$$
     //$$ private static long[] hfut$state(XoroshiroRandomSource rng) {
     //$$     Xor128Accessor acc = (Xor128Accessor) ((XoroshiroRandomSourceAccessor) rng).hfut$generator();
     //$$     return new long[]{acc.hfut$seedLo(), acc.hfut$seedHi()};
@@ -146,7 +135,7 @@ public class TradeSeqCommand {
     //$$ private static int hfut$status(CommandContext<CommandSourceStack> ctx) {
     //$$     CommandSourceStack source = ctx.getSource();
     //$$     Identifier id = hfut$id(ctx);
-    //$$     long[] state = hfut$state(hfut$source(source.getServer(), id));
+    //$$     long[] state = hfut$state(RandomSequenceApi.sequence(source.getServer(), id));
     //$$     source.sendSuccess(() -> HFUTText.forViewer(source, "hfut.tradeseq.status",
     //$$             id, Long.toHexString(state[0]), Long.toHexString(state[1])), false);
     //$$     return 1;
@@ -159,7 +148,7 @@ public class TradeSeqCommand {
     //$$     Identifier id = hfut$id(ctx);
     //$$     int value = IntegerArgumentType.getInteger(ctx, "value");
     //$$     server.getRandomSequences().reset(id, server.getWorldGenSettings().options().seed());
-    //$$     XoroshiroRandomSource rng = hfut$source(server, id);
+    //$$     XoroshiroRandomSource rng = RandomSequenceApi.sequence(server, id);
     //$$     if (value > 0) {
     //$$         rng.consumeCount(value);
     //$$     }
@@ -174,7 +163,7 @@ public class TradeSeqCommand {
     //$$     CommandSourceStack source = ctx.getSource();
     //$$     Identifier id = hfut$id(ctx);
     //$$     int steps = IntegerArgumentType.getInteger(ctx, "steps");
-    //$$     Xor128Accessor acc = (Xor128Accessor) ((XoroshiroRandomSourceAccessor) hfut$source(source.getServer(), id)).hfut$generator();
+    //$$     Xor128Accessor acc = (Xor128Accessor) ((XoroshiroRandomSourceAccessor) RandomSequenceApi.sequence(source.getServer(), id)).hfut$generator();
     //$$     long lo = acc.hfut$seedLo();
     //$$     long hi = acc.hfut$seedHi();
     //$$     for (int i = 0; i < steps; i++) {
@@ -196,7 +185,7 @@ public class TradeSeqCommand {
     //$$     CommandSourceStack source = ctx.getSource();
     //$$     Identifier id = hfut$id(ctx);
     //$$     int steps = IntegerArgumentType.getInteger(ctx, "steps");
-    //$$     hfut$source(source.getServer(), id).consumeCount(steps);
+    //$$     RandomSequenceApi.sequence(source.getServer(), id).consumeCount(steps);
     //$$     source.sendSuccess(() -> HFUTText.forViewer(source, "hfut.tradeseq.skipped", id, steps), false);
     //$$     return 1;
     //$$ }
