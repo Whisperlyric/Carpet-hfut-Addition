@@ -134,4 +134,7 @@
   "carpet.rule.commandTradeSeq.desc": "使用 /tradeseq 操纵交易序列的权限",
   "carpet.rule.commandTradeSeq.extra.0": "true：所有人；ops：权限等级 2 及以上；false：关闭；或填 0-4 指定最低权限等级",
   "carpet.rule.namedWanderingTraderPersistence.name": "命名流浪商人不消失",
-  "carpet.rule.namedWanderingTraderPersistence.desc": "false 关闭；true 任意命名的流浪商人不消失；填其他值 被命名为该名字的流浪商人才不消失"}
+  "carpet.rule.namedWanderingTraderPersistence.desc": "false 关闭；true 任意命名的流浪商人不消失；填其他值 被命名为该名字的流浪商人才不消失",
+  "hfut.client.hidePauseSocial.hidden": "暂停菜单社交栏：已隐藏",
+  "hfut.client.hidePauseSocial.shown": "暂停菜单社交栏：已显示"
+}

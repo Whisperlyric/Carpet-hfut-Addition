@@ -1,6 +1,6 @@
 # Commands
 
-This mod registers `/hfut`, `/pearltrace` and `/tradeseq`, and injects one subcommand into Carpet's own `/player`.
+This mod registers `/hfut`, `/pearltrace` and `/tradeseq`, and injects one subcommand into Carpet's own `/player`. All of them are registered server-side except `/hfutclient`, which is client-only.
 
 Who may use them is controlled by permission rules (see [rules](rules_en.md)): `commandPlayerTickingStage` for `/player ... tickingStage`, `commandPearlTrace` for the read-only `/pearltrace` `list`/`show`, `commandPearlTracePurge` for `purge`, and `commandTradeSeq` for `/tradeseq`. Values: `false` (disabled), `true` (everyone), `ops` (permission level 2 or above), `0`-`4` (a minimum permission level).
 
@@ -63,6 +63,16 @@ Who may use them is controlled by permission rules (see [rules](rules_en.md)): `
 
 ### Effect
 - Prints the mod name and current version.
+
+## Client switches (`/hfutclient`) `MC>=26.2` `Client only`
+
+### Syntax
+- `/hfutclient hidepausesocial`
+- `/hfutclient hidepausesocial <true|false>`
+
+### Effect
+- Hides the 26.2+ pause menu's social button row (bug report / Friends / reporting) and the Friends button next to Multiplayer on the title screen. If ModMenu is installed, the old default behaviour is restored.
+- Without an argument it toggles; `true`/`false` sets it directly.
 
 ## GCA fake player menu button (not a command)
 

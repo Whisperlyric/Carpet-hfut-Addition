@@ -134,5 +134,7 @@
   "carpet.rule.commandTradeSeq.desc": "Permission for manipulating trade sequences with /tradeseq",
   "carpet.rule.commandTradeSeq.extra.0": "true: everyone; ops: permission level 2+; false: disabled; or a minimum permission level 0-4",
   "carpet.rule.namedWanderingTraderPersistence.name": "Named Wandering Trader Persistence",
-  "carpet.rule.namedWanderingTraderPersistence.desc": "false = disabled; true = any custom-named trader persists; any other value = only traders named with that exact string persist"
+  "carpet.rule.namedWanderingTraderPersistence.desc": "false = disabled; true = any custom-named trader persists; any other value = only traders named with that exact string persist",
+  "hfut.client.hidePauseSocial.hidden": "Pause social row: hidden",
+  "hfut.client.hidePauseSocial.shown": "Pause social row: visible"
 }

@@ -252,4 +252,5 @@ public class HFUTSettings {
     @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE},
           options = {"false", "true"}, strict = false)
     public static String namedWanderingTraderPersistence = "false";
+
 }

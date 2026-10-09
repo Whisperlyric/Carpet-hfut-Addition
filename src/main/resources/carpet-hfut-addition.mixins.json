@@ -57,7 +57,9 @@
     "compat.guglecarpetaddition.PlayerEnderChestContainerMixin"
   ],
   "client": [
-    "client.rule.mapPlayerIconRotation.MapDecorationMixin"
+    "client.rule.mapPlayerIconRotation.MapDecorationMixin",
+    "client.rule.hidePauseSocial.PauseScreenMixin",
+    "client.rule.hidePauseSocial.TitleScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

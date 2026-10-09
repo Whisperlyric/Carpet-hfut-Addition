@@ -1,6 +1,6 @@
 # 命令
 
-本模组注册了 `/hfut`、`/pearltrace`、`/tradeseq` 三个命令，并向 Carpet 自带的 `/player` 注入了一个子命令。
+本模组注册了 `/hfut`、`/pearltrace`、`/tradeseq` 三个命令，并向 Carpet 自带的 `/player` 注入了一个子命令。除 `/hfutclient` 为纯客户端命令外，其余命令都在服务端注册。
 
 能否使用由权限规则控制（见[规则](rules.md)）：`commandPlayerTickingStage` 管 `/player ... tickingStage`，`commandPearlTrace` 管 `/pearltrace` 的查验（`list`/`show`），`commandPearlTracePurge` 管清除（`purge`），`commandTradeSeq` 管 `/tradeseq`。取值：`false`（禁用）、`true`（所有人）、`ops`（权限等级 2 及以上）、`0`～`4`（指定的最低权限等级）。
 
@@ -63,6 +63,16 @@
 
 ### 效果
 - 打印模组名与当前版本。
+
+## 客户端开关 (`/hfutclient`) `MC>=26.2` `仅客户端`
+
+### 语法
+- `/hfutclient hidepausesocial`
+- `/hfutclient hidepausesocial <true|false>`
+
+### 效果
+- 隐藏 26.2+ 暂停菜单里的社交按钮一排（问题反馈 / 好友 / 举报等），以及标题界面「多人游戏」旁的好友按钮。如果安装了 ModMenu ，则行为与旧版本的默认界面相同。
+- 不带参数为取反，带 `true`/`false` 为直接设置。
 
 ## GCA 假人菜单按钮（非命令）
 
