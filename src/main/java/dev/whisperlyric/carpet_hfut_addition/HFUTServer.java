@@ -9,7 +9,6 @@ import dev.whisperlyric.carpet_hfut_addition.FakePlayerOpenStorageSettings;
 import dev.whisperlyric.carpet_hfut_addition.commands.HFUTCommand;
 import dev.whisperlyric.carpet_hfut_addition.commands.PearlTraceCommand;
 import dev.whisperlyric.carpet_hfut_addition.commands.SimpleLazyChunkCommand;
-import dev.whisperlyric.carpet_hfut_addition.helpers.compat.guglecarpetaddition.GcaGuard;
 //#if MC >= 260100
 //$$ import dev.whisperlyric.carpet_hfut_addition.commands.TradeSeqCommand;
 //#endif
@@ -65,13 +64,11 @@ public class HFUTServer implements CarpetExtension {
         } else {
             CarpetServer.settingsManager.parseSettingsClass(GhostPearlFixSettings.class);
         }
-        if (GcaGuard.present()) {
-            // /player <name> open inventory|enderchest rides GCA's fake player interface
-            try {
-                CarpetServer.settingsManager.parseSettingsClass(FakePlayerOpenStorageSettings.class);
-            } catch (UnsupportedOperationException e) {
-                LOGGER.info("[HFUT] commandFakePlayerOpenStorage already provided elsewhere; skipping", e);
-            }
+        // /player <name> open inventory|enderchest: self-contained, no GCA required
+        try {
+            CarpetServer.settingsManager.parseSettingsClass(FakePlayerOpenStorageSettings.class);
+        } catch (UnsupportedOperationException e) {
+            LOGGER.info("[HFUT] commandFakePlayerOpenStorage already provided elsewhere; skipping", e);
         }
         SettingsManager.registerGlobalRuleObserver((source, rule, newValue) -> {
             if ("fakePlayerTicksLikeRealPlayer".equals(rule.name())) {

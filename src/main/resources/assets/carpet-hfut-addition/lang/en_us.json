@@ -174,7 +174,7 @@
     "hfut.fakePlayerOpen.no_data": "No saved player data for %s",
     "hfut.fakePlayerOpen.no_server": "The editor is not available yet",
     "carpet.rule.commandFakePlayerOpenStorage.name": "Fake Player Open Storage Permission",
-    "carpet.rule.commandFakePlayerOpenStorage.desc": "Allows /player <player> open inventory|enderchest to open GCA's fake player interface for editing while the fake player is offline; edits are written back when the menu closes, and also force-flushed before the player joins or the server stops, preventing item duplication. Requires Carpet GugleCarpetAddition; without it the rule does not exist",
+    "carpet.rule.commandFakePlayerOpenStorage.desc": "Allows /player <player> open inventory|enderchest to open a fake player's inventory or ender chest for editing while it is offline; edits are written back when the menu closes, and also force-flushed before the player joins or the server stops, preventing item duplication",
     "carpet.rule.commandFakePlayerOpenStorage.extra.0": "true: everyone; ops: permission level 2+; false: disabled; or a minimum permission level 0-4",
     "carpet.rule.beaconDownwardsInfiniteRange.name": "Beacon Effects Reach Downwards",
     "carpet.rule.beaconDownwardsInfiniteRange.desc": "The beacon's effect area extends downwards without limit (vanilla only extends it upwards); the horizontal range is unchanged"

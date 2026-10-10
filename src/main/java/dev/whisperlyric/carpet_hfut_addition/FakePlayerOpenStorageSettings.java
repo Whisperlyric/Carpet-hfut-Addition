@@ -5,8 +5,8 @@ import carpet.api.settings.RuleCategory;
 import dev.whisperlyric.carpet_hfut_addition.utils.HFUTRuleCategory;
 
 /**
- * Parsed only when GCA is present, since the command rides its fake player
- * interface; without GCA the rule and command don't exist.
+ * Permission for {@code /player <player> open inventory|enderchest}, which is
+ * self-contained and available with or without GCA.
  */
 public class FakePlayerOpenStorageSettings {
     /** Permission for /player <player> open inventory|enderchest: true/false/ops/0-4. */

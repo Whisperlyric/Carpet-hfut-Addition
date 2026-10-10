@@ -28,7 +28,7 @@ import java.util.UUID;
 
 /**
  * Offline storage editor for fake players ({@code /player <name> open
- * inventory|enderchest}, GCA-gated): the target's playerdata is loaded into a
+ * inventory|enderchest}): the target's playerdata is loaded into a
  * shadow {@link ServerPlayer} that never joins the world, and every exit path
  * writes it back to disk before vanilla can read stale data.
  *

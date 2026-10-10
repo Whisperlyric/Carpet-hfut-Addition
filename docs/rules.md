@@ -20,9 +20,9 @@
 - 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `HFUT`, `COMMAND`, `FEATURE`
 
-## 假人离线开箱权限 (commandFakePlayerOpenStorage) `依赖GCA`
+## 假人离线开箱权限 (commandFakePlayerOpenStorage)
 
-设置谁可以使用 `/player <假人> open inventory|enderchest`：在假人不在线时打开它的背包或末影箱进行编辑（见[命令](commands.md)）。依赖 Carpet GugleCarpetAddition，未安装时该规则不存在。
+设置谁可以使用 `/player <假人> open inventory|enderchest`：在假人不在线时打开它的背包或末影箱进行编辑（见[命令](commands.md)）。无需安装 Carpet GugleCarpetAddition。
 
 - 类型: `string`
 - 默认值: `ops`
