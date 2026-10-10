@@ -11,25 +11,14 @@ Who may use `/player <name> tickingStage` to adjust a fake player's tick stage.
 - Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - Categories: `HFUT`, `COMMAND`, `FEATURE`
 
-## commandPearlTrace
+## commandSimpleLazyChunk `🐛Beta`
 
-Who may use the read-only `/pearltrace list` and `show` to inspect ghost pearl leftovers.
-
-- Type: `string`
-- Default value: `ops`
-- Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
-- Categories: `HFUT`, `COMMAND`, `FEATURE`
-
-## commandPearlTracePurge
-
-Who may use `/pearltrace purge` to remove ghost pearls from online players.
+Controls who may use `/hfut lazychunk`, which pins chunks at lazy (weakly loaded) strength (block ticks only, entities frozen) even with no player nearby, and holds them there against promotion to fully loaded (see [commands](commands_en.md)). Marks live in memory only and are lost on restart.
 
 - Type: `string`
 - Default value: `ops`
 - Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - Categories: `HFUT`, `COMMAND`, `FEATURE`
-
-> The read-only `list`/`show` are controlled by `commandPearlTrace`; purging rewrites player data, so it gets its own, tighter permission.
 
 ## tripwireIgnoreDepartures `🐛Beta` `MC>=1.21.9`
 
@@ -79,12 +68,39 @@ Fixes several main symptoms of the ghost ender pearl bug (MC-306936).
 
 ## ghostEnderPearlTrace `🐛Beta` `MC>=1.21.2`
 
-Records every pearl teleport and its origin and counts teleports per pearl UUID; inspect or purge with `/pearltrace` (see [commands](commands_en.md)).
+When on, records every pearl teleport and its origin and counts teleports per pearl UUID; inspect or purge with `/pearltrace` (see [commands](commands_en.md)). This rule only decides **whether to record**; who may use the command is governed by `commandPearlTrace` / `commandPearlTracePurge` below.
 
 - Type: `boolean`
 - Default value: `false`
 - Suggested options: `false`, `true`
-- Categories: `HFUT`, `BUGFIX`, `COMMAND`
+- Categories: `HFUT`, `BUGFIX`
+
+> A pearl can only teleport once, so 2+ teleports of the same UUID is basically proven ghost replay.
+> Works standalone and stacks on vanilla, carpet-igny-addition or ghostEnderPearlFix alike.
+
+## commandPearlTrace
+
+Who may use the read-only `/pearltrace list` and `show` to inspect ghost pearl leftovers.
+
+- Type: `string`
+- Default value: `ops`
+- Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- Categories: `HFUT`, `COMMAND`, `FEATURE`
+
+> Recording must be on first (`ghostEnderPearlTrace=true`) for there to be anything to inspect; this rule only governs command access.
+> `false` here disables the command, not the recording.
+
+## commandPearlTracePurge
+
+Who may use `/pearltrace purge` to remove ghost pearls from online players.
+
+- Type: `string`
+- Default value: `ops`
+- Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- Categories: `HFUT`, `COMMAND`, `FEATURE`
+
+> Purging rewrites player data, so it gets its own, tighter permission.
+> Recording must be on first (`ghostEnderPearlTrace=true`) for there to be anything to purge; `false` here disables the command, not the recording.
 
 ## shulkerBulletPortalCleanup `MC>=1.21.2`
 

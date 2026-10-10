@@ -11,25 +11,14 @@
 - 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `HFUT`, `COMMAND`, `FEATURE`
 
-## 幽灵珍珠反查命令权限 (commandPearlTrace)
+## 弱加载指令权限 (commandSimpleLazyChunk) `🐛Beta`
 
-设置谁可以使用 `/pearltrace list`/`show` 查看幽灵珍珠残留。
-
-- 类型: `string`
-- 默认值: `ops`
-- 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
-- 分类: `HFUT`, `COMMAND`, `FEATURE`
-
-## 幽灵珍珠清除命令权限 (commandPearlTracePurge)
-
-设置谁可以使用 `/pearltrace purge` 从在线玩家身上清除幽灵珍珠。
+设置谁可以使用 `/hfut lazychunk`：把区块固定在弱加载状态（仅方块刻运行、实体冻结），即使附近没有玩家也保持加载，并阻止其升级为完全加载（见[命令](commands.md)）。标记仅保存在内存中，重启后失效。
 
 - 类型: `string`
 - 默认值: `ops`
 - 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `HFUT`, `COMMAND`, `FEATURE`
-
-> 只读的 `list`/`show` 由 `commandPearlTrace` 控制；清除会改写玩家数据，因此单独用一个更严的权限。
 
 ## 绊线行为修复 (tripwireIgnoreDepartures) `🐛Beta` `MC>=1.21.9`
 
@@ -80,12 +69,39 @@
 
 ## 幽灵末影珍珠反查 (ghostEnderPearlTrace) `🐛Beta` `MC>=1.21.2`
 
-记录每次珍珠传送及其来源并按珍珠 UUID 累计次数，可用 `/pearltrace` 查看或清除（见[命令](commands.md)）。
+开启后记录每次珍珠传送及其来源并按珍珠 UUID 累计次数，可用 `/pearltrace` 查看或清除（见[命令](commands.md)）。本规则只管**是否记录**，命令能否使用由下面的 `commandPearlTrace` / `commandPearlTracePurge` 控制。
 
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false`, `true`
-- 分类: `HFUT`, `BUGFIX`, `COMMAND`
+- 分类: `HFUT`, `BUGFIX`
+
+> 一颗珍珠只能传送一次，同 UUID 传送 ≥2 次即基本确定为幽灵珍珠。
+> 可独立使用，也可叠加于原版、carpet-igny-addition 或 ghostEnderPearlFix 之上。
+
+## 幽灵珍珠反查命令权限 (commandPearlTrace)
+
+设置谁可以使用 `/pearltrace list`/`show` 查看幽灵珍珠残留。
+
+- 类型: `string`
+- 默认值: `ops`
+- 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- 分类: `HFUT`, `COMMAND`, `FEATURE`
+
+> 需先开启 `ghostEnderPearlTrace=true` 才会有记录可查；本规则只控制命令权限。
+> 这里的 `false` 表示关闭该命令，不等于关闭记录。
+
+## 幽灵珍珠清除命令权限 (commandPearlTracePurge)
+
+设置谁可以使用 `/pearltrace purge` 从在线玩家身上清除幽灵珍珠。
+
+- 类型: `string`
+- 默认值: `ops`
+- 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- 分类: `HFUT`, `COMMAND`, `FEATURE`
+
+> 清除会改写玩家数据，因此单独用一个更严的权限。
+> 需先开启 `ghostEnderPearlTrace=true` 才会有记录可清除；这里的 `false` 表示关闭该命令，不等于关闭记录。
 
 ## 清除过门潜影弹 (shulkerBulletPortalCleanup) `MC>=1.21.2`
 

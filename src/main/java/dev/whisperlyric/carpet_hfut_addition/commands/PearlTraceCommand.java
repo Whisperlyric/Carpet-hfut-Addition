@@ -12,7 +12,9 @@ import dev.whisperlyric.carpet_hfut_addition.helpers.rule.ghostPearl.PearlTraceS
 import dev.whisperlyric.carpet_hfut_addition.helpers.rule.ghostPearl.PearlTraceStore.TeleportEvent;
 import dev.whisperlyric.carpet_hfut_addition.utils.CommandUtil;
 import dev.whisperlyric.carpet_hfut_addition.utils.PlayerNames;
+import dev.whisperlyric.carpet_hfut_addition.utils.HFUTChatPage;
 import dev.whisperlyric.carpet_hfut_addition.utils.HFUTText;
+import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
@@ -79,11 +81,7 @@ public final class PearlTraceCommand {
                         .requires(source -> CommandUtil.canUseCommand(source, HFUTSettings.commandPearlTrace))
                         .executes(ctx -> list(ctx.getSource(), null, 1))
                         .then(argument("player", StringArgumentType.word())
-                                .executes(ctx -> list(ctx.getSource(), StringArgumentType.getString(ctx, "player"), 1))
-                                .then(argument("page", StringArgumentType.word())
-                                        .executes(ctx -> list(ctx.getSource(),
-                                                StringArgumentType.getString(ctx, "player"),
-                                                parsePage(StringArgumentType.getString(ctx, "page")))))))
+                                .executes(ctx -> list(ctx.getSource(), StringArgumentType.getString(ctx, "player"), 1))))
                 .then(literal("show")
                         .requires(source -> CommandUtil.canUseCommand(source, HFUTSettings.commandPearlTrace))
                         .then(argument("uuid", StringArgumentType.word())
@@ -114,23 +112,16 @@ public final class PearlTraceCommand {
         return builder.buildFuture();
     }
 
-    private static int parsePage(String raw) {
-        try {
-            return Math.max(1, Integer.parseInt(raw));
-        } catch (NumberFormatException e) {
-            return 1;
-        }
-    }
-
-    private static int list(CommandSourceStack source, String ownerFilter, int page) {
+    public static int list(CommandSourceStack source, String ownerFilter, int page) {
         List<TeleportEvent> events = PearlTraceStore.get().events(ownerFilter, null);
         if (events.isEmpty()) {
             send(source, "hfut.pearltrace.list.empty");
             return Command.SINGLE_SUCCESS;
         }
         int pages = (events.size() + PAGE_SIZE - 1) / PAGE_SIZE;
-        page = Math.min(page, pages);
-        send(source, "hfut.pearltrace.list.header", events.size(), page, pages);
+        page = Math.max(1, Math.min(page, pages));
+        long batch = HFUTChatPage.nextBatch();
+        sendMarked(source, batch, "hfut.pearltrace.list.header", events.size(), page, pages);
         int start = events.size() - 1 - (page - 1) * PAGE_SIZE;
         for (int i = start; i >= 0 && i > start - PAGE_SIZE; i--) {
             TeleportEvent event = events.get(i);
@@ -142,10 +133,45 @@ public final class PearlTraceCommand {
                     event.origin() == PearlTraceStore.Origin.NBT_LOAD ? "NBT" : "--",
                     event.count(),
                     String.format("%.0f %.0f %.0f", event.x(), event.y(), event.z()));
-            Component clickable = clickable(row, "/pearltrace show " + event.pearl());
+            MutableComponent clickable = HFUTChatPage.mark(
+                    clickable(row, "/pearltrace show " + event.pearl()), HFUTChatPage.PEARLTRACE, batch);
             source.sendSuccess(() -> clickable, false);
         }
+        if (pages > 1) {
+            MutableComponent nav = HFUTChatPage.mark(
+                    pageNav(source, ownerFilter, page, pages), HFUTChatPage.PEARLTRACE, batch);
+            source.sendSuccess(() -> nav, false);
+        }
         return Command.SINGLE_SUCCESS;
+    }
+
+    private static MutableComponent pageNav(CommandSourceStack source, String ownerFilter, int page, int pages) {
+        MutableComponent nav = Component.empty();
+        if (page > 1) {
+            nav.append(runnable(HFUTText.forViewer(source, "hfut.pearltrace.page_prev").withStyle(ChatFormatting.GRAY),
+                    pearlPageCommand(page - 1, ownerFilter)));
+            if (page < pages) {
+                nav.append("  ");
+            }
+        }
+        if (page < pages) {
+            nav.append(runnable(HFUTText.forViewer(source, "hfut.pearltrace.page_next").withStyle(ChatFormatting.GRAY),
+                    pearlPageCommand(page + 1, ownerFilter)));
+        }
+        return nav;
+    }
+
+    private static String pearlPageCommand(int page, String ownerFilter) {
+        return ownerFilter == null ? "/hfutclient pearl " + page : "/hfutclient pearl " + page + " " + ownerFilter;
+    }
+
+    /** Page arrows run on click - harmless, unlike a row's inspect command. */
+    private static MutableComponent runnable(MutableComponent line, String command) {
+        //#if MC >= 12105
+        //$$ return line.withStyle(style -> style.withClickEvent(new ClickEvent.RunCommand(command)));
+        //#else
+        return line.withStyle(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, command)));
+        //#endif
     }
 
     private static int show(CommandSourceStack source, String uuidRaw) {
@@ -269,5 +295,11 @@ public final class PearlTraceCommand {
 
     private static void send(CommandSourceStack source, String key, Object... args) {
         source.sendSuccess(() -> HFUTText.forViewer(source, key, args), false);
+    }
+
+    /** A line of a paged listing, tagged with the page's batch so the client can replace the previous page. */
+    private static void sendMarked(CommandSourceStack source, long batch, String key, Object... args) {
+        MutableComponent line = HFUTChatPage.mark(HFUTText.forViewer(source, key, args), HFUTChatPage.PEARLTRACE, batch);
+        source.sendSuccess(() -> line, false);
     }
 }

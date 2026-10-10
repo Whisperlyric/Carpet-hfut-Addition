@@ -2,7 +2,7 @@
 
 This mod registers `/hfut`, `/pearltrace` and `/tradeseq`, and injects one subcommand into Carpet's own `/player`. All of them are registered server-side except `/hfutclient`, which is client-only.
 
-Who may use them is controlled by permission rules (see [rules](rules_en.md)): `commandPlayerTickingStage` for `/player ... tickingStage`, `commandPearlTrace` for the read-only `/pearltrace` `list`/`show`, `commandPearlTracePurge` for `purge`, and `commandTradeSeq` for `/tradeseq`. Values: `false` (disabled), `true` (everyone), `ops` (permission level 2 or above), `0`-`4` (a minimum permission level).
+Who may use them is controlled by permission rules (see [rules](rules_en.md)).
 
 ## Change a fake player's tick stage (`/player <name> tickingStage`)
 
@@ -20,15 +20,17 @@ Who may use them is controlled by permission rules (see [rules](rules_en.md)): `
 
 ## Ghost pearl trace (`/pearltrace`) `MC>=1.21.2`
 
+> Recording requires the `ghostEnderPearlTrace` rule to be on first; access to `/pearltrace` is governed by `commandPearlTrace` (`list`/`show`) and `commandPearlTracePurge` (`purge`).
+
 ### Syntax
-- `/pearltrace list [<player>] [<page>]`
+- `/pearltrace list [<player>]`
 - `/pearltrace show <uuid>`
 - `/pearltrace purge <player> <uuid> [confirm]`
 
 `<uuid>` may be a full UUID or just enough leading characters to identify it uniquely.
 
 ### Effect
-- `list` shows recent teleport events (newest first, 8 per page): each row has the ghost mark (`!!` = the same UUID teleported 2+ times), full UUID, player, time, origin, count and coordinates; clicking a row puts the `show` command into the chat input.
+- `list` shows recent teleport events (newest first, 8 per page): each row has the ghost mark (`!!` = the same UUID teleported 2+ times), full UUID, player, time, origin, count and coordinates; clicking a row puts the `show` command into the chat input; when there are multiple pages, gray `[< Prev]` / `[Next >]` arrows at the bottom turn the page on click. On a client that has this mod, a new page replaces the previous page in chat instead of stacking; this only affects the display, with everything still kept in `logs/latest.log`.
 - `show` prints the pearl's details: total teleport count, the latest teleport (time / owner / dimension / coordinates / origin / birth spot), and which online players still hold leftover copies.
 - `purge` removes entries of that UUID from an online player's collection (gated by `commandPearlTracePurge`, tighter than inspection), in two steps to avoid mistakes:
     - Without `confirm`: preview only, nothing is removed; not confirming means cancel.
@@ -56,6 +58,29 @@ Who may use them is controlled by permission rules (see [rules](rules_en.md)): `
 - `skip <number>` advances forward by `<number>` draws to jump past unwanted results (`<number>` >= 1, up to 100000).
 - Requires op (gated by `commandTradeSeq`); only exists on 26.1+ (the sequence mechanism came with data-driven trades).
 
+## Simple lazy chunks (`/hfut lazychunk`) `🐛Beta`
+
+Pins chunks at "lazy" (weakly loaded) strength: kept loaded, only block ticks run (crop growth, scheduled ticks, etc.), entities do not tick (mobs stand still, no spawning), and they stay that way even with no player nearby; at the same time nothing can promote them back to fully loaded (walking players, `/forceload`, portals are all clamped). Available on all versions; marks live in memory only, are tracked per dimension, and are cleared on server restart.
+
+### Syntax
+- `/hfut lazychunk add chunk <x> <z>`: mark a single chunk by **chunk coordinates**
+- `/hfut lazychunk add pos <x> <z>`: mark the chunk a **column `<x> <z>`** falls in (supports `~`; converted to chunk coordinates for you, no need to divide by 16)
+- `/hfut lazychunk add area chunk <x1> <z1> <x2> <z2>`: mark a rectangular range by chunk coordinates
+- `/hfut lazychunk add area pos <x1> <z1> <x2> <z2>`: mark a range by columns (each end is converted to a chunk, then the rectangle is taken)
+- `/hfut lazychunk delete chunk <x> <z>`: unmark a single chunk
+- `/hfut lazychunk delete area <x1> <z1> <x2> <z2>`: unmark a rectangular range (chunk coordinates only - what `query` prints is what you use here)
+- `/hfut lazychunk delete all`: unmark **every** mark in this dimension
+- `/hfut lazychunk query`: page through all marked chunks in this dimension with their **current load state** (a localized status name)
+
+### Effect
+- After `add` a chunk turns lazy on the next chunk-tick update; after `delete` it returns to the normal unload flow immediately.
+- `add` / `add area` refuses a range that exceeds 256 chunks after conversion (same cap as vanilla `/forceload`); already-lazy chunks in the range are skipped and only the new ones are counted. When there is nothing to add or remove, a neutral message is sent (not reported as an error).
+- Chunk coordinates outside the world border (±1,874,999, i.e. the ±29,999,984-block world border ÷ 16) are refused outright, so no permanently-unreachable tickets are created.
+- **Players are never frozen**: the player's own chunk is exempt from the clamp and stays entity-ticking while they are present, turning lazy the same tick they leave (removing the player ticket itself triggers that level update). So running `add` on a range with a player inside is accepted as usual, with a note that it only takes effect once they leave.
+- `delete all` unmarks every mark in this dimension and returns how many were removed; nothing marked yields a neutral message.
+- `query` shows 10 rows per page. Clicking a row fills the chat input with its `delete chunk` command; when there are multiple pages, gray `[< Prev]` / `[Next >]` arrows at the bottom turn the page on click. On a client that has this mod, turning the page replaces the previous page in chat instead of stacking the pages; this only affects the display, and every line is still kept in `logs/latest.log`.
+- Requires op (gated by `commandSimpleLazyChunk`).
+
 ## Version (`/hfut version`)
 
 ### Syntax
@@ -64,15 +89,17 @@ Who may use them is controlled by permission rules (see [rules](rules_en.md)): `
 ### Effect
 - Prints the mod name and current version.
 
-## Client switches (`/hfutclient`) `MC>=26.2` `Client only`
+## Client commands (`/hfutclient`) `Client only`
 
 ### Syntax
-- `/hfutclient hidepausesocial`
-- `/hfutclient hidepausesocial <true|false>`
+- `/hfutclient lazychunk <page>`
+- `/hfutclient pearl <page> [<player>]`
+- `/hfutclient hidepausesocial` `MC>=26.2`
+- `/hfutclient hidepausesocial <true|false>` `MC>=26.2`
 
 ### Effect
-- Hides the 26.2+ pause menu's social button row (bug report / Friends / reporting) and the Friends button next to Multiplayer on the title screen. If ModMenu is installed, the old default behaviour is restored.
-- Without an argument it toggles; `true`/`false` sets it directly.
+- `lazychunk` / `pearl`: ask the server to re-send the given page of `/hfut lazychunk query` / `/pearltrace list`; the page arrows at the bottom of `query` and `list` call them on click. The server re-checks permission against the matching rule. On a client without this mod, clicking a page arrow gives "Unknown command".
+- `hidepausesocial`: hides the 26.2+ pause menu's social button row (bug report / Friends / reporting) and the Friends button next to Multiplayer on the title screen. If ModMenu is installed, the old default behaviour is restored. Without an argument it toggles; `true`/`false` sets it directly.
 
 ## GCA fake player menu button (not a command)
 

@@ -27,9 +27,9 @@ public class HFUTSettings {
           options = {"true", "ops", "0", "1", "2", "3", "4", "false"}, strict = true)
     public static String commandPearlTracePurge = "ops";
 
-    /** Ghost pearl forensics (MC-306936): records teleports and exposes {@code /pearltrace}. */
+    /** Ghost pearl forensics (MC-306936): when on, records teleports; {@code /pearltrace} access is gated by {@code commandPearlTrace*}. */
     //#if MC >= 12102
-    //$$ @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.BUGFIX, RuleCategory.COMMAND})
+    //$$ @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.BUGFIX})
     //$$ public static boolean ghostEnderPearlTrace = false;
     //#endif
 
@@ -252,5 +252,10 @@ public class HFUTSettings {
     @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE},
           options = {"false", "true"}, strict = false)
     public static String namedWanderingTraderPersistence = "false";
+
+    /** Permission for /hfut lazychunk (in-memory simple lazy chunks): true/false/ops/0-4. */
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.COMMAND, RuleCategory.FEATURE},
+          options = {"true", "ops", "0", "1", "2", "3", "4", "false"}, strict = true)
+    public static String commandSimpleLazyChunk = "ops";
 
 }

@@ -7,6 +7,7 @@ import carpet.api.settings.SettingsManager;
 import com.mojang.brigadier.CommandDispatcher;
 import dev.whisperlyric.carpet_hfut_addition.commands.HFUTCommand;
 import dev.whisperlyric.carpet_hfut_addition.commands.PearlTraceCommand;
+import dev.whisperlyric.carpet_hfut_addition.commands.SimpleLazyChunkCommand;
 //#if MC >= 260100
 //$$ import dev.whisperlyric.carpet_hfut_addition.commands.TradeSeqCommand;
 //#endif
@@ -14,7 +15,9 @@ import dev.whisperlyric.carpet_hfut_addition.helpers.rule.fakePlayerTickStage.Fa
 import dev.whisperlyric.carpet_hfut_addition.helpers.rule.fakePlayerTickStage.TisBridge;
 import dev.whisperlyric.carpet_hfut_addition.helpers.rule.ghostPearl.GhostPearlGuard;
 import dev.whisperlyric.carpet_hfut_addition.helpers.rule.ghostPearl.PearlTraceStore;
+import dev.whisperlyric.carpet_hfut_addition.helpers.rule.simpleLazyChunk.SimpleLazyChunkManager;
 import dev.whisperlyric.carpet_hfut_addition.logger.HFUTLoggers;
+import dev.whisperlyric.carpet_hfut_addition.network.HFUTNetwork;
 import dev.whisperlyric.carpet_hfut_addition.utils.Translations;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
@@ -36,6 +39,8 @@ public class HFUTServer implements CarpetExtension {
 
     public static void init() {
         CarpetServer.manageExtension(INSTANCE);
+        // both sides: the client needs the codec registered to send a page request
+        HFUTNetwork.init();
     }
 
     @Override
@@ -78,6 +83,7 @@ public class HFUTServer implements CarpetExtension {
     ) {
         HFUTCommand.register(dispatcher, commandBuildContext);
         PearlTraceCommand.register(dispatcher);
+        SimpleLazyChunkCommand.register(dispatcher);
         //#if MC >= 260100
         //$$ TradeSeqCommand.register(dispatcher);
         //#endif
@@ -89,6 +95,7 @@ public class HFUTServer implements CarpetExtension {
             TisBridge.refreshFromField();
         }
         PearlTraceStore.get().attach(server);
+        SimpleLazyChunkManager.attach(server);
     }
 
     @Override
@@ -96,6 +103,7 @@ public class HFUTServer implements CarpetExtension {
         FakePlayerTickStage.clearOnServerStop();
         PearlTraceStore.get().close();
         PearlTraceCommand.clearPending();
+        SimpleLazyChunkManager.clear();
     }
 
     @Override
