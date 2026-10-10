@@ -5,14 +5,17 @@ import carpet.CarpetServer;
 import carpet.api.settings.Rule;
 import carpet.api.settings.SettingsManager;
 import com.mojang.brigadier.CommandDispatcher;
+import dev.whisperlyric.carpet_hfut_addition.FakePlayerOpenStorageSettings;
 import dev.whisperlyric.carpet_hfut_addition.commands.HFUTCommand;
 import dev.whisperlyric.carpet_hfut_addition.commands.PearlTraceCommand;
 import dev.whisperlyric.carpet_hfut_addition.commands.SimpleLazyChunkCommand;
+import dev.whisperlyric.carpet_hfut_addition.helpers.compat.guglecarpetaddition.GcaGuard;
 //#if MC >= 260100
 //$$ import dev.whisperlyric.carpet_hfut_addition.commands.TradeSeqCommand;
 //#endif
 import dev.whisperlyric.carpet_hfut_addition.helpers.rule.fakePlayerTickStage.FakePlayerTickStage;
 import dev.whisperlyric.carpet_hfut_addition.helpers.rule.fakePlayerTickStage.TisBridge;
+import dev.whisperlyric.carpet_hfut_addition.helpers.rule.fakePlayerOpen.FakePlayerStorageEditor;
 import dev.whisperlyric.carpet_hfut_addition.helpers.rule.ghostPearl.GhostPearlGuard;
 import dev.whisperlyric.carpet_hfut_addition.helpers.rule.ghostPearl.PearlTraceStore;
 import dev.whisperlyric.carpet_hfut_addition.helpers.rule.simpleLazyChunk.SimpleLazyChunkManager;
@@ -62,6 +65,14 @@ public class HFUTServer implements CarpetExtension {
         } else {
             CarpetServer.settingsManager.parseSettingsClass(GhostPearlFixSettings.class);
         }
+        if (GcaGuard.present()) {
+            // /player <name> open inventory|enderchest rides GCA's fake player interface
+            try {
+                CarpetServer.settingsManager.parseSettingsClass(FakePlayerOpenStorageSettings.class);
+            } catch (UnsupportedOperationException e) {
+                LOGGER.info("[HFUT] commandFakePlayerOpenStorage already provided elsewhere; skipping", e);
+            }
+        }
         SettingsManager.registerGlobalRuleObserver((source, rule, newValue) -> {
             if ("fakePlayerTicksLikeRealPlayer".equals(rule.name())) {
                 TisBridge.setShadowGlobal(Boolean.parseBoolean(newValue));
@@ -96,6 +107,7 @@ public class HFUTServer implements CarpetExtension {
         }
         PearlTraceStore.get().attach(server);
         SimpleLazyChunkManager.attach(server);
+        FakePlayerStorageEditor.attach(server);
     }
 
     @Override
@@ -104,6 +116,8 @@ public class HFUTServer implements CarpetExtension {
         PearlTraceStore.get().close();
         PearlTraceCommand.clearPending();
         SimpleLazyChunkManager.clear();
+        FakePlayerStorageEditor.flushAll();
+        FakePlayerStorageEditor.clear();
     }
 
     @Override

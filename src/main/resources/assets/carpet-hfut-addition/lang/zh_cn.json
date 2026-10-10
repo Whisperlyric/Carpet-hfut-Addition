@@ -165,5 +165,17 @@
     "hfut.lazychunk.query_header": "本维度共 %s 个添加的弱加载区块（第 %s/%s 页）：",
     "hfut.lazychunk.page_prev": "[< 上一页]",
     "hfut.lazychunk.page_next": "[下一页 >]",
-    "hfut.lazychunk.cleared": "已移除本维度全部 %s 添加的弱加载标记，对应区块恢复正常卸载"
+    "hfut.lazychunk.cleared": "已移除本维度全部 %s 添加的弱加载标记，对应区块恢复正常卸载",
+    "hfut.fakePlayerOpen.title.inventory": "%s 的背包（离线）",
+    "hfut.fakePlayerOpen.title.enderchest": "%s 的末影箱（离线）",
+    "hfut.fakePlayerOpen.opened.inventory": "已离线打开 %s 的背包",
+    "hfut.fakePlayerOpen.opened.enderchest": "已离线打开 %s 的末影箱",
+    "hfut.fakePlayerOpen.player_only": "只有玩家能打开该界面",
+    "hfut.fakePlayerOpen.online": "%s 当前在线，请直接使用在线界面",
+    "hfut.fakePlayerOpen.in_use": "%s 的存储正被 %s 查看",
+    "hfut.fakePlayerOpen.no_data": "%s 没有已保存的玩家数据",
+    "hfut.fakePlayerOpen.no_server": "编辑器尚未就绪",
+    "carpet.rule.commandFakePlayerOpenStorage.name": "假人离线开箱权限",
+    "carpet.rule.commandFakePlayerOpenStorage.desc": "允许使用 /player <玩家> open inventory|enderchest 在假人不在线时打开 GCA 的假人界面进行编辑；关闭界面时写回，玩家加入或服务器关闭前也会强制写回，防止刷物品。依赖 Carpet GugleCarpetAddition，未安装时该规则不存在",
+    "carpet.rule.commandFakePlayerOpenStorage.extra.0": "true：所有人；ops：权限等级 2+；false：禁用；或最低权限等级 0-4"
 }

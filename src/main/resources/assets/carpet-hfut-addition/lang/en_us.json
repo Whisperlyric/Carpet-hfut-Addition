@@ -165,5 +165,17 @@
     "hfut.lazychunk.query_header": "%s chunk(s) marked simple lazy in this dimension (page %s/%s):",
     "hfut.lazychunk.page_prev": "[< Prev]",
     "hfut.lazychunk.page_next": "[Next >]",
-    "hfut.lazychunk.cleared": "Removed all %s simple lazy mark(s) in this dimension; affected chunks resume normal unloading"
+    "hfut.lazychunk.cleared": "Removed all %s simple lazy mark(s) in this dimension; affected chunks resume normal unloading",
+    "hfut.fakePlayerOpen.title.inventory": "%s's inventory (offline)",
+    "hfut.fakePlayerOpen.title.enderchest": "%s's ender chest (offline)",
+    "hfut.fakePlayerOpen.opened.inventory": "Opened %s's inventory offline",
+    "hfut.fakePlayerOpen.opened.enderchest": "Opened %s's ender chest offline",
+    "hfut.fakePlayerOpen.player_only": "Only players can open this interface",
+    "hfut.fakePlayerOpen.online": "%s is currently online - open their live interface instead",
+    "hfut.fakePlayerOpen.in_use": "%s's storage is already being viewed by %s",
+    "hfut.fakePlayerOpen.no_data": "No saved player data for %s",
+    "hfut.fakePlayerOpen.no_server": "The editor is not available yet",
+    "carpet.rule.commandFakePlayerOpenStorage.name": "Fake Player Open Storage Permission",
+    "carpet.rule.commandFakePlayerOpenStorage.desc": "Allows /player <player> open inventory|enderchest to open GCA's fake player interface for editing while the fake player is offline; edits are written back when the menu closes, and also force-flushed before the player joins or the server stops, preventing item duplication. Requires Carpet GugleCarpetAddition; without it the rule does not exist",
+    "carpet.rule.commandFakePlayerOpenStorage.extra.0": "true: everyone; ops: permission level 2+; false: disabled; or a minimum permission level 0-4"
 }

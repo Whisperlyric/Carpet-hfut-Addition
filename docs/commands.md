@@ -77,9 +77,21 @@
 - `add`/`add area` 的范围换算后超过 256 个区块会拒绝执行（与原版 `/forceload` 上限一致）；范围内已是弱加载的区块会跳过，只统计新增数量。
 - 区块坐标超出世界边界（±1 874 999，即世界边界 ±29 999 984 方块 ÷ 16）会直接拒绝，不会挂出永远加载不到的废票。
 - **玩家永远不会被冻结**：玩家所在区块豁免于钳制，临时保持实体刻，玩家离开的同一刻即降为弱加载。因此对有玩家在场的范围执行 `add` 会照常接受，但会附一条提示说明该区块要等玩家离开才生效。
-- `delete all` 一键取消本维度全部标记，返回移除数量；本就没有标记时给出中性提示。
+- `delete all` 一键取消本维度全部标记，返回移除数量。
 - `query` 每页 10 条；点击任意一行会把对应的 `delete chunk` 命令填进聊天框；多于一页时底部有灰色 `[< 上一页]` / `[下一页 >]` 按钮（点击翻页）。安装本模组的客户端翻页时会用新一页替换聊天里的上一页，而不是把上一页顶上去；这仅影响显示，每一行仍完整保留在 `logs/latest.log`。
 - 需要 op 权限（受 `commandSimpleLazyChunk` 控制）。
+
+## 假人离线开箱 (`/player <假人> open`) `依赖GCA`
+
+在**假人不在线**时打开它的背包或末影箱进行编辑，界面与 GCA 的假人界面类似。由 `commandFakePlayerOpenStorage` 控制权限；**未同时安装 Carpet GugleCarpetAddition 时，本命令与规则均不存在**。
+
+### 语法
+- `/player <假人> open inventory`：打开背包
+- `/player <假人> open enderchest`：打开末影箱
+
+### 效果
+- 目标的存档数据被加载进一个不入世界的影子实体，编辑实时写回玩家存档：关闭界面即保存，服务器关闭时也会进行保存。
+- 防刷物品、独占访问，不会出现 GCA 的控制按钮，假人从未生成过（无玩家存档）时拒绝打开。
 
 ## 查看版本 (`/hfut version`)
 
@@ -103,7 +115,7 @@
 
 ## GCA 假人菜单按钮（非命令）
 
-装了 [GugleCarpetAddition](https://github.com/Gu-ZT/gugle-carpet-addition)（GCA）时，假人的末影箱 / 控制菜单里、GCA「退出游戏」按钮的左侧（第 25 格）会出现 **HFUT：tick 阶段反转** 按钮。
+同时安装 [GugleCarpetAddition](https://github.com/Gu-ZT/gugle-carpet-addition)（GCA）时，假人的末影箱 / 控制菜单里、GCA「退出游戏」按钮的左侧（第 25 格）会出现 **HFUT：tick 阶段反转** 按钮。
 
 - 悬停显示当前生效值（T/F 及所处阶段）与全局值。
 - 点击在 `invert` 与 `global` 之间切换，等同于 `/player <假人> tickingStage invert`。

@@ -209,7 +209,6 @@ public class SimpleLazyChunkCommand {
             return 0;
         }
         if (changed == 0) {
-            // informational, not an error - stay off the red failure channel
             source.sendSuccess(() -> HFUTText.forViewer(source, adding
                     ? "hfut.lazychunk.range_added_none" : "hfut.lazychunk.range_removed_none"), false);
             return 0;

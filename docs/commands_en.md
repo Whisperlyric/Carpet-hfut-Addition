@@ -74,12 +74,24 @@ Pins chunks at "lazy" (weakly loaded) strength: kept loaded, only block ticks ru
 
 ### Effect
 - After `add` a chunk turns lazy on the next chunk-tick update; after `delete` it returns to the normal unload flow immediately.
-- `add` / `add area` refuses a range that exceeds 256 chunks after conversion (same cap as vanilla `/forceload`); already-lazy chunks in the range are skipped and only the new ones are counted. When there is nothing to add or remove, a neutral message is sent (not reported as an error).
+- `add` / `add area` refuses a range that exceeds 256 chunks after conversion (same cap as vanilla `/forceload`); already-lazy chunks in the range are skipped and only the new ones are counted.
 - Chunk coordinates outside the world border (±1,874,999, i.e. the ±29,999,984-block world border ÷ 16) are refused outright, so no permanently-unreachable tickets are created.
 - **Players are never frozen**: the player's own chunk is exempt from the clamp and stays entity-ticking while they are present, turning lazy the same tick they leave (removing the player ticket itself triggers that level update). So running `add` on a range with a player inside is accepted as usual, with a note that it only takes effect once they leave.
-- `delete all` unmarks every mark in this dimension and returns how many were removed; nothing marked yields a neutral message.
+- `delete all` unmarks every mark in this dimension and returns how many were removed.
 - `query` shows 10 rows per page. Clicking a row fills the chat input with its `delete chunk` command; when there are multiple pages, gray `[< Prev]` / `[Next >]` arrows at the bottom turn the page on click. On a client that has this mod, turning the page replaces the previous page in chat instead of stacking the pages; this only affects the display, and every line is still kept in `logs/latest.log`.
 - Requires op (gated by `commandSimpleLazyChunk`).
+
+## Offline fake player storage (`/player <name> open`) `Requires GCA`
+
+Opens a fake player's inventory or ender chest for editing **while it is offline**, in an interface similar to GCA's fake player menu. Gated by `commandFakePlayerOpenStorage`; **without Carpet GugleCarpetAddition, neither this command nor the rule exists**.
+
+### Syntax
+- `/player <name> open inventory`: opens the inventory
+- `/player <name> open enderchest`: opens the ender chest
+
+### Effect
+- The target's saved data is loaded into a shadow entity that never joins the world, and edits are written straight back to the playerdata: saved when the menu closes and on server stop.
+- Duping is prevented and access is exclusive; GCA's control buttons do not appear, and opening is refused when the fake player has never been spawned (no playerdata).
 
 ## Version (`/hfut version`)
 
@@ -103,7 +115,7 @@ Pins chunks at "lazy" (weakly loaded) strength: kept loaded, only block ticks ru
 
 ## GCA fake player menu button (not a command)
 
-With [GugleCarpetAddition](https://github.com/Gu-ZT/gugle-carpet-addition) (GCA) installed, a **HFUT: tick stage invert** button appears in the fake player's ender chest / controller menu, to the left of GCA's "quit game" button (slot 25).
+With [GugleCarpetAddition](https://github.com/Gu-ZT/gugle-carpet-addition) (GCA) also installed, a **HFUT: tick stage invert** button appears in the fake player's ender chest / controller menu, to the left of GCA's "quit game" button (slot 25).
 
 - The tooltip shows the current value (T/F and its phase) and the global value.
 - Clicking toggles between `invert` and `global`, the same as `/player <name> tickingStage invert`.
