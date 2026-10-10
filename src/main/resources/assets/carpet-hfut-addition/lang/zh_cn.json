@@ -131,10 +131,8 @@
     "hfut.tradeseq.set": "已将随机序列 %s 重置并前进 %s 步（状态 %s:%s）",
     "hfut.tradeseq.rolled_back": "已将随机序列 %s 回退 %s 步（状态 %s:%s）",
     "hfut.tradeseq.skipped": "已将随机序列 %s 向前步进 %s 步",
-    "carpet.rule.tradeSeqEnabled.name": "交易序列操纵",
-    "carpet.rule.tradeSeqEnabled.desc": "启用 /tradeseq 交易序列操纵指令",
-    "carpet.rule.commandTradeSeq.name": "交易序列指令权限",
-    "carpet.rule.commandTradeSeq.desc": "使用 /tradeseq 操纵交易序列的权限",
+    "carpet.rule.commandTradeSeq.name": "交易序列操纵",
+    "carpet.rule.commandTradeSeq.desc": "允许使用 /tradeseq：查询与移动村民交易刷新所用的命名随机序列",
     "carpet.rule.commandTradeSeq.extra.0": "true：所有人；ops：权限等级 2 及以上；false：关闭；或填 0-4 指定最低权限等级",
     "carpet.rule.namedWanderingTraderPersistence.name": "命名流浪商人不消失",
     "carpet.rule.namedWanderingTraderPersistence.desc": "false 关闭；true 任意命名的流浪商人不消失；填其他值 被命名为该名字的流浪商人才不消失",
@@ -177,5 +175,7 @@
     "hfut.fakePlayerOpen.no_server": "编辑器尚未就绪",
     "carpet.rule.commandFakePlayerOpenStorage.name": "假人离线开箱权限",
     "carpet.rule.commandFakePlayerOpenStorage.desc": "允许使用 /player <玩家> open inventory|enderchest 在假人不在线时打开 GCA 的假人界面进行编辑；关闭界面时写回，玩家加入或服务器关闭前也会强制写回，防止刷物品。依赖 Carpet GugleCarpetAddition，未安装时该规则不存在",
-    "carpet.rule.commandFakePlayerOpenStorage.extra.0": "true：所有人；ops：权限等级 2+；false：禁用；或最低权限等级 0-4"
+    "carpet.rule.commandFakePlayerOpenStorage.extra.0": "true：所有人；ops：权限等级 2+；false：禁用；或最低权限等级 0-4",
+    "carpet.rule.beaconDownwardsInfiniteRange.name": "信标效果向下无限延伸",
+    "carpet.rule.beaconDownwardsInfiniteRange.desc": "信标的效果判定区域向下无限延伸（原版仅向上延伸），水平范围不变"
 }

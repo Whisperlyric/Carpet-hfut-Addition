@@ -238,12 +238,8 @@ public class HFUTSettings {
     public static boolean durabilityRngFollowsPlayer = false;
 
     //#if MC >= 260100
-    //$$ /** Enables /tradeseq, which reads and moves a villager trade refresh sequence. */
-    //$$ @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
-    //$$ public static boolean tradeSeqEnabled = false;
-    //$$
-    //$$ /** Permission for /tradeseq: true/false/ops/0-4. */
-    //$$ @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.COMMAND},
+    //$$ /** Permission for /tradeseq (villager trade refresh sequence): true/false/ops/0-4. */
+    //$$ @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.COMMAND, RuleCategory.FEATURE},
     //$$       options = {"true", "ops", "0", "1", "2", "3", "4", "false"}, strict = true)
     //$$ public static String commandTradeSeq = "ops";
     //#endif
@@ -257,5 +253,9 @@ public class HFUTSettings {
     @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.COMMAND, RuleCategory.FEATURE},
           options = {"true", "ops", "0", "1", "2", "3", "4", "false"}, strict = true)
     public static String commandSimpleLazyChunk = "ops";
+
+    /** Beacon effect area extends infinitely downwards (vanilla only extends it upwards): true/false. */
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    public static boolean beaconDownwardsInfiniteRange = false;
 
 }

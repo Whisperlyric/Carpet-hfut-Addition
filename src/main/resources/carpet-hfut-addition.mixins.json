@@ -43,6 +43,7 @@
         "rule.fakePlayerOpen.PlayerListMixin",
         "rule.fakePlayerOpen.PlayerCloseMixin",
         "rule.fakePlayerOpen.PlayerListAccessor",
+        "rule.beaconDownwardsInfiniteRange.BeaconBlockEntityMixin",
         "rule.creativeNoEntityCollision.EntityMixin",
         "rule.creativeNoEntityCollision.LivingEntityMixin",
         "rule.windChargeNoRedstoneActivation.ExplosionMixin",

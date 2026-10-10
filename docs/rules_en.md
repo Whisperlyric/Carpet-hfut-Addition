@@ -29,6 +29,15 @@ Controls who may use `/player <name> open inventory|enderchest` to open a fake p
 - Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - Categories: `HFUT`, `COMMAND`, `FEATURE`
 
+## commandTradeSeq `🐛Beta` `MC>=26.1`
+
+Controls who may use `/tradeseq`, which reads and moves the named random sequence a villager's trade refresh draws from (see [commands](commands_en.md)).
+
+- Type: `string`
+- Default value: `ops`
+- Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- Categories: `HFUT`, `COMMAND`, `FEATURE`
+
 ## tripwireIgnoreDepartures `🐛Beta` `MC>=1.21.9`
 
 Fixes, in a fairly aggressive way, the tripwire firing its rising edge multiple times as entities pass through it (MC-305475).
@@ -336,24 +345,6 @@ Unbreaking's durability loss roll uses the player's own random sequence instead 
 - Suggested options: `false`, `true`
 - Categories: `HFUT`, `FEATURE`
 
-## tradeSeqEnabled `🐛Beta` `MC>=26.1`
-
-Enables `/tradeseq`, which reads and moves the named random sequence a villager's trade refresh draws from.
-
-- Type: `boolean`
-- Default value: `false`
-- Suggested options: `false`, `true`
-- Categories: `HFUT`, `FEATURE`
-
-## commandTradeSeq `MC>=26.1`
-
-Controls who may manipulate trade sequences with `/tradeseq`.
-
-- Type: `string`
-- Default value: `ops`
-- Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
-- Categories: `HFUT`, `COMMAND`
-
 ## namedWanderingTraderPersistence
 
 A wandering trader named with a matching custom name no longer despawns naturally.
@@ -366,3 +357,15 @@ A wandering trader named with a matching custom name no longer despawns naturall
 - `false`: disabled
 - `true`: any custom-named trader persists
 - any other value: only traders named with that exact string persist
+
+## beaconDownwardsInfiniteRange
+
+The beacon's effect area extends downwards without limit; the horizontal range is unchanged.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`
+
+- `false`: disabled (vanilla behaviour — the effect area only grows upwards)
+- `true`: players at any depth directly below the beacon receive its effects

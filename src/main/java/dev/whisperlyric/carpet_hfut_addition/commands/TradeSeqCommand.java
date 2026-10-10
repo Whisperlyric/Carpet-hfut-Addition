@@ -58,8 +58,7 @@ public class TradeSeqCommand {
     //$$
     //$$ public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
     //$$     var root = Commands.literal("tradeseq")
-    //$$             .requires(source -> HFUTSettings.tradeSeqEnabled
-    //$$                     && CommandUtil.canUseCommand(source, HFUTSettings.commandTradeSeq));
+    //$$             .requires(source -> CommandUtil.canUseCommand(source, HFUTSettings.commandTradeSeq));
     //$$     root.then(Commands.argument("profession", StringArgumentType.word())
     //$$             .suggests(TradeSeqCommand::suggestProfessions)
     //$$             .then(Commands.argument("level", IntegerArgumentType.integer(1, 5))

@@ -29,6 +29,15 @@
 - 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `HFUT`, `COMMAND`, `FEATURE`
 
+## 交易序列操纵 (commandTradeSeq) `🐛Beta` `MC>=26.1`
+
+设置谁可以使用 `/tradeseq`：查询与移动村民交易刷新所用的命名随机序列（见[命令](commands.md)）。
+
+- 类型: `string`
+- 默认值: `ops`
+- 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- 分类: `HFUT`, `COMMAND`, `FEATURE`
+
 ## 绊线行为修复 (tripwireIgnoreDepartures) `🐛Beta` `MC>=1.21.9`
 
 用较为激进的方式修复绊线在实体穿过时多次触发上升沿的问题（MC-305475）。
@@ -334,24 +343,6 @@
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `FEATURE`
 
-## 交易序列操纵 (tradeSeqEnabled) `🐛Beta` `MC>=26.1`
-
-启用 `/tradeseq`，用于查询与移动村民交易刷新所用的命名随机序列。
-
-- 类型: `boolean`
-- 默认值: `false`
-- 参考选项: `false`, `true`
-- 分类: `HFUT`, `FEATURE`
-
-## 交易序列指令权限 (commandTradeSeq) `MC>=26.1`
-
-设置谁可以使用 `/tradeseq` 操纵交易序列。
-
-- 类型: `string`
-- 默认值: `ops`
-- 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
-- 分类: `HFUT`, `COMMAND`
-
 ## 命名流浪商人不消失 (namedWanderingTraderPersistence)
 
 被命名为指定字符串的流浪商人不会自然消失。
@@ -364,3 +355,15 @@
 - `false`：关闭
 - `true`：任意自定义命名的流浪商人不消失
 - 其他值：仅名称与该值完全相同的流浪商人不消失
+
+## 信标效果向下无限延伸 (beaconDownwardsInfiniteRange)
+
+信标的效果判定区域向下无限延伸，水平范围不变。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `HFUT`, `FEATURE`
+
+- `false`：关闭（原版行为，效果区域仅向上方延伸）
+- `true`：信标正下方任意深度的玩家同样获得其效果
