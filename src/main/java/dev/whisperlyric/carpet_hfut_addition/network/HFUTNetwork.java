@@ -30,9 +30,12 @@ public final class HFUTNetwork {
         //#endif
         ServerPlayNetworking.registerGlobalReceiver(HFUTPagePayload.TYPE, (payload, context) -> {
             ServerPlayer player = context.player();
-            // Virtual call: ServerPlayer declares its own no-arg createCommandSourceStack() from
-            // 1.21.3 on and inherits Entity's before that, so the same text compiles on every node.
+            // Remap would rewrite this to Entity.createCommandSourceStackForNameResolution(ServerLevel),
+            // which does not typecheck; suppress it here. The directives are consumed by the remap
+            // layer, so the preprocessor's "unknown directive" warnings are expected.
+            //#disable-remap
             CommandSourceStack source = player.createCommandSourceStack();
+            //#enable-remap
             switch (payload.channel()) {
                 case HFUTChatPage.LAZYCHUNK -> {
                     if (CommandUtil.canUseCommand(source, HFUTSettings.commandSimpleLazyChunk)) {
