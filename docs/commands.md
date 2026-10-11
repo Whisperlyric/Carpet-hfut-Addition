@@ -81,17 +81,22 @@
 - `query` 每页 10 条；点击任意一行会把对应的 `delete chunk` 命令填进聊天框；多于一页时底部有灰色 `[< 上一页]` / `[下一页 >]` 按钮（点击翻页）。安装本模组的客户端翻页时会用新一页替换聊天里的上一页，而不是把上一页顶上去；这仅影响显示，每一行仍完整保留在 `logs/latest.log`。
 - 需要 op 权限（受 `commandSimpleLazyChunk` 控制）。
 
-## 假人离线开箱 (`/player <假人> open`)
+## 离线开箱 (`/player <玩家> open`)
 
-在**假人不在线**时打开它的背包或末影箱进行编辑。由 `commandFakePlayerOpenStorage` 控制权限；界面由本模组自带，无需安装 Carpet GugleCarpetAddition。
+在目标**不在线**时打开它的背包或末影箱进行编辑。界面由本模组自带，无需安装 Carpet GugleCarpetAddition。
+
+权限按目标身份分流，并以 `commandFakePlayerOpenStorage` 作为指令总开关（`false` 时指令整体禁用，此时真人规则单独开启无效）：
+
+- **离线身份**（v3 UUID，如假人、离线模式服务器上的真人玩家）→ `commandFakePlayerOpenStorage`（默认 `ops`）
+- **Mojang 账号身份**（v4 UUID，如正版真人玩家，以及 26.x 中共享该账号的高级名假人）→ `commandRealPlayerOpenStorage`（默认 `false`）
 
 ### 语法
-- `/player <假人> open inventory`：打开背包
-- `/player <假人> open enderchest`：打开末影箱
+- `/player <玩家> open inventory`：打开背包
+- `/player <玩家> open enderchest`：打开末影箱
 
 ### 效果
 - 目标的存档数据被加载进一个不入世界的影子实体，编辑实时写回玩家存档：关闭界面即保存，服务器关闭时也会进行保存。
-- 防刷物品、独占访问，假人从未生成过（无玩家存档）时拒绝打开。背包为 5 行（含头/胸/腿/脚与副手位），末影箱为 3 行。
+- 防刷物品、独占访问，目标从未生成过（无玩家存档）时拒绝打开。背包为 5 行（含头/胸/腿/脚与副手位），末影箱为 3 行。
 
 ## 查看版本 (`/hfut version`)
 

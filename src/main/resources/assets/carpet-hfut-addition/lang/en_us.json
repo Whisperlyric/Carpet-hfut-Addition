@@ -174,8 +174,11 @@
     "hfut.fakePlayerOpen.no_data": "No saved player data for %s",
     "hfut.fakePlayerOpen.no_server": "The editor is not available yet",
     "carpet.rule.commandFakePlayerOpenStorage.name": "Fake Player Open Storage Permission",
-    "carpet.rule.commandFakePlayerOpenStorage.desc": "Allows /player <player> open inventory|enderchest to open a fake player's inventory or ender chest for editing while it is offline; edits are written back when the menu closes, and also force-flushed before the player joins or the server stops, preventing item duplication",
+    "carpet.rule.commandFakePlayerOpenStorage.desc": "Permission for /player <player> open inventory|enderchest against offline-identity (v3 uuid) targets - fake players, and real players on offline-mode servers. This rule is also the command's master switch: setting it to false disables the command entirely regardless of the real-player rule",
     "carpet.rule.commandFakePlayerOpenStorage.extra.0": "true: everyone; ops: permission level 2+; false: disabled; or a minimum permission level 0-4",
     "carpet.rule.beaconDownwardsInfiniteRange.name": "Beacon Effects Reach Downwards",
-    "carpet.rule.beaconDownwardsInfiniteRange.desc": "The beacon's effect area extends downwards without limit (vanilla only extends it upwards); the horizontal range is unchanged"
+    "carpet.rule.beaconDownwardsInfiniteRange.desc": "The beacon's effect area extends downwards without limit (vanilla only extends it upwards); the horizontal range is unchanged",
+    "carpet.rule.commandRealPlayerOpenStorage.name": "Real Player Open Storage Permission",
+    "carpet.rule.commandRealPlayerOpenStorage.desc": "Permission for /player <player> open inventory|enderchest against Mojang-account (v4 uuid) targets - real players, and 26.x premium-named fake players sharing that account. Only effective while the fake-player rule is enabled (anything other than false); when this rule is false, real-player lookups are skipped entirely and no auth-backend query is made. Default false because this touches real players' saved data",
+    "hfut.fakePlayerOpen.denied": "You do not have permission to open %s's storage (requires rule %s)"
 }

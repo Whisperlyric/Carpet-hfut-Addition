@@ -22,12 +22,24 @@ Controls who may use `/hfut lazychunk`, which pins chunks at lazy (weakly loaded
 
 ## commandFakePlayerOpenStorage
 
-Controls who may use `/player <name> open inventory|enderchest` to open a fake player's inventory or ender chest for editing while it is offline (see [commands](commands_en.md)). Carpet GugleCarpetAddition is not required.
+Controls who may use `/player <name> open inventory|enderchest` to open a target's inventory or ender chest for editing while it is offline (see [commands](commands_en.md)). This rule covers **offline identities** (v3 uuid); targets bound to a Mojang account (v4 uuid, including 26.x premium-named fake players) are governed by `commandRealPlayerOpenStorage` instead (default off). This rule is also the command's master switch: setting it to `false` disables the command entirely regardless of the real-player rule. Carpet GugleCarpetAddition is not required.
 
 - Type: `string`
 - Default value: `ops`
 - Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - Categories: `HFUT`, `COMMAND`, `FEATURE`
+
+## Real player open storage permission (commandRealPlayerOpenStorage)
+
+Sets who can use `/player <player> open inventory|enderchest` against a target bound to a Mojang account (v4 uuid): real players, and 26.x premium-named fake players whose storage is shared with that account. Only effective while the fake-player rule is enabled (anything other than `false`); when this rule is `false`, real-player lookups are skipped entirely and no auth-backend query is made.
+
+- Type: `string`
+- Default value: `false`
+- Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- Categories: `HFUT`, `COMMAND`, `FEATURE`
+
+- `false`: disabled (default — this touches real players' saved data)
+- `true` / `ops` / `0`-`4`: granted per the corresponding level
 
 ## commandTradeSeq `🐛Beta` `MC>=26.1`
 
