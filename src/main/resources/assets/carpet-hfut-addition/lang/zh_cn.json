@@ -95,9 +95,6 @@
     "carpet.rule.windChargeNoBeehiveAnger.desc": "[1.21.2+]风弹爆炸不再因蜂箱激怒周围的蜜蜂",
     "carpet.rule.windChargeNoNonLivingKnockback.name": "风弹不影响非生物实体",
     "carpet.rule.windChargeNoNonLivingKnockback.desc": "风弹爆炸不再对非生物实体产生击退",
-    "hfut.fakePlayerTickStage.stage.t": "T —— 与真人玩家相同（网络阶段 tick）",
-    "hfut.fakePlayerTickStage.stage.f": "F —— 与普通实体相同（实体阶段 tick）",
-    "hfut.fakePlayerTickStage.toggled": "假人 %s 的 tick 阶段已调整 → 生效 %s（%s），全局 %s",
     "hfut.fakePlayerTickStage.not_fake": "%s 不是假人",
     "hfut.fakePlayerTickStage.button.name": "HFUT：tick 阶段反转",
     "hfut.fakePlayerTickStage.button.current": "当前生效：%s（%s）",
@@ -179,5 +176,9 @@
     "carpet.rule.beaconDownwardsInfiniteRange.name": "信标效果向下无限延伸",
     "carpet.rule.beaconDownwardsInfiniteRange.desc": "信标的效果判定区域向下无限延伸（原版仅向上延伸），水平范围不变",
     "carpet.rule.dolphinBoatRidingRestore.name": "海豚上船恢复",
-    "carpet.rule.dolphinBoatRidingRestore.desc": "恢复 1.21.9 前海豚可进入船的行为（1.21.9 起海豚被加入 cannot_be_pushed_onto_boats 实体标签而无法上船）"
+    "carpet.rule.dolphinBoatRidingRestore.desc": "恢复 1.21.9 前海豚可进入船的行为（1.21.9 起海豚被加入 cannot_be_pushed_onto_boats 实体标签而无法上船）",
+    "hfut.fakePlayerTickStage.adjusted": "假人 %s 的 tick 阶段已调整：%s，全局规则为 %s",
+    "hfut.fakePlayerTickStage.query": "假人 %s 的 tick 阶段当前为：%s",
+    "hfut.fakePlayerTickStage.stage.network": "网络阶段NU",
+    "hfut.fakePlayerTickStage.stage.entity": "实体阶段EU"
 }

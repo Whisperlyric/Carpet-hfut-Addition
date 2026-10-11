@@ -7,14 +7,15 @@
 ## 调整假人 tick 阶段 (`/player <假人> tickingStage`)
 
 ### 语法
-- `/player <假人> tickingStage <global|invert|origin|likeReal>`
-    - `global` 跟随全局规则（默认，取消单独设置）
-    - `invert` 与全局规则相反
-    - `origin` 假人的原始行为（实体阶段）
-    - `likeReal` 与真人玩家相同（网络阶段）
+- `/player <假人> tickingStage`：查询当前状态
+- `/player <假人> tickingStage <invert|origin|likeReal>`
+    - `invert` 相对当前取反
+    - `origin` 实体阶段
+    - `likeReal` 网络阶段
 
 ### 效果
-- 修改该假人的 tick 阶段，并提示当前生效值（T/F 及所处阶段）与全局值。
+- 返回为灰色斜体；调整后同时显示假人与全局规则各自所处的阶段（网络阶段NU/实体阶段EU，当前生效者在前）。
+- 全局规则选项已移除：全局规则仅作为未单独设置假人的默认值。
 - `<假人>` 支持 Tab 补全（仅在线假人）。
 - 仅在本次开服期间有效：重新生成同一个假人仍会保持，重启服务器后重置。
 

@@ -43,24 +43,21 @@ public final class GcaInvertButton {
 
     private static Component currentLine(EntityPlayerMPFake fake, String lang) {
         boolean effective = FakePlayerTickStage.effectiveTicksLikeRealPlayer(fake);
-        String stageKey = effective ? "hfut.fakePlayerTickStage.stage.t" : "hfut.fakePlayerTickStage.stage.f";
         return HFUTText.forLang(lang, "hfut.fakePlayerTickStage.button.current",
-                boolText(effective), HFUTText.forLang(lang, stageKey).getString());
+                boolText(effective), FakePlayerTickStage.stageDisplayFor(fake, effective).getString());
     }
 
     /** Feedback goes to everyone currently viewing this menu (normally the single clicker). */
     private static void notifyViewers(Container menuContainer, EntityPlayerMPFake fake, boolean newEffective) {
-        String stageKey = newEffective ? "hfut.fakePlayerTickStage.stage.t" : "hfut.fakePlayerTickStage.stage.f";
         for (ServerPlayer viewer : fake.level().getServer().getPlayerList().getPlayers()) {
             if (!(viewer.containerMenu instanceof ChestMenu chestMenu)
                     || chestMenu.getContainer() != menuContainer) {
                 continue;
             }
             viewer.sendSystemMessage(HFUTText.forPlayer(
-                    viewer, "hfut.fakePlayerTickStage.toggled",
-                    fake.getName().getString(), boolText(newEffective),
-                    HFUTText.forPlayer(viewer, stageKey).getString(),
-                    boolText(FakePlayerTickStage.globalTicksLikeRealPlayer())
+                    viewer, "hfut.fakePlayerTickStage.query",
+                    fake.getName().getString(),
+                    FakePlayerTickStage.stageDisplayFor(viewer, newEffective)
             ));
         }
     }

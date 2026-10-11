@@ -95,9 +95,6 @@
     "carpet.rule.windChargeNoBeehiveAnger.desc": "[1.21.2+] Wind charge explosions no longer anger nearby bees through beehives",
     "carpet.rule.windChargeNoNonLivingKnockback.name": "Wind Charges Don't Push Non-Living Entities",
     "carpet.rule.windChargeNoNonLivingKnockback.desc": "Wind charge explosions no longer knock back non-living entities",
-    "hfut.fakePlayerTickStage.stage.t": "T - ticks like a real player (network phase)",
-    "hfut.fakePlayerTickStage.stage.f": "F - ticks like a normal entity (entity phase)",
-    "hfut.fakePlayerTickStage.toggled": "Fake player %s tick stage -> %s (%s) [global %s]",
     "hfut.fakePlayerTickStage.not_fake": "Not a fake player: %s",
     "hfut.fakePlayerTickStage.button.name": "HFUT: tick stage invert",
     "hfut.fakePlayerTickStage.button.current": "effective: %s (%s)",
@@ -179,5 +176,9 @@
     "carpet.rule.beaconDownwardsInfiniteRange.name": "Beacon Effects Reach Downwards",
     "carpet.rule.beaconDownwardsInfiniteRange.desc": "The beacon's effect area extends downwards without limit (vanilla only extends it upwards); the horizontal range is unchanged",
     "carpet.rule.dolphinBoatRidingRestore.name": "Dolphin Boat Riding Restore",
-    "carpet.rule.dolphinBoatRidingRestore.desc": "Restores the pre-1.21.9 behaviour of dolphins entering boats (1.21.9 moved dolphins into the cannot_be_pushed_onto_boats entity tag, which stops them boarding)"
+    "carpet.rule.dolphinBoatRidingRestore.desc": "Restores the pre-1.21.9 behaviour of dolphins entering boats (1.21.9 moved dolphins into the cannot_be_pushed_onto_boats entity tag, which stops them boarding)",
+    "hfut.fakePlayerTickStage.adjusted": "Fake player %s's tick stage adjusted: %s; the global rule is %s",
+    "hfut.fakePlayerTickStage.query": "Fake player %s's tick stage is currently: %s",
+    "hfut.fakePlayerTickStage.stage.network": "network phase (NU)",
+    "hfut.fakePlayerTickStage.stage.entity": "entity phase (EU)"
 }

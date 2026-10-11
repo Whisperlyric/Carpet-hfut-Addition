@@ -1,6 +1,10 @@
 package dev.whisperlyric.carpet_hfut_addition.helpers.rule.fakePlayerTickStage;
 
 import carpet.patches.EntityPlayerMPFake;
+import dev.whisperlyric.carpet_hfut_addition.mixins.ServerPlayerLanguageAccessor;
+import dev.whisperlyric.carpet_hfut_addition.utils.HFUTText;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import dev.whisperlyric.carpet_hfut_addition.HFUTServer;
 import dev.whisperlyric.carpet_hfut_addition.FakePlayerTickStageSettings;
 import net.fabricmc.loader.api.FabricLoader;
@@ -52,6 +56,11 @@ public class FakePlayerTickStage {
     }
 
     public static StageMode setMode(EntityPlayerMPFake fake, StageMode mode) {
+        if (mode == StageMode.INVERT) {
+            // invert flips the CURRENT effective stage: NU <-> EU, stored as the
+            // resulting absolute mode
+            mode = effectiveTicksLikeRealPlayer(fake) ? StageMode.ORIGIN : StageMode.LIKE_REAL;
+        }
         if (mode == StageMode.GLOBAL) {
             MODES.remove(fake.getUUID());
         } else {
@@ -63,5 +72,13 @@ public class FakePlayerTickStage {
 
     public static void clearOnServerStop() {
         MODES.clear();
+    }
+
+    /** The current phase with its code (network phase NU / entity phase EU). */
+    public static MutableComponent stageDisplayFor(ServerPlayer langHolder, boolean effective) {
+        String lang = ((ServerPlayerLanguageAccessor) langHolder).hfut$language();
+        return Component.literal(effective
+                ? HFUTText.forLang(lang, "hfut.fakePlayerTickStage.stage.network").getString()
+                : HFUTText.forLang(lang, "hfut.fakePlayerTickStage.stage.entity").getString());
     }
 }
