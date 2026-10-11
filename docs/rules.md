@@ -379,3 +379,27 @@
 
 - `false`：关闭（1.21.9+ 原版行为，海豚无法上船）
 - `true`：海豚碰撞船时照旧进入船内
+
+## 坚毅紫水晶母岩 (resilientBuddingAmethyst)
+
+紫水晶母岩的硬度与爆炸抗性提升至 1557。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `HFUT`, `FEATURE`
+
+- `false`：关闭（原版行为）
+- `true`：紫水晶母岩变为坚毅方块
+
+## 易碎玻璃 (fragileGlass)
+
+玻璃、染色玻璃与遮光玻璃和玻璃板的合适挖掘工具变为锄头。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `HFUT`, `FEATURE`
+
+- `false`：关闭（原版行为，无合适工具）
+- `true`：锄头可加速破坏上述方块，效率附魔随之生效；掉落行为不变

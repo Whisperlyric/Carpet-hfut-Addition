@@ -180,5 +180,9 @@
     "hfut.fakePlayerTickStage.adjusted": "Fake player %s's tick stage adjusted: %s; the global rule is %s",
     "hfut.fakePlayerTickStage.query": "Fake player %s's tick stage is currently: %s",
     "hfut.fakePlayerTickStage.stage.network": "network phase (NU)",
-    "hfut.fakePlayerTickStage.stage.entity": "entity phase (EU)"
+    "hfut.fakePlayerTickStage.stage.entity": "entity phase (EU)",
+    "carpet.rule.resilientBuddingAmethyst.name": "Resilient Budding Amethyst",
+    "carpet.rule.resilientBuddingAmethyst.desc": "Budding amethyst hardness and blast resistance are raised to 1557",
+    "carpet.rule.fragileGlass.name": "Fragile Glass",
+    "carpet.rule.fragileGlass.desc": "Glass, stained glass, tinted glass and glass panes gain the hoe as their proper mining tool (hoes break them faster, and Efficiency applies); drops are unchanged"
 }

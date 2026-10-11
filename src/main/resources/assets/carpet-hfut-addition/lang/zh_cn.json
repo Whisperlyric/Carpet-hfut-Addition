@@ -180,5 +180,9 @@
     "hfut.fakePlayerTickStage.adjusted": "假人 %s 的 tick 阶段已调整：%s，全局规则为 %s",
     "hfut.fakePlayerTickStage.query": "假人 %s 的 tick 阶段当前为：%s",
     "hfut.fakePlayerTickStage.stage.network": "网络阶段NU",
-    "hfut.fakePlayerTickStage.stage.entity": "实体阶段EU"
+    "hfut.fakePlayerTickStage.stage.entity": "实体阶段EU",
+    "carpet.rule.resilientBuddingAmethyst.name": "坚毅紫水晶母岩",
+    "carpet.rule.resilientBuddingAmethyst.desc": "紫水晶母岩的硬度与爆炸抗性提升至 1557",
+    "carpet.rule.fragileGlass.name": "易碎玻璃",
+    "carpet.rule.fragileGlass.desc": "玻璃、染色玻璃与遮光玻璃和玻璃板的合适挖掘工具变为锄头（锄头可加速破坏，效率附魔随之生效）；掉落行为不变"
 }

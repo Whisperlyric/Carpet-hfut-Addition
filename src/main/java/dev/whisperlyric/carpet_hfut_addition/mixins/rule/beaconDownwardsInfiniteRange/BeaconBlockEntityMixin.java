@@ -12,8 +12,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import java.util.List;
 
 /**
- * beaconDownwardsInfiniteRange: 效果判定框向下无限延伸，水平范围不变.
- * getEntitiesOfClass(Class, AABB) 的 descriptor 各版本一致，故全版本共用同一锚点，无需版本分流.
+ * beaconDownwardsInfiniteRange: the effect check box extends downwards infinitely;
+ * the horizontal range is unchanged. getEntitiesOfClass(Class, AABB) has the same
+ * descriptor in every version, so all versions share one anchor and no version
+ * split is needed.
  */
 @Mixin(BeaconBlockEntity.class)
 public abstract class BeaconBlockEntityMixin {

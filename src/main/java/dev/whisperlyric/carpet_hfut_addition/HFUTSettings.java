@@ -264,4 +264,12 @@ public class HFUTSettings {
     //$$ public static boolean dolphinBoatRidingRestore = false;
     //#endif
 
+    /** Budding amethyst hardness and blast resistance are raised to 1557. */
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    public static boolean resilientBuddingAmethyst = false;
+
+    /** Glass, stained glass, tinted glass and glass panes gain the hoe as their proper mining tool. */
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    public static boolean fragileGlass = false;
+
 }

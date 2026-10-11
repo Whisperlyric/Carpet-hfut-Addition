@@ -381,3 +381,27 @@ Restores the pre-1.21.9 behaviour of dolphins entering boats. 1.21.9 turned the 
 
 - `false`: disabled (vanilla 1.21.9+ behaviour — dolphins cannot board)
 - `true`: dolphins that collide with a boat enter it as before
+
+## Resilient budding amethyst (resilientBuddingAmethyst)
+
+Budding amethyst hardness and blast resistance are raised to 1557.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`
+
+- `false`: disabled (vanilla behaviour)
+- `true`: budding amethyst becomes a resilient block
+
+## Fragile glass (fragileGlass)
+
+Glass, stained glass, tinted glass and glass panes gain the hoe as their proper mining tool.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`
+
+- `false`: disabled (vanilla behaviour — no proper tool)
+- `true`: hoes break these blocks faster, and Efficiency applies; drops are unchanged
