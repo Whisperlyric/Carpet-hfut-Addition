@@ -174,11 +174,8 @@
     "hfut.fakePlayerOpen.no_data": "%s 没有已保存的玩家数据",
     "hfut.fakePlayerOpen.no_server": "编辑器尚未就绪",
     "carpet.rule.commandFakePlayerOpenStorage.name": "假人离线开箱权限",
-    "carpet.rule.commandFakePlayerOpenStorage.desc": "允许对离线身份（v3 UUID）目标使用 /player <玩家> open inventory|enderchest——包括假人，以及离线模式服务器上的真人玩家。本规则同时是指令总开关：设为 false 时指令整体禁用（无论真人规则如何）",
+    "carpet.rule.commandFakePlayerOpenStorage.desc": "允许使用 /player <玩家> open inventory|enderchest 在假人不在线时打开其背包或末影箱进行编辑；关闭界面时写回，玩家加入或服务器关闭前也会强制写回，防止刷物品",
     "carpet.rule.commandFakePlayerOpenStorage.extra.0": "true：所有人；ops：权限等级 2+；false：禁用；或最低权限等级 0-4",
     "carpet.rule.beaconDownwardsInfiniteRange.name": "信标效果向下无限延伸",
-    "carpet.rule.beaconDownwardsInfiniteRange.desc": "信标的效果判定区域向下无限延伸（原版仅向上延伸），水平范围不变",
-    "carpet.rule.commandRealPlayerOpenStorage.name": "真人离线开箱权限",
-    "carpet.rule.commandRealPlayerOpenStorage.desc": "允许对绑定 Mojang 账号（v4 UUID）的目标使用 /player <玩家> open inventory|enderchest——包括真人玩家，以及 26.x 中共享该账号的高级名假人。仅在假人规则启用（非 false）时生效；本规则为 false 时完全跳过真玩家查询，不发起任何认证后端请求。因涉及真人存档数据，默认关闭",
-    "hfut.fakePlayerOpen.denied": "你没有打开 %s 存储的权限（需要规则 %s）"
+    "carpet.rule.beaconDownwardsInfiniteRange.desc": "信标的效果判定区域向下无限延伸（原版仅向上延伸），水平范围不变"
 }

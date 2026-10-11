@@ -81,14 +81,9 @@ Pins chunks at "lazy" (weakly loaded) strength: kept loaded, only block ticks ru
 - `query` shows 10 rows per page. Clicking a row fills the chat input with its `delete chunk` command; when there are multiple pages, gray `[< Prev]` / `[Next >]` arrows at the bottom turn the page on click. On a client that has this mod, turning the page replaces the previous page in chat instead of stacking the pages; this only affects the display, and every line is still kept in `logs/latest.log`.
 - Requires op (gated by `commandSimpleLazyChunk`).
 
-## Offline storage (`/player <name> open`)
+## Offline fake player storage (`/player <name> open`)
 
-Opens a target's inventory or ender chest for editing **while it is offline**. The menu ships with this mod, so Carpet GugleCarpetAddition is not required.
-
-Permission is routed by target identity, with `commandFakePlayerOpenStorage` acting as the command's master switch (`false` disables the command entirely, so enabling the real-player rule alone has no effect):
-
-- **Offline identity** (v3 uuid, e.g. fake players, real players on offline-mode servers) → `commandFakePlayerOpenStorage` (default `ops`)
-- **Mojang-account identity** (v4 uuid, e.g. real players, and 26.x premium-named fake players sharing that account) → `commandRealPlayerOpenStorage` (default `false`)
+Opens a fake player's inventory or ender chest for editing **while it is offline**. Gated by `commandFakePlayerOpenStorage`; the menu ships with this mod, so Carpet GugleCarpetAddition is not required.
 
 ### Syntax
 - `/player <name> open inventory`: opens the inventory
@@ -96,7 +91,7 @@ Permission is routed by target identity, with `commandFakePlayerOpenStorage` act
 
 ### Effect
 - The target's saved data is loaded into a shadow entity that never joins the world, and edits are written straight back to the playerdata: saved when the menu closes and on server stop.
-- Duping is prevented and access is exclusive, and opening is refused when the target has never been spawned (no playerdata). The inventory view is 5 rows (including head/chest/legs/feet and off-hand cells); the ender chest is 3 rows.
+- Duping is prevented and access is exclusive, and opening is refused when the fake player has never been spawned (no playerdata). The inventory view is 5 rows (including head/chest/legs/feet and off-hand cells); the ender chest is 3 rows.
 
 ## Version (`/hfut version`)
 

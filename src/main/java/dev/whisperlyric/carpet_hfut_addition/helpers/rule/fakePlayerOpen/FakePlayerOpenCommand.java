@@ -18,10 +18,9 @@ import net.minecraft.world.inventory.MenuType;
 import static net.minecraft.commands.Commands.literal;
 
 /**
- * {@code /player <player> open inventory|enderchest}: a chest view over an offline
- * target's storage, self-contained without GCA. Placeholder cells keep a plain-NBT
- * marker so GCA-aware sorters skip them. Permission is routed per target inside
- * {@link FakePlayerStorageEditor#begin}.
+ * {@code /player <player> open inventory|enderchest}: opens a chest view over an
+ * OFFLINE fake player's storage, self-contained with no GCA dependency. Non-storage
+ * cells still carry a plain-NBT marker so GCA-aware sorters skip them.
  */
 public final class FakePlayerOpenCommand {
     private FakePlayerOpenCommand() {
@@ -29,7 +28,6 @@ public final class FakePlayerOpenCommand {
 
     public static LiteralArgumentBuilder<CommandSourceStack> openNode() {
         return literal("open")
-                // master switch: false disables the command entirely, whatever the real rule says
                 .requires(source -> CommandUtil.canUseCommand(
                         source, FakePlayerOpenStorageSettings.commandFakePlayerOpenStorage))
                 .then(literal("inventory")
@@ -46,7 +44,7 @@ public final class FakePlayerOpenCommand {
             return 0;
         }
         String name = StringArgumentType.getString(ctx, "player");
-        FakePlayerStorageEditor.BeginResult result = FakePlayerStorageEditor.begin(source, viewer, name);
+        FakePlayerStorageEditor.BeginResult result = FakePlayerStorageEditor.begin(name);
         if (result.errorKey() != null) {
             source.sendFailure(HFUTText.forViewer(source, result.errorKey(), result.errorArgs()));
             return 0;

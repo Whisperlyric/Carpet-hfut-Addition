@@ -20,26 +20,14 @@
 - 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `HFUT`, `COMMAND`, `FEATURE`
 
-## 假人离线开箱权限 (commandFakePlayerOpenStorage) `🐛Beta`
+## 假人离线开箱权限 (commandFakePlayerOpenStorage)
 
-设置谁可以使用 `/player <玩家> open inventory|enderchest`：在目标不在线时打开它的背包或末影箱进行编辑（见[命令](commands.md)）。本规则覆盖**离线身份**（v3 UUID）目标；绑定 Mojang 账号身份（v4 UUID，含 26.x 高级名假人）的目标由 `commandRealPlayerOpenStorage` 另行管控（默认关闭）。本规则同时是指令总开关：设为 `false` 时指令整体禁用（无论真人规则如何）。无需安装 Carpet GugleCarpetAddition。
+设置谁可以使用 `/player <假人> open inventory|enderchest`：在假人不在线时打开它的背包或末影箱进行编辑（见[命令](commands.md)）。无需安装 Carpet GugleCarpetAddition。
 
 - 类型: `string`
 - 默认值: `ops`
 - 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `HFUT`, `COMMAND`, `FEATURE`
-
-## 真人离线开箱权限 (commandRealPlayerOpenStorage) `🐛Beta`
-
-设置谁可以对绑定 Mojang 高级账号身份（v4 UUID）的目标使用 `/player <玩家> open inventory|enderchest`：包括真人玩家，以及 26.x 中抓取了真实档案的高级名假人（其存储与该账号共享）。仅在假人规则启用（非 `false`）时生效；本规则为 `false` 时完全跳过真玩家查询，不发起任何认证后端请求。
-
-- 类型: `string`
-- 默认值: `false`
-- 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
-- 分类: `HFUT`, `COMMAND`, `FEATURE`
-
-- `false`：关闭（默认——涉及真人存档数据）
-- `true` / `ops` / `0`-`4`：按对应权限放行
 
 ## 交易序列操纵 (commandTradeSeq) `🐛Beta` `MC>=26.1`
 

@@ -1,10 +1,7 @@
 package dev.whisperlyric.carpet_hfut_addition.helpers.rule.fakePlayerOpen;
 
 import com.mojang.authlib.GameProfile;
-import dev.whisperlyric.carpet_hfut_addition.FakePlayerOpenStorageSettings;
 import dev.whisperlyric.carpet_hfut_addition.mixins.rule.fakePlayerOpen.PlayerListAccessor;
-import dev.whisperlyric.carpet_hfut_addition.utils.CommandUtil;
-import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
@@ -31,10 +28,17 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * Loads a target's playerdata into a shadow {@link ServerPlayer} that never joins
- * the world, for editing via {@code /player <name> open}; every exit path writes it
- * back to disk before vanilla can read stale data. Exclusive access plus flushes at
- * join ({@link #flushFor}) and server stop ({@link #flushAll}) prevent duping.
+ * Offline storage editor for fake players ({@code /player <name> open
+ * inventory|enderchest}): the target's playerdata is loaded into a
+ * shadow {@link ServerPlayer} that never joins the world, and every exit path
+ * writes it back to disk before vanilla can read stale data.
+ *
+ * <p>Duping is prevented by exclusive access (one viewer at a time) and by
+ * flushing at join ({@link #flushFor} runs at {@code placeNewPlayer} HEAD, so
+ * a joining entity reads the just-written data) and on server stop
+ * ({@link #flushAll}). Identities are addressed purely by their offline UUID
+ * derivation - no auth-backend lookup is performed. Version branches mirror
+ * vanilla's own login loader.
  */
 public final class FakePlayerStorageEditor {
     public enum Kind { INVENTORY, ENDER_CHEST }
@@ -91,74 +95,27 @@ public final class FakePlayerStorageEditor {
         SESSIONS.clear();
     }
 
-    /**
-     * Auth-backend lookup (blocking on first hit, cached afterwards); authlib-injector
-     * setups resolve their registered users through the same call.
-     */
-    private static Optional<GameProfile> resolveViaBackend(MinecraftServer server, String name) {
-        //#if MC >= 12110
-        //$$ Optional<GameProfile> fetched = server.services().profileResolver().fetchByName(name);
-        //$$ fetched.ifPresent(profile -> server.services().nameToIdCache().add(new NameAndId(profile)));
-        //$$ return fetched;
-        //#else
-        return server.getProfileCache().get(name);
-        //#endif
-    }
-
     private static ServerPlayer newShadow(MinecraftServer server, ServerLevel level, UUID uuid, String name) {
         return new ServerPlayer(server, level, new GameProfile(uuid, name), ClientInformation.createDefault());
     }
 
     /**
-     * Begins (or reuses) the editing session for {@code name}. The offline (v3)
-     * identity is probed first with no network access; only when it holds no data is
-     * the auth backend consulted, and the identity it resolves to decides the rule
-     * (premium/v4 → real rule, otherwise fake). The identity rule is checked before
-     * session reuse, so an existing session cannot bypass the real-player rule, and
-     * the backend query itself is only reached by callers who would pass it.
+     * Begins (or reuses) the editing session for {@code name}. Fails when the
+     * identity is online, someone else is viewing it, or no playerdata exists.
      */
-    public static BeginResult begin(CommandSourceStack source, ServerPlayer viewer, String name) {
+    public static BeginResult begin(String name) {
         if (server == null) {
             return BeginResult.fail("hfut.fakePlayerOpen.no_server");
         }
         PlayerList list = server.getPlayerList();
         ServerLevel level = server.overworld();
         UUID uuid = UUIDUtil.createOfflinePlayerUUID(name);
-        boolean premium = false;
         ServerPlayer shadow = newShadow(server, level, uuid, name);
         if (!loadPlayerData(list, shadow, uuid, name)) {
-            // no offline data: the auth backend is only reached when the real rule is
-            // enabled AND this caller passes it - anyone else (or a disabled rule)
-            // reports "no data", keeping premium lookups and their network cost gated
-            String realRule = FakePlayerOpenStorageSettings.commandRealPlayerOpenStorage;
-            if ("false".equals(realRule) || !CommandUtil.canUseCommand(source, realRule)) {
-                return BeginResult.fail("hfut.fakePlayerOpen.no_data", name);
-            }
-            Optional<GameProfile> fetched = resolveViaBackend(server, name);
-            if (fetched.isEmpty()) {
-                return BeginResult.fail("hfut.fakePlayerOpen.no_data", name);
-            }
-            //#if MC >= 12110
-            //$$ uuid = fetched.get().id();
-            //#else
-            uuid = fetched.get().getId();
-            //#endif
-            premium = !uuid.equals(UUIDUtil.createOfflinePlayerUUID(name));
-            shadow = newShadow(server, level, uuid, name);
-            if (!loadPlayerData(list, shadow, uuid, name)) {
-                return BeginResult.fail("hfut.fakePlayerOpen.no_data", name);
-            }
+            return BeginResult.fail("hfut.fakePlayerOpen.no_data", name);
         }
         if (list.getPlayer(uuid) != null) {
             return BeginResult.fail("hfut.fakePlayerOpen.online", name);
-        }
-        // the rule follows the identity the data was found under - checked BEFORE
-        // session reuse so an existing session cannot bypass the real-player rule
-        String ruleKey = premium
-                ? FakePlayerOpenStorageSettings.commandRealPlayerOpenStorage
-                : FakePlayerOpenStorageSettings.commandFakePlayerOpenStorage;
-        if (!CommandUtil.canUseCommand(source, ruleKey)) {
-            return BeginResult.fail("hfut.fakePlayerOpen.denied", name, ruleKey);
         }
         Session session = SESSIONS.get(uuid);
         if (session != null) {
