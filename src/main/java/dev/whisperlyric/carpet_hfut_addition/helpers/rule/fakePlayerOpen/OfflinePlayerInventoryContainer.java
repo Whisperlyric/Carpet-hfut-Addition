@@ -36,7 +36,12 @@ public final class OfflinePlayerInventoryContainer implements Container {
     }
 
     private static ItemStack placeholderMarker(int slot) {
+        //#if MC >= 260200
+        //$$ // 26.2 起染色玻璃系合并为 ColorCollection,逐色常量不复存在
+        //$$ ItemStack stack = new ItemStack(Items.STAINED_GLASS_PANE.red());
+        //#else
         ItemStack stack = new ItemStack(Items.RED_STAINED_GLASS_PANE);
+        //#endif
         CompoundTag tag = new CompoundTag();
         tag.putBoolean("GcaClear", true);
         tag.putInt("GcaButton", slot);
