@@ -44,6 +44,7 @@
         "rule.fakePlayerOpen.PlayerCloseMixin",
         "rule.fakePlayerOpen.PlayerListAccessor",
         "rule.beaconDownwardsInfiniteRange.BeaconBlockEntityMixin",
+        "rule.dolphinBoatRidingRestore.AbstractBoatMixin",
         "rule.creativeNoEntityCollision.EntityMixin",
         "rule.creativeNoEntityCollision.LivingEntityMixin",
         "rule.windChargeNoRedstoneActivation.ExplosionMixin",

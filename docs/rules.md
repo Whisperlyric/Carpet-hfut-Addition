@@ -367,3 +367,15 @@
 
 - `false`：关闭（原版行为，效果区域仅向上方延伸）
 - `true`：信标正下方任意深度的玩家同样获得其效果
+
+## 海豚上船恢复 (dolphinBoatRidingRestore) `MC>=1.21.9`
+
+恢复 1.21.9 前海豚可进入船的行为。1.21.9 将登船白名单改为 `cannot_be_pushed_onto_boats` 黑名单标签，并把海豚加入其中。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `HFUT`, `FEATURE`
+
+- `false`：关闭（1.21.9+ 原版行为，海豚无法上船）
+- `true`：海豚碰撞船时照旧进入船内

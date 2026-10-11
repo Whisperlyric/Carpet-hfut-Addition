@@ -369,3 +369,15 @@ The beacon's effect area extends downwards without limit; the horizontal range i
 
 - `false`: disabled (vanilla behaviour — the effect area only grows upwards)
 - `true`: players at any depth directly below the beacon receive its effects
+
+## Dolphin boat riding restore (dolphinBoatRidingRestore) `MC>=1.21.9`
+
+Restores the pre-1.21.9 behaviour of dolphins entering boats. 1.21.9 turned the boarding whitelist into the `cannot_be_pushed_onto_boats` blacklist tag and put dolphins in it.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`
+
+- `false`: disabled (vanilla 1.21.9+ behaviour — dolphins cannot board)
+- `true`: dolphins that collide with a boat enter it as before

@@ -258,4 +258,10 @@ public class HFUTSettings {
     @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
     public static boolean beaconDownwardsInfiniteRange = false;
 
+    //#if MC >= 12109
+    //$$ /** Restores dolphins boarding boats (1.21.9 blacklisted them in cannot_be_pushed_onto_boats). */
+    //$$ @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    //$$ public static boolean dolphinBoatRidingRestore = false;
+    //#endif
+
 }
