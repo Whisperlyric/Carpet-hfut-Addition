@@ -22,9 +22,12 @@ public class HFUTMixinConfigPlugin extends RestrictiveMixinConfigPlugin {
     }
 
     /**
-     * Mixins that only exist on some versions. The 26.x trade sequence
-     * accessors are source-gated behind {@code MC >= 260100}, so 1.21.x
-     * builds ship no such classes to register.
+     * Mixins that only exist on some versions, so they cannot sit in the
+     * unconditional list of the mixin config. The 26.x trade sequence accessors
+     * are source-gated behind {@code MC >= 260100} (absent from 1.21.x builds),
+     * while the stone cutter recipe mixin is source-gated behind
+     * {@code MC < 260100} (absent from 26.x builds); register each only where
+     * its class was compiled in.
      */
     @Override
     public List<String> getMixins() {
@@ -36,6 +39,8 @@ public class HFUTMixinConfigPlugin extends RestrictiveMixinConfigPlugin {
         if (mc.startsWith("26.")) {
             out.add("rule.tradeSeq.XoroshiroRandomSourceAccessor");
             out.add("rule.tradeSeq.Xor128Accessor");
+        } else {
+            out.add("rule.stoneCutCobblestoneVariants.RecipeManagerMixin");
         }
         return out;
     }

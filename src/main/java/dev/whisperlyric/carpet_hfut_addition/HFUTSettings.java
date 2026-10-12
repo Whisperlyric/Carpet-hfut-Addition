@@ -272,4 +272,14 @@ public class HFUTSettings {
     @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
     public static boolean fragileGlass = false;
 
+    /**
+     * Backport of the 26.1 stonecutter recipes: stone cuts into cobblestone,
+     * its slab, stairs and wall; deepslate into cobbled deepslate and its
+     * slab, stairs and wall. Native on 26.1+.
+     */
+    //#if MC < 260100
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    public static boolean stoneCutCobblestoneVariants = false;
+    //#endif
+
 }

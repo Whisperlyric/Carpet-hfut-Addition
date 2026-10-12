@@ -370,9 +370,11 @@ The beacon's effect area extends downwards without limit; the horizontal range i
 - `false`: disabled (vanilla behaviour — the effect area only grows upwards)
 - `true`: players at any depth directly below the beacon receive its effects
 
-## Dolphin boat riding restore (dolphinBoatRidingRestore) `MC>=1.21.9`
+## [1.21.9+] Dolphin boat riding restore (dolphinBoatRidingRestore) `MC>=1.21.9`
 
-Restores the pre-1.21.9 behaviour of dolphins entering boats. 1.21.9 turned the boarding whitelist into the `cannot_be_pushed_onto_boats` blacklist tag and put dolphins in it.
+Restores the pre-1.21.9 behaviour of dolphins entering boats.
+
+> 1.21.9 turned the boarding whitelist into the `cannot_be_pushed_onto_boats` blacklist tag and put dolphins in it.
 
 - Type: `boolean`
 - Default value: `false`
@@ -384,7 +386,7 @@ Restores the pre-1.21.9 behaviour of dolphins entering boats. 1.21.9 turned the 
 
 ## Resilient budding amethyst (resilientBuddingAmethyst)
 
-Budding amethyst hardness and blast resistance are raised to 1557.
+Changes budding amethyst's hardness and blast resistance to 1557.
 
 - Type: `boolean`
 - Default value: `false`
@@ -396,7 +398,7 @@ Budding amethyst hardness and blast resistance are raised to 1557.
 
 ## Fragile glass (fragileGlass)
 
-Glass, stained glass, tinted glass and glass panes gain the hoe as their proper mining tool.
+Sets the proper mining tool of glass, stained glass, tinted glass and glass panes to the hoe.
 
 - Type: `boolean`
 - Default value: `false`
@@ -405,3 +407,19 @@ Glass, stained glass, tinted glass and glass panes gain the hoe as their proper 
 
 - `false`: disabled (vanilla behaviour — no proper tool)
 - `true`: hoes break these blocks faster, and Efficiency applies; drops are unchanged
+
+## [1.21.x] Stone cut cobblestone variants (stoneCutCobblestoneVariants) `MC<26.1`
+
+In the stonecutter, stone and deepslate can be cut into the corresponding cobblestone and its cobblestone-variant building blocks.
+
+> Backports the 26.1 stonecutter recipes (slabs 1:2, the rest 1:1); vanilla has them natively on 26.1+, where the rule does not exist.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`
+
+- `false`: disabled (vanilla 1.21.x behaviour)
+- `true`: registers the eight stonecutter recipes above; the stonecutter UI, crafting checks and recipe sync all run on vanilla logic
+
+Toggling the rule triggers a datapack reload (same as `/reload`) to rebuild the recipes and re-send the recipe packet, taking effect immediately.

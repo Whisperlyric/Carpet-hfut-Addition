@@ -74,6 +74,16 @@ public class HFUTServer implements CarpetExtension {
             if ("fakePlayerTicksLikeRealPlayer".equals(rule.name())) {
                 TisBridge.setShadowGlobal(Boolean.parseBoolean(newValue));
             }
+            //#if MC < 260100
+            if ("stoneCutCobblestoneVariants".equals(rule.name())) {
+                MinecraftServer server = source == null ? null : source.getServer();
+                if (server != null && server.isReady()) {
+                    // the stonecutter recipe set changed: rerun the datapack
+                    // reload so it is rebuilt and re-synced to every client
+                    server.reloadResources(server.getPackRepository().getSelectedIds());
+                }
+            }
+            //#endif
         });
         long ruleCount = Arrays.stream(HFUTSettings.class.getDeclaredFields()).
                 filter(field -> field.isAnnotationPresent(Rule.class)).count();
