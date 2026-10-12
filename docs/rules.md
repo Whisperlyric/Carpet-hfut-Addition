@@ -22,7 +22,7 @@
 
 ## 假人离线开箱权限 (commandFakePlayerOpenStorage)
 
-设置谁可以使用 `/player <假人> open inventory|enderchest`：在假人不在线时打开它的背包或末影箱进行编辑（见[命令](commands.md)）。无需安装 Carpet GugleCarpetAddition。
+设置谁可以使用 `/player <假人> open inventory|enderchest`：在假人不在线时打开它的背包或末影箱进行编辑（见[命令](commands.md)）。
 
 - 类型: `string`
 - 默认值: `ops`
@@ -38,16 +38,16 @@
 - 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `HFUT`, `COMMAND`, `FEATURE`
 
-## 绊线行为修复 (tripwireIgnoreDepartures) `🐛Beta` `MC>=1.21.9`
+## 绊线行为修复 (tripwireIgnoreDepartures) `MC>=1.21.9`
 
 用较为激进的方式修复绊线在实体穿过时多次触发上升沿的问题（MC-305475）。
+
+26.2+需要规则`tripwireRestore`作为前置。
 
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `BUGFIX`
-
-> 26.2 及以上需要先开启 `tripwireRestore=true` 作为前置。
 
 ## 恢复绊线行为 (tripwireRestore) `MC>=26.2`
 
@@ -66,26 +66,27 @@
 
 让假人像真人玩家一样 tick：假人的 tick 移到网络阶段，动作包移到异步任务阶段。
 
+可只对单个假人生效：`/player <假人> tickingStage`，或 GCA 假人菜单里的按钮；未重启服务器时对该假人持续有效。
+
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `EXPERIMENTAL`
 
-> 可只对单个假人生效：`/player <假人> tickingStage`（global / invert / origin / likeReal），或 GCA 假人菜单里的按钮；未重启服务器时对该假人持续有效。
-
 ## 幽灵末影珍珠修复 (ghostEnderPearlFix) `MC>=1.21.2`
 
 修复幽灵末影珍珠修复（MC-306936）的几个主要表征。
+
+登录时丢弃重复生成的珍珠副本、关服时防止珍珠被区块重复保存、存档时只写入仍存在于世界中的珍珠。
+
+同时安装 Carpet Igny Addition 时本规则隐藏，由其同名规则接管。
 
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `BUGFIX`
 
-> 登录时丢弃重复生成的珍珠副本、关服时防止珍珠被区块重复保存、存档时只写入仍存在于世界中的珍珠。
-> 同时安装 Carpet Igny Addition 时本规则隐藏，由其同名规则接管。
-
-## 幽灵末影珍珠反查 (ghostEnderPearlTrace) `🐛Beta` `MC>=1.21.2`
+## 幽灵末影珍珠反查 (ghostEnderPearlTrace) `MC>=1.21.2`
 
 开启后记录每次珍珠传送及其来源并按珍珠 UUID 累计次数，可用 `/pearltrace` 查看或清除（见[命令](commands.md)）。本规则只管**是否记录**，命令能否使用由下面的 `commandPearlTrace` / `commandPearlTracePurge` 控制。
 
@@ -94,44 +95,40 @@
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `BUGFIX`
 
-> 一颗珍珠只能传送一次，同 UUID 传送 ≥2 次即基本确定为幽灵珍珠。
-> 可独立使用，也可叠加于原版、carpet-igny-addition 或 ghostEnderPearlFix 之上。
-
 ## 幽灵珍珠反查命令权限 (commandPearlTrace)
 
 设置谁可以使用 `/pearltrace list`/`show` 查看幽灵珍珠残留。
+
+需要规则`ghostEnderPearlTrace=true`作为记录前置，本规则只控制命令权限。
 
 - 类型: `string`
 - 默认值: `ops`
 - 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `HFUT`, `COMMAND`, `FEATURE`
-
-> 需先开启 `ghostEnderPearlTrace=true` 才会有记录可查；本规则只控制命令权限。
-> 这里的 `false` 表示关闭该命令，不等于关闭记录。
 
 ## 幽灵珍珠清除命令权限 (commandPearlTracePurge)
 
 设置谁可以使用 `/pearltrace purge` 从在线玩家身上清除幽灵珍珠。
 
+需先规则`ghostEnderPearlTrace=true` 作为记录前置，本规则只控制命令权限。
+
 - 类型: `string`
 - 默认值: `ops`
 - 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `HFUT`, `COMMAND`, `FEATURE`
 
-> 清除会改写玩家数据，因此单独用一个更严的权限。
-> 需先开启 `ghostEnderPearlTrace=true` 才会有记录可清除；这里的 `false` 表示关闭该命令，不等于关闭记录。
-
 ## 清除过门潜影弹 (shulkerBulletPortalCleanup) `MC>=1.21.2`
 
 让潜影弹在穿过传送门切换维度时被清除。
+
+潜影弹的制导目标是跨维度解析的，过门后会朝切换维度前的坐标飞行。
+
+在传送发生前清除，同时免去目的侧的区块加载。
 
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `FEATURE`
-
-> 潜影弹的制导目标是跨维度解析的，过门后会朝切换维度前的坐标飞行。
-> 在传送发生前清除，同时免去目的侧的区块加载。
 
 ## 清除弱加载区块潜影弹 (shulkerBulletWeakChunkCleanup)
 
@@ -155,12 +152,12 @@
 
 重新引入 1.21.5-26.2 的矿车加速：假人可以链式换乘矿车，一游戏刻内被多次 tick。
 
+将26.3+成功上矿车的返回值改回26.2-的PASS。
+
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `EXPERIMENTAL`, `FEATURE`
-
-> 26.3 修复了矿车交互的返回值，假人骑矿车开始有 4t 使用间隔；开启后成功上矿车的返回值改回 PASS，等价 26.2- 行为。
 
 ## 属性修饰符清除延迟 (attributeModifierRemovalDelay) `MC>=26.3`
 
@@ -171,66 +168,61 @@
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `EXPERIMENTAL`, `FEATURE`
 
-
 ## 地图玩家记录泄漏修复 (mapRegistryLeakFix)
 
-原版会清除地图里的玩家记录，但 Lithium 等模组改写了这条清除路径，边缘情况没清掉，导致记录堆积、内存泄漏。
+原版会清除地图里的玩家记录，但 Lithium 等模组改写了这条清除路径，边缘情况下未能正确清除，导致记录堆积、内存泄漏。
+
+玩家一下线，就从所有已加载地图的名单中移除；假人不再被记入名单。
 
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `REMOTE_BUGFIX`
-
-> 玩家一下线，就从所有已加载地图的名单中移除；假人不再被记入名单。
->
-> 默认关闭，需要时手动开启；开销很小：只在玩家下线时清理一次。
 
 ## [26.x-]Relogin泄漏修复 (reloginAvatarLeakFix) `1.21.2~1.21.11`
 
 修复 Carpet-Org-Addition 1.21.x 上的重登泄漏：relogin 下线的旧假人没有真正断开，会一直残留在内存中。
 
+下线任务会跳过已标记移除的假人，旧假人的断开流程因此永远不会执行。修复方式：强制执行断开，同时跳过已移除假人的重复存档
+
+需要安装 carpet-org-addition；仅 1.21.2～1.21.11 存在此问题（org v1.46.0+ 已包含修复）。
+
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `REMOTE_BUGFIX`
 
-> 下线任务会跳过已标记移除的假人，旧假人的断开流程因此永远不会执行。修复方式：强制执行断开，同时跳过已移除假人的重复存档
->
-> 需要安装 carpet-org-addition；仅 1.21.2～1.21.11 存在此问题（org v1.46.0+ 已包含修复）。
-
 ## 挖掘疲劳修复 (miningFatigueDigSpeedFix) `MC<=26.2`
 
-修复挖掘疲劳 III+ 的挖掘速度表：0.027 被写成了 0.0027、0.0081 被写成了 8.1E-4，挖掘疲劳 III 起挖掘速度比预期慢 10 倍。
+修正挖掘疲劳III及以上的挖掘速度百分比。
+
+26.3+ 原版修正公式为 0.3^(等级+1)，本规则仅存在于26.2-，但保留了26.2-的高于IV的挖掘速度等同于IV这一行为。
 
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `BUGFIX`
-
-> 26.3 起原版已按 0.3^(等级+1) 计算并自行修复，本规则仅存在于 26.2 及以下，但保留了 26.2- 的高于IV的挖掘速度等同于IV这一行为。
 
 ## 末影龙垂直速度修复 (enderDragonVerticalVelocityFix)
 
-修复末影龙飞向目标节点时垂直速度过低的问题（MC-272431）：19w08b（1.14）起垂直加速度系数 0.01 应为 0.1，末影龙难以爬升和俯冲，在目标节点周围来回盘旋。
+修复末影龙飞向目标节点时垂直速度过低的问题(MC-272431)
 
+将末影龙的垂直加速度系数从19w08b(1.14)起的0.01改为0.1，从而恢复 1.13 及更早的末影龙飞行行为。
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `BUGFIX`
-
-> 恢复 1.13 及更早的末影龙飞行行为，同时缓解 MC-271336、MC-271337、MC-197201。
 
 ## 村民即时升级 (villagerInstantLevelUp) `MC<=26.2`
 
 向下移植 26.3 的村民交易界面行为，达到经验后当立即升级并解锁新等级交易，无需关闭界面再打开。
 
+同时移植了对交易中玩家立即计算并显示新等级的交易折扣的特性。
+
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `FEATURE`
-
-> 26.2- 原版将升级推迟 40 tick 且要求村民不在交易状态，26.3 起原版取消了此限制。
-> 同时移植对交易中玩家立即计算并显示新等级的交易折扣。
 
 ## 村民界面价格即时同步 (villagerLivePriceSync) `MC<=26.2`
 
@@ -250,19 +242,16 @@
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `FEATURE`
 
-> 犰狳、美西螈、蜜蜂、骆驼、猫、鸡、牛、海豚、驴、狐狸、发光鱿鱼、山羊、小恶魂（快乐恶魂幼体）、疣猪兽、马、羊驼、哞菇、骡、鹦鹉螺、豹猫、熊猫、猪、北极熊、兔子、绵羊、嗅探兽、鱿鱼、炽足兽、硫方怪、蝌蚪、行商羊驼、海龟、狼。
-> 清单外的生物（含幼年村民）与成年个体不受影响。
-
 ## 已锁生长的幼年生物不回避金蒲公英 (babyMobAvoidGoldenDandelionIgnoreAgeLocked) `MC>=26.1`
 
 被金蒲公英锁住生长的幼年生物不再逃离金蒲公英。
+
+需要规则 `babyMobAvoidGoldenDandelion` 作为前置。
 
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `FEATURE`
-
-> 需要先开启 `babyMobAvoidGoldenDandelion` 才有效。
 
 ## 骨粉催熟出瓜 (bonemealGrowMelons)
 
@@ -273,30 +262,25 @@
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `FEATURE`
 
-> 原版成熟茎会直接拒绝骨粉，瓜只能等待随机刻才会生长；开启后成熟茎成为合法目标，放瓜完全复用原版随机刻逻辑。
-
 ## 地图玩家图标朝向 (mapPlayerIconRotation) `MC<=26.2`
 
-向下移植 26.3 的地图改动：处于地图范围外的玩家，其边缘夹紧标记会随玩家朝向旋转。
+向下移植 26.3 的地图改动：处于地图范围外但在追踪范围内的玩家，其标记显示会随玩家朝向旋转。
 
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `FEATURE`
-
-> 地图中玩家的图标一直显示朝向。26.2 及以前图外玩家的标记不可见方向，26.3 起改为同样按朝向旋转。
-> 旋转字节随地图数据包下发，原版客户端无需安装本模组即可看到效果。
 
 ## 创造模式无实体碰撞 (creativeNoEntityCollision)
 
 创造模式玩家不再参与实体的碰撞计算。
 
+非飞行状态也生效，但投射物命中、压力板触发等非碰撞交互不受影响。
+
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `FEATURE`
-
-> 非飞行状态也生效，但投射物命中、压力板触发等非碰撞交互不受影响。
 
 ## 风弹不触发红石元件 (windChargeNoRedstoneActivation)
 
@@ -372,14 +356,12 @@
 
 恢复 1.21.9 前海豚可进入船的行为。
 
-> 1.21.9 将登船白名单改为 `cannot_be_pushed_onto_boats` 黑名单标签，并把海豚加入其中。
-
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `FEATURE`
 
-- `false`：关闭（1.21.9+ 原版行为，海豚无法上船）
+- `false`：关闭
 - `true`：海豚碰撞船时照旧进入船内
 
 ## 坚毅紫水晶母岩 (resilientBuddingAmethyst)
@@ -410,14 +392,30 @@
 
 在切石机中，石头和深板岩可切出相应的圆石及其圆石变种建筑方块。
 
-> 向下移植 26.1 的切石机配方（台阶为 1:2，其余为 1:1）；26.1 起原版已内置，不提供此规则。
+向下移植 26.1 的切石机配方
+
+切换规则时会触发一次数据包重载（与 `/reload` 相同）以重建配方并重发配方包，即时生效。
 
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `FEATURE`
 
-- `false`：关闭（1.21.x 原版行为）
-- `true`：注册上述 8 条切石机配方，切石机界面、合成校验与配方同步均沿用原版逻辑
+- `false`：关闭
+- `true`：注册上述切石机配方
+
+## 便捷发射器合成 (easyDispenserCrafting)
+
+使发射器可以在弓的合成配方中心空位放置一个投掷器来合成。
+
+该配方没有对应的解锁进度，不会出现在配方书中，需手动摆放材料。
 
 切换规则时会触发一次数据包重载（与 `/reload` 相同）以重建配方并重发配方包，即时生效。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `HFUT`, `FEATURE`
+
+- `false`：关闭
+- `true`：注册上述合成配方

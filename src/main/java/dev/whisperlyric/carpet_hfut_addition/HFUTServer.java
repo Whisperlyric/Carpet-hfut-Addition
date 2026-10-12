@@ -74,16 +74,12 @@ public class HFUTServer implements CarpetExtension {
             if ("fakePlayerTicksLikeRealPlayer".equals(rule.name())) {
                 TisBridge.setShadowGlobal(Boolean.parseBoolean(newValue));
             }
-            //#if MC < 260100
-            if ("stoneCutCobblestoneVariants".equals(rule.name())) {
-                MinecraftServer server = source == null ? null : source.getServer();
-                if (server != null && server.isReady()) {
-                    // the stonecutter recipe set changed: rerun the datapack
-                    // reload so it is rebuilt and re-synced to every client
-                    server.reloadResources(server.getPackRepository().getSelectedIds());
-                }
+            // recipe-set rules: rerun the datapack reload so the changed set is
+            // rebuilt and re-synced to every client; stoneCutCobblestoneVariants
+            // only exists below 26.1, its name is simply never matched there
+            if ("easyDispenserCrafting".equals(rule.name()) || "stoneCutCobblestoneVariants".equals(rule.name())) {
+                reloadRecipeSets(source);
             }
-            //#endif
         });
         long ruleCount = Arrays.stream(HFUTSettings.class.getDeclaredFields()).
                 filter(field -> field.isAnnotationPresent(Rule.class)).count();
@@ -125,6 +121,14 @@ public class HFUTServer implements CarpetExtension {
         SimpleLazyChunkManager.clear();
         FakePlayerStorageEditor.flushAll();
         FakePlayerStorageEditor.clear();
+    }
+
+    /** Reruns the datapack reload so a changed recipe set is rebuilt and re-synced to clients. */
+    private static void reloadRecipeSets(CommandSourceStack source) {
+        MinecraftServer server = source == null ? null : source.getServer();
+        if (server != null && server.isReady()) {
+            server.reloadResources(server.getPackRepository().getSelectedIds());
+        }
     }
 
     @Override

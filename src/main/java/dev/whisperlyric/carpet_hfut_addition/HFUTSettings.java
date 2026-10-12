@@ -282,4 +282,11 @@ public class HFUTSettings {
     public static boolean stoneCutCobblestoneVariants = false;
     //#endif
 
+    /**
+     * Convenience crafting: the bow recipe with a dropper in the middle
+     * crafts a dispenser - sticks and strings around a dropper.
+     */
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    public static boolean easyDispenserCrafting = false;
+
 }

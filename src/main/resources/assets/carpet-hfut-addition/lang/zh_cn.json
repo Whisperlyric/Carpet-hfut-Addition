@@ -152,9 +152,9 @@
     "hfut.lazychunk.player_in_range": "玩家 %s 正在标记范围内：期间所在区块保持实体刻，离开的同一刻即转为弱加载",
     "hfut.lazychunk.player_more": "等 %s 人",
     "hfut.lazychunk.status.INACCESSIBLE": "不可访问",
-    "hfut.lazychunk.status.FULL": "已加载（不刻）",
-    "hfut.lazychunk.status.BLOCK_TICKING": "方块刻（弱加载）",
-    "hfut.lazychunk.status.ENTITY_TICKING": "实体刻（完全加载）",
+    "hfut.lazychunk.status.FULL": "not ticking (未加载)",
+    "hfut.lazychunk.status.BLOCK_TICKING": "block ticking (弱加载)",
+    "hfut.lazychunk.status.ENTITY_TICKING": "entity ticking (强加载)",
     "hfut.lazychunk.status.NOT_LOADED": "未加载",
     "hfut.lazychunk.status.UNKNOWN": "未知",
     "hfut.lazychunk.query_header": "本维度共 %s 个添加的弱加载区块（第 %s/%s 页）：",
@@ -186,5 +186,7 @@
     "carpet.rule.fragileGlass.name": "易碎玻璃",
     "carpet.rule.fragileGlass.desc": "将玻璃、染色玻璃、遮光玻璃和玻璃板的合适挖掘工具设为锄头",
     "carpet.rule.stoneCutCobblestoneVariants.name": "[1.21.x]石头可切圆石变种",
-    "carpet.rule.stoneCutCobblestoneVariants.desc": "在切石机中，石头和深板岩可切出相应的圆石及其圆石变种建筑方块"
+    "carpet.rule.stoneCutCobblestoneVariants.desc": "在切石机中，石头和深板岩可切出相应的圆石及其圆石变种建筑方块",
+    "carpet.rule.easyDispenserCrafting.name": "便捷发射器合成",
+    "carpet.rule.easyDispenserCrafting.desc": "使用弓的合成配方并在其中间空位放置投掷器，即可合成发射器"
 }

@@ -186,5 +186,7 @@
     "carpet.rule.fragileGlass.name": "Fragile Glass",
     "carpet.rule.fragileGlass.desc": "Sets the proper mining tool of glass, stained glass, tinted glass and glass panes to the hoe",
     "carpet.rule.stoneCutCobblestoneVariants.name": "[1.21.x] Stone Cut Cobblestone Variants",
-    "carpet.rule.stoneCutCobblestoneVariants.desc": "In the stonecutter, stone and deepslate can be cut into the corresponding cobblestone and its cobblestone-variant building blocks"
+    "carpet.rule.stoneCutCobblestoneVariants.desc": "In the stonecutter, stone and deepslate can be cut into the corresponding cobblestone and its cobblestone-variant building blocks",
+    "carpet.rule.easyDispenserCrafting.name": "Easy Dispenser Crafting",
+    "carpet.rule.easyDispenserCrafting.desc": "Crafts a dispenser with the bow recipe and a dropper in its middle slot"
 }
