@@ -121,6 +121,9 @@ public class HFUTServer implements CarpetExtension {
         SimpleLazyChunkManager.clear();
         FakePlayerStorageEditor.flushAll();
         FakePlayerStorageEditor.clear();
+        //#if MC >= 260100
+        //$$ TradeSeqCommand.clearState();
+        //#endif
     }
 
     /** Reruns the datapack reload so a changed recipe set is rebuilt and re-synced to clients. */

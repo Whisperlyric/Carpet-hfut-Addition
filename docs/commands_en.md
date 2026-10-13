@@ -47,6 +47,8 @@ Who may use them is controlled by permission rules (see [rules](rules_en.md)).
 - `/tradeseq <profession> <level> set <number>`
 - `/tradeseq <profession> <level> rollback <number>`
 - `/tradeseq <profession> <level> skip <number>`
+- `/tradeseq confirm`
+- `/tradeseq cancel`
 - `/tradeseq debug <true|false>`
 
 `<profession>` is a villager profession (with suggestions), `<level>` is 1-5; together they map to the vanilla named random sequence `minecraft:trade_set/<profession>/level_<level>` (e.g. `librarian 4` is `minecraft:trade_set/librarian/level_4`).
@@ -58,11 +60,13 @@ Who may use them is controlled by permission rules (see [rules](rules_en.md)).
 - `set <number>` re-seeds the sequence to its fresh state and then replays `<number>` refreshes (`<number>` >= 0, up to `2147483647`, the int maximum). `set 0` is the start, so the next refresh is result #1; after `set n` the next refresh matches the Python reference tool's `predict_at_offset(prof, level, n)`.
 - `rollback <number>` locates the current generation, then replays to `max(0, generation - number)` (`<number>` >= 1, up to `2147483647`); when `<number>` exceeds the current generation it clamps to the fresh state, and the message reports the **actual amount rolled back**; it refuses when the position cannot be located (out of search range).
 - `skip <number>` replays `<number>` refreshes on the live sequence to jump past unwanted results (`<number>` >= 1, up to `2147483647`).
+- `<number>` over `100000` is not run immediately; it is parked as a pending action and you are asked to run `/tradeseq confirm` (a guard against accidentally triggering a huge replay), and only runs after `/tradeseq confirm`. With nothing pending, `/tradeseq confirm` reports that there is nothing to confirm.
+- `cancel` requests cancellation of the running computation (cooperative interrupt, stops shortly after, replies "computation cancelled"). Only one computation may run at a time: while one is running, other `/tradeseq` commands are rejected and told to `cancel` first.
 - Requires op (gated by `commandTradeSeq`); only exists on 26.1+ (the sequence mechanism came with data-driven trades).
 
 > **The unit is a refresh, matching the Python tool**: one refresh is the whole "pick a trade_set and generate an offer" round, consuming a variable number of underlying draws (**1+**, depending on the trade table, whether duplicates are allowed, whether an offer fails to generate, and whether price/enchantment components draw extra). Counting starts at the **fresh state**: `set n` is a re-seed followed by n full replays, so each `n` lines up one-to-one with the Python reference tool's offset. All modifications are persisted correctly and survive a restart.
 >
-> **Limit and asynchrony**: `<number>` and the internal search bound are both the int maximum `2147483647`, which is what the command arguments are validated against. Replays run on a **single-threaded async worker**, off the server tick, so a long replay no longer trips the startup watchdog crash; the command returns immediately and the result (generation; plus time and state under debug) is sent back once the computation finishes. The cost is that a very large number still monopolises that one worker, so other `/tradeseq` commands queue behind it. `rollback`/`skip` verify the sequence was not changed concurrently (e.g. a villager traded meanwhile) before applying the result; if it was, the operation is cancelled and you are asked to retry.
+> **Limit and asynchrony**: `<number>` and the internal search bound are both the int maximum `2147483647`, which is what the command arguments are validated against. Replays run on a **single-threaded async worker**, off the server tick, so a long replay no longer trips the startup watchdog crash; the command returns immediately and the result (generation; plus time and state under debug) is sent back once the computation finishes. The cost is that a very large number still monopolises that one worker, so other `/tradeseq` commands are rejected until it finishes or you stop it with `/tradeseq cancel`. `rollback`/`skip` verify the sequence was not changed concurrently (e.g. a villager traded meanwhile) before applying the result; if it was, the operation is cancelled and you are asked to retry.
 
 ## Simple lazy chunks (`/hfut lazychunk`) `🐛Beta`
 

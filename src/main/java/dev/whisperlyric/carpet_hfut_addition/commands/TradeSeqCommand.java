@@ -49,6 +49,7 @@ package dev.whisperlyric.carpet_hfut_addition.commands;
 //$$ import java.util.Set;
 //$$ import java.util.TreeSet;
 //$$ import java.util.concurrent.CompletableFuture;
+//$$ import java.util.concurrent.CompletionException;
 //$$ import java.util.concurrent.ExecutorService;
 //$$ import java.util.concurrent.Executors;
 //$$ import java.util.function.Consumer;
@@ -56,8 +57,9 @@ package dev.whisperlyric.carpet_hfut_addition.commands;
 //#endif
 
 /**
- * {@code /tradeseq <profession> <level> status|set|rollback|skip <n>} - drives one
- * named random sequence. 26.1+ trade refresh draws from
+ * {@code /tradeseq <profession> <level> status|set|rollback|skip <n>}, plus
+ * {@code /tradeseq cancel}, {@code /tradeseq confirm} and {@code /tradeseq debug <bool>},
+ * drives one named random sequence. 26.1+ trade refresh draws from
  * {@code minecraft:trade_set/<profession>/level_<n>}, shared by every villager of
  * that profession and level, so nudging the sequence steers the whole batch.
  *
@@ -75,6 +77,12 @@ package dev.whisperlyric.carpet_hfut_addition.commands;
  * replay; {@code rollback} locates the current generation, then replays to
  * {@code max(0, generation - n)} (an unknown position aborts it). Every mutation flags the
  * sequence store for saving - the writes bypass vanilla's dirty marking.
+ *
+ * <p>Replays run on one daemon worker ({@link #REPLAY_EXECUTOR}), so a long one never
+ * stalls the tick; only one may run at a time - a second command is rejected until it
+ * finishes or is stopped with {@code /tradeseq cancel}. A {@code <n>} above
+ * {@link #CONFIRM_THRESHOLD} does not run at once: it is parked, and the issuing source
+ * must clear it with a bare {@code /tradeseq confirm}.
  */
 public class TradeSeqCommand {
 
@@ -103,6 +111,32 @@ public class TradeSeqCommand {
     //$$
     //$$ /** Backward-walk bound for spotting a state that sits in the middle of a refresh. */
     //$$ private static final long INSIDE_REFRESH_CAP = 1L << 16;
+    //$$
+    //$$ /** Values above this refresh count are parked until the source clears them with {@code /tradeseq confirm}. */
+    //$$ private static final int CONFIRM_THRESHOLD = 100_000;
+    //$$
+    //$$ /** The too-large action parked for {@code /tradeseq confirm}, with the source that may clear it. */
+    //$$ private static volatile Pending PENDING;
+    //$$
+    //$$ /** The replay in flight; a second one is rejected until it finishes or is cancelled. */
+    //$$ private static volatile CompletableFuture<?> CURRENT;
+    //$$
+    //$$ /** The worker thread running {@code CURRENT}, for {@code /tradeseq cancel} to interrupt. */
+    //$$ private static volatile Thread REPLAY_THREAD;
+    //$$
+    //$$ /** Cooperative-cancellation marker; stack traces disabled, it is pure control flow. */
+    //$$ private static final class ReplayCancelled extends RuntimeException {
+    //$$     private ReplayCancelled() {
+    //$$         super(null, null, false, false);
+    //$$     }
+    //$$ }
+    //$$
+    //$$ /** Thrown from the replay loops when {@code /tradeseq cancel} interrupted the worker. */
+    //$$ private static void hfut$checkCancelled() {
+    //$$     if (Thread.currentThread().isInterrupted()) {
+    //$$         throw new ReplayCancelled();
+    //$$     }
+    //$$ }
     //$$
     //$$ /**
     //$$  * When on (via {@code /tradeseq debug true}), the replay commands append the elapsed time and the
@@ -142,6 +176,10 @@ public class TradeSeqCommand {
     //$$ private record Rollback(int amount, int target, long[] state) {
     //$$ }
     //$$
+    //$$ /** A parked action: {@code initiator} is the source allowed to confirm it, {@code run} the replay it starts. */
+    //$$ private record Pending(String initiator, Supplier<Integer> run) {
+    //$$ }
+    //$$
     //$$ public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
     //$$     var root = Commands.literal("tradeseq")
     //$$             .requires(source -> CommandUtil.canUseCommand(source, HFUTSettings.commandTradeSeq));
@@ -159,6 +197,10 @@ public class TradeSeqCommand {
     //$$                     .then(Commands.literal("skip")
     //$$                             .then(Commands.argument("steps", IntegerArgumentType.integer(1, REFRESH_CAP))
     //$$                                     .executes(TradeSeqCommand::hfut$skip)))));
+    //$$     root.then(Commands.literal("confirm")
+    //$$             .executes(TradeSeqCommand::hfut$confirm));
+    //$$     root.then(Commands.literal("cancel")
+    //$$             .executes(TradeSeqCommand::hfut$cancel));
     //$$     root.then(Commands.literal("debug")
     //$$             .then(Commands.argument("value", BoolArgumentType.bool())
     //$$                     .executes(TradeSeqCommand::hfut$debug)));
@@ -291,6 +333,7 @@ public class TradeSeqCommand {
     //$$     int found = 0;
     //$$     if (tradeSet.allowDuplicates()) {
     //$$         while (found < amount) {
+    //$$             hfut$checkCancelled(); // a datapack amount can be huge; never spin past a cancel
     //$$             Optional<Holder<VillagerTrade>> holder = trades.getRandomElement(ctx.getRandom());
     //$$             if (holder.isEmpty()) {
     //$$                 break;
@@ -306,6 +349,7 @@ public class TradeSeqCommand {
     //$$             pool.add(trade);
     //$$         }
     //$$         while (found < amount && !pool.isEmpty()) {
+    //$$             hfut$checkCancelled();
     //$$             Holder<VillagerTrade> holder = pool.remove(ctx.getRandom().nextInt(pool.size()));
     //$$             if (holder.value().getOffer(ctx) != null) {
     //$$                 found++;
@@ -325,6 +369,9 @@ public class TradeSeqCommand {
     //$$ /** Replays {@code count} refreshes on the scratch. Pure arithmetic, safe off the server thread. */
     //$$ private static void hfut$replay(Replay replay, int count) {
     //$$     for (int i = 0; i < count; i++) {
+    //$$         if ((i & 0xFF) == 0) {
+    //$$             hfut$checkCancelled();
+    //$$         }
     //$$         hfut$refresh(replay.tradeSet(), replay.ctx(), replay.pool());
     //$$     }
     //$$ }
@@ -344,17 +391,95 @@ public class TradeSeqCommand {
     //$$     return live[0] != snapshot[0] || live[1] != snapshot[1];
     //$$ }
     //$$
-    //$$ /** Runs {@code compute} on the replay worker, then {@code done} back on the server thread. */
+    //$$ /**
+    //$$  * Rejects while another replay is still running (cancel it first via
+    //$$  * {@code /tradeseq cancel}); otherwise runs {@code compute} on the replay
+    //$$  * worker and {@code done} back on the server thread. The task is registered
+    //$$  * in {@code CURRENT} for the busy check and {@code cancel}, and deregistered
+    //$$  * on completion so neither it nor its scratch outlives its result.
+    //$$  */
     //$$ private static <T> void hfut$async(CommandSourceStack source, Supplier<T> compute, Consumer<T> done) {
     //$$     MinecraftServer server = source.getServer();
-    //$$     CompletableFuture.supplyAsync(compute, REPLAY_EXECUTOR).whenComplete((value, error) ->
-    //$$             server.execute(() -> {
-    //$$                 if (error != null) {
-    //$$                     source.sendFailure(HFUTText.forViewer(source, "hfut.tradeseq.failed"));
-    //$$                     return;
-    //$$                 }
-    //$$                 done.accept(value);
-    //$$             }));
+    //$$     if (CURRENT != null && !CURRENT.isDone()) {
+    //$$         source.sendFailure(HFUTText.forViewer(source, "hfut.tradeseq.busy"));
+    //$$         return;
+    //$$     }
+    //$$     CompletableFuture<T> future = CompletableFuture.supplyAsync(() -> {
+    //$$         REPLAY_THREAD = Thread.currentThread();
+    //$$         try {
+    //$$             return compute.get();
+    //$$         } finally {
+    //$$             Thread.interrupted(); // a cancelled replay leaves the flag set; clear it for the next task
+    //$$         }
+    //$$     }, REPLAY_EXECUTOR);
+    //$$     CURRENT = future;
+    //$$     future.whenComplete((value, error) -> server.execute(() -> {
+    //$$         if (CURRENT == future) {
+    //$$             CURRENT = null;
+    //$$             REPLAY_THREAD = null;
+    //$$         }
+    //$$         // supplyAsync wraps a thrown exception in CompletionException, so unwrap before matching
+    //$$         Throwable cause = error instanceof CompletionException && error.getCause() != null
+    //$$                 ? error.getCause() : error;
+    //$$         if (cause instanceof ReplayCancelled) {
+    //$$             source.sendSuccess(() -> HFUTText.forViewer(source, "hfut.tradeseq.cancelled"), false);
+    //$$         } else if (error != null) {
+    //$$             source.sendFailure(HFUTText.forViewer(source, "hfut.tradeseq.failed"));
+    //$$         } else {
+    //$$             done.accept(value);
+    //$$         }
+    //$$     }));
+    //$$ }
+    //$$
+    //$$ /** Runs {@code run} at once; above {@link #CONFIRM_THRESHOLD} parks it for {@code /tradeseq confirm} instead. */
+    //$$ private static int hfut$guarded(CommandSourceStack source, int value, Supplier<Integer> run) {
+    //$$     if (value <= CONFIRM_THRESHOLD) {
+    //$$         return run.get();
+    //$$     }
+    //$$     PENDING = new Pending(source.getTextName(), run);
+    //$$     source.sendFailure(HFUTText.forViewer(source, "hfut.tradeseq.confirm", value, CONFIRM_THRESHOLD));
+    //$$     return 0;
+    //$$ }
+    //$$
+    //$$ /**
+    //$$  * Drops the parked action and the task bookkeeping, and stops a still-running
+    //$$  * replay; called on server close so no source or server is retained across a
+    //$$  * restart (or a singleplayer world switch).
+    //$$  */
+    //$$ public static void clearState() {
+    //$$     PENDING = null;
+    //$$     CURRENT = null;
+    //$$     Thread worker = REPLAY_THREAD;
+    //$$     REPLAY_THREAD = null;
+    //$$     if (worker != null) {
+    //$$         worker.interrupt();
+    //$$     }
+    //$$ }
+    //$$
+    //$$ /** {@code /tradeseq confirm} - starts the action parked by the same source, if any. */
+    //$$ private static int hfut$confirm(CommandContext<CommandSourceStack> ctx) {
+    //$$     CommandSourceStack source = ctx.getSource();
+    //$$     Pending pending = PENDING;
+    //$$     if (pending == null || !pending.initiator().equals(source.getTextName())) {
+    //$$         source.sendFailure(HFUTText.forViewer(source, "hfut.tradeseq.confirm.nothing"));
+    //$$         return 0;
+    //$$     }
+    //$$     PENDING = null;
+    //$$     return pending.run().get();
+    //$$ }
+    //$$
+    //$$ /** {@code /tradeseq cancel} - cooperatively stops the running replay by interrupting the worker. */
+    //$$ private static int hfut$cancel(CommandContext<CommandSourceStack> ctx) {
+    //$$     CommandSourceStack source = ctx.getSource();
+    //$$     CompletableFuture<?> future = CURRENT;
+    //$$     Thread worker = REPLAY_THREAD;
+    //$$     if (future == null || future.isDone() || worker == null) {
+    //$$         source.sendSuccess(() -> HFUTText.forViewer(source, "hfut.tradeseq.cancel.nothing"), false);
+    //$$         return 1;
+    //$$     }
+    //$$     worker.interrupt();
+    //$$     source.sendSuccess(() -> HFUTText.forViewer(source, "hfut.tradeseq.cancel.requested"), false);
+    //$$     return 1;
     //$$ }
     //$$
     //$$ /**
@@ -407,6 +532,9 @@ public class TradeSeqCommand {
     //$$     long beforeLo = fresh[0];
     //$$     long beforeHi = fresh[1];
     //$$     for (long r = 1; r <= REFRESH_CAP; r++) {
+    //$$         if ((r & 0xFF) == 0) {
+    //$$             hfut$checkCancelled();
+    //$$         }
     //$$         hfut$refresh(replay.tradeSet(), replay.ctx(), replay.pool());
     //$$         long afterLo = state.hfut$seedLo();
     //$$         long afterHi = state.hfut$seedHi();
@@ -457,13 +585,18 @@ public class TradeSeqCommand {
     //$$     }
     //$$ }
     //$$
-    //$$ /** set n = re-seed, then replay n refreshes, so the next refresh is result n+1. */
+    //$$ /** {@code set n} entry: parks the replay for confirmation when n is above the threshold. */
     //$$ private static int hfut$set(CommandContext<CommandSourceStack> ctx) {
     //$$     CommandSourceStack source = ctx.getSource();
-    //$$     MinecraftServer server = source.getServer();
     //$$     Identifier id = hfut$id(ctx);
     //$$     int value = IntegerArgumentType.getInteger(ctx, "value");
     //$$     Identifier tradeSetId = hfut$tradeSetId(ctx);
+    //$$     return hfut$guarded(source, value, () -> hfut$runSet(source, id, tradeSetId, value));
+    //$$ }
+    //$$
+    //$$ /** set n = re-seed, then replay n refreshes, so the next refresh is result n+1. */
+    //$$ private static int hfut$runSet(CommandSourceStack source, Identifier id, Identifier tradeSetId, int value) {
+    //$$     MinecraftServer server = source.getServer();
     //$$     RefreshSim sim = hfut$sim(source, tradeSetId);
     //$$     if (sim == null) {
     //$$         source.sendFailure(HFUTText.forViewer(source, "hfut.tradeseq.no_trade_set", tradeSetId));
@@ -483,13 +616,18 @@ public class TradeSeqCommand {
     //$$     return 1;
     //$$ }
     //$$
-    //$$ /** rollback n = locate the current generation, then replay to max(0, generation - n). */
+    //$$ /** {@code rollback n} entry: parks the replay for confirmation when n is above the threshold. */
     //$$ private static int hfut$rollback(CommandContext<CommandSourceStack> ctx) {
     //$$     CommandSourceStack source = ctx.getSource();
-    //$$     MinecraftServer server = source.getServer();
     //$$     Identifier id = hfut$id(ctx);
     //$$     int steps = IntegerArgumentType.getInteger(ctx, "steps");
     //$$     Identifier tradeSetId = hfut$tradeSetId(ctx);
+    //$$     return hfut$guarded(source, steps, () -> hfut$runRollback(source, id, tradeSetId, steps));
+    //$$ }
+    //$$
+    //$$ /** rollback n = locate the current generation, then replay to max(0, generation - n). */
+    //$$ private static int hfut$runRollback(CommandSourceStack source, Identifier id, Identifier tradeSetId, int steps) {
+    //$$     MinecraftServer server = source.getServer();
     //$$     RefreshSim sim = hfut$sim(source, tradeSetId);
     //$$     if (sim == null) {
     //$$         source.sendFailure(HFUTText.forViewer(source, "hfut.tradeseq.no_trade_set", tradeSetId));
@@ -528,13 +666,18 @@ public class TradeSeqCommand {
     //$$     return 1;
     //$$ }
     //$$
-    //$$ /** skip n = replay n refreshes on the live sequence, jumping past unwanted results. */
+    //$$ /** {@code skip n} entry: parks the replay for confirmation when n is above the threshold. */
     //$$ private static int hfut$skip(CommandContext<CommandSourceStack> ctx) {
     //$$     CommandSourceStack source = ctx.getSource();
-    //$$     MinecraftServer server = source.getServer();
     //$$     Identifier id = hfut$id(ctx);
     //$$     int steps = IntegerArgumentType.getInteger(ctx, "steps");
     //$$     Identifier tradeSetId = hfut$tradeSetId(ctx);
+    //$$     return hfut$guarded(source, steps, () -> hfut$runSkip(source, id, tradeSetId, steps));
+    //$$ }
+    //$$
+    //$$ /** skip n = replay n refreshes on the live sequence, jumping past unwanted results. */
+    //$$ private static int hfut$runSkip(CommandSourceStack source, Identifier id, Identifier tradeSetId, int steps) {
+    //$$     MinecraftServer server = source.getServer();
     //$$     RefreshSim sim = hfut$sim(source, tradeSetId);
     //$$     if (sim == null) {
     //$$         source.sendFailure(HFUTText.forViewer(source, "hfut.tradeseq.no_trade_set", tradeSetId));
