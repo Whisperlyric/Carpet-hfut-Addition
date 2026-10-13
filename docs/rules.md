@@ -419,3 +419,15 @@
 
 - `false`：关闭
 - `true`：注册上述合成配方
+
+## 侧向流动水不生成脆冰 (lateralFlowingWaterNoBrittleIce) `MC>=26.4`
+
+自 26.4-snapshot-4 起，与蓝冰水平相邻的水会转化为脆冰。开启后，侧向流动的水(level=1-7)不再转化为脆冰；水源与下落的水仍与原版一致地转化。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `HFUT`, `FEATURE`
+
+- `false`：关闭
+- `true`：侧向流动的水不会因接触蓝冰而转化为脆冰

@@ -191,8 +191,8 @@
     "carpet.rule.commandFakePlayerOpenStorage.extra.0": "true: everyone; ops: permission level 2+; false: disabled; or a minimum permission level 0-4",
     "carpet.rule.beaconDownwardsInfiniteRange.name": "Beacon Effects Reach Downwards",
     "carpet.rule.beaconDownwardsInfiniteRange.desc": "The beacon's effect area extends downwards without limit (vanilla only extends it upwards); the horizontal range is unchanged",
-    "carpet.rule.dolphinBoatRidingRestore.name": "[1.21.9+] Dolphin Boat Riding Restore",
-    "carpet.rule.dolphinBoatRidingRestore.desc": "Restores the pre-1.21.9 behaviour of dolphins entering boats",
+    "carpet.rule.dolphinBoatRidingRestore.name": "Dolphin Boat Riding Restore",
+    "carpet.rule.dolphinBoatRidingRestore.desc": "[1.21.9+] Restores the pre-1.21.9 behaviour of dolphins entering boats",
     "hfut.fakePlayerTickStage.adjusted": "Fake player %s's tick stage adjusted: %s; the global rule is %s",
     "hfut.fakePlayerTickStage.query": "Fake player %s's tick stage is currently: %s",
     "hfut.fakePlayerTickStage.stage.network": "network phase (NU)",
@@ -201,8 +201,10 @@
     "carpet.rule.resilientBuddingAmethyst.desc": "Changes budding amethyst's hardness and blast resistance to 1557",
     "carpet.rule.fragileGlass.name": "Fragile Glass",
     "carpet.rule.fragileGlass.desc": "Sets the proper mining tool of glass, stained glass, tinted glass and glass panes to the hoe",
-    "carpet.rule.stoneCutCobblestoneVariants.name": "[1.21.x] Stone Cut Cobblestone Variants",
-    "carpet.rule.stoneCutCobblestoneVariants.desc": "In the stonecutter, stone and deepslate can be cut into the corresponding cobblestone and its cobblestone-variant building blocks",
+    "carpet.rule.stoneCutCobblestoneVariants.name": "Stone Cut Cobblestone Variants",
+    "carpet.rule.stoneCutCobblestoneVariants.desc": "[1.21.x] In the stonecutter, stone and deepslate can be cut into the corresponding cobblestone and its cobblestone-variant building blocks",
     "carpet.rule.easyDispenserCrafting.name": "Easy Dispenser Crafting",
-    "carpet.rule.easyDispenserCrafting.desc": "Crafts a dispenser with the bow recipe and a dropper in its middle slot"
+    "carpet.rule.easyDispenserCrafting.desc": "Crafts a dispenser with the bow recipe and a dropper in its middle slot",
+    "carpet.rule.lateralFlowingWaterNoBrittleIce.name": "No Brittle Ice From Lateral Flowing Water",
+    "carpet.rule.lateralFlowingWaterNoBrittleIce.desc": "[26.4-snapshot-4+]Lateral (sideways) flowing water no longer turns into brittle ice when it meets blue ice"
 }

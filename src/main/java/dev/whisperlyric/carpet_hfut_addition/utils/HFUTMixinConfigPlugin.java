@@ -44,6 +44,9 @@ public class HFUTMixinConfigPlugin extends RestrictiveMixinConfigPlugin {
             if (minorAtLeast(mc, 3)) {
                 out.add("rule.easyDispenserCrafting.RecipeMapInvoker");
             }
+            if (minorAtLeast(mc, 4)) {
+                out.add("rule.brittleIce.LiquidBlockMixin");
+            }
         } else {
             out.add("rule.stoneCutCobblestoneVariants.RecipeManagerMixin");
         }

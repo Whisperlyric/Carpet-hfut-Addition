@@ -134,7 +134,13 @@ public class AvoidGoldenDandelionGoal extends Goal {
         double sin = Math.sin(jitter);
         Vec3 dir = new Vec3(away.x * cos - away.z * sin, 0.0, away.x * sin + away.z * cos).normalize();
         Vec3 target = this.mob.position().add(dir.scale(8.0 + this.mob.getRandom().nextDouble() * 4.0));
+        //#if MC >= 260400
+        //$$ // 26.4-snapshot-4 removed Mth.clamp and renamed the build-height accessors
+        //$$ this.mob.getNavigation().moveTo(target.x, Math.clamp(target.y, this.mob.level().getMinY(),
+        //$$                 this.mob.level().getMaxY() - 1), target.z, FLEE_SPEED);
+        //#else
         this.mob.getNavigation().moveTo(target.x, Mth.clamp(target.y, this.mob.level().getMinBuildHeight(),
                 this.mob.level().getMaxBuildHeight() - 1), target.z, FLEE_SPEED);
+        //#endif
     }
 }

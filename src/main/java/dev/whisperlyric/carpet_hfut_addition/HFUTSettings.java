@@ -65,6 +65,16 @@ public class HFUTSettings {
     //#endif
 
     /**
+     * Sideways-flowing water (levels 1-7) ignores blue ice instead of turning
+     * into brittle ice; sources and falling water still convert like vanilla.
+     * 26.4+ only.
+     */
+    //#if MC >= 260400
+    //$$ @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    //$$ public static boolean lateralFlowingWaterNoBrittleIce = false;
+    //#endif
+
+    /**
      * Vanilla clears a map's player records, but map optimizations such as
      * Lithium rewrite that path and miss an edge case, so the records leak.
      */

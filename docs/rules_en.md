@@ -445,3 +445,15 @@ The recipe has no unlock advancement, so it never appears in the recipe book —
 
 - `false`: disabled (vanilla behaviour — dispensers are only crafted from cobblestone and a bow)
 - `true`: registers the crafting recipe above; crafting checks and recipe sync run on vanilla logic
+
+## No Brittle Ice From Lateral Flowing Water (lateralFlowingWaterNoBrittleIce) `MC>=26.4`
+
+Since 26.4-snapshot-4, water whose horizontal neighbour is blue ice converts into brittle ice. With this on, lateral (sideways) flowing water (level=1-7) ignores blue ice and keeps flowing instead of converting; source blocks and falling water still convert like vanilla.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`
+
+- `false`: disabled
+- `true`: lateral flowing water does not convert into brittle ice on touching blue ice

@@ -191,8 +191,8 @@
     "carpet.rule.commandFakePlayerOpenStorage.extra.0": "true：所有人；ops：权限等级 2+；false：禁用；或最低权限等级 0-4",
     "carpet.rule.beaconDownwardsInfiniteRange.name": "信标效果向下无限延伸",
     "carpet.rule.beaconDownwardsInfiniteRange.desc": "信标的效果判定区域向下无限延伸（原版仅向上延伸），水平范围不变",
-    "carpet.rule.dolphinBoatRidingRestore.name": "[1.21.9+]海豚上船恢复",
-    "carpet.rule.dolphinBoatRidingRestore.desc": "恢复 1.21.9 前海豚可进入船的行为",
+    "carpet.rule.dolphinBoatRidingRestore.name": "海豚上船恢复",
+    "carpet.rule.dolphinBoatRidingRestore.desc": "[1.21.9+]恢复 1.21.9 前海豚可进入船的行为",
     "hfut.fakePlayerTickStage.adjusted": "假人 %s 的 tick 阶段已调整：%s，全局规则为 %s",
     "hfut.fakePlayerTickStage.query": "假人 %s 的 tick 阶段当前为：%s",
     "hfut.fakePlayerTickStage.stage.network": "网络阶段NU",
@@ -201,8 +201,10 @@
     "carpet.rule.resilientBuddingAmethyst.desc": "将紫水晶母岩的硬度与爆炸抗性改为 1557",
     "carpet.rule.fragileGlass.name": "易碎玻璃",
     "carpet.rule.fragileGlass.desc": "将玻璃、染色玻璃、遮光玻璃和玻璃板的合适挖掘工具设为锄头",
-    "carpet.rule.stoneCutCobblestoneVariants.name": "[1.21.x]石头可切圆石变种",
-    "carpet.rule.stoneCutCobblestoneVariants.desc": "在切石机中，石头和深板岩可切出相应的圆石及其圆石变种建筑方块",
+    "carpet.rule.stoneCutCobblestoneVariants.name": "石头可切圆石变种",
+    "carpet.rule.stoneCutCobblestoneVariants.desc": "[1.21.x]在切石机中，石头和深板岩可切出相应的圆石及其圆石变种建筑方块",
     "carpet.rule.easyDispenserCrafting.name": "便捷发射器合成",
-    "carpet.rule.easyDispenserCrafting.desc": "使用弓的合成配方并在其中间空位放置投掷器，即可合成发射器"
+    "carpet.rule.easyDispenserCrafting.desc": "使用弓的合成配方并在其中间空位放置投掷器，即可合成发射器",
+    "carpet.rule.lateralFlowingWaterNoBrittleIce.name": "侧向流动水不生成脆冰",
+    "carpet.rule.lateralFlowingWaterNoBrittleIce.desc": "[26.4-snapshot-4+]侧向流动的水接触到蓝冰时不再转化为脆冰"
 }

@@ -30,7 +30,12 @@ public abstract class TitleScreenMixin {
     //$$     for (var child : ((TitleScreen) (Object) this).children()) {
     //$$         if (child instanceof SpriteIconButton icon
     //$$                 && !child.getClass().getName().startsWith("com.terraformersmc.modmenu.")) {
+    //#if MC >= 260400
+    //$$             // the visible field went from public to protected in 26.4
+    //$$             icon.setVisible(false);
+    //#else
     //$$             icon.visible = false;
+    //#endif
     //$$         }
     //$$     }
     //$$ }

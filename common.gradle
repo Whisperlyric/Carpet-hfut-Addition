@@ -97,10 +97,12 @@ dependencies {
 
 	// GCA (gugle-carpet-addition), compile-only: types for the menu-button compat mixin.
 	// GCA releases a wrapper jar with per-MC jars inside; the per-MC jars are extracted
-	// into libs/ (nearest-version substitutes for 1.21.3/1.21.8).
+	// into libs/ (nearest-version substitutes for 1.21.3/1.21.8; the 26.4 node compiles
+	// against GCA's 26.4-snapshot-3 jar until a snapshot-4 build ships).
 	def gcaJarVariant = [
-			"1.21.3": "mc1.21.2",
-			"1.21.8": "mc1.21.6",
+			"1.21.3"         : "mc1.21.2",
+			"1.21.8"         : "mc1.21.6",
+			"26.4-snapshot-4": "mc26.4-snapshot-3",
 	].getOrDefault(project.minecraft_version, "mc${project.minecraft_version}")
 	autoCompileOnly(name: "gugle-carpet-addition-${gcaJarVariant}", version: "${project.gca_compile_version}") { transitive = false }
 }
