@@ -40,6 +40,7 @@ public class HFUTMixinConfigPlugin extends RestrictiveMixinConfigPlugin {
         if (mc.startsWith("26.")) {
             out.add("rule.tradeSeq.XoroshiroRandomSourceAccessor");
             out.add("rule.tradeSeq.Xor128Accessor");
+            out.add("rule.tradeSeq.RandomSequencesAccessor");
             if (minorAtLeast(mc, 3)) {
                 out.add("rule.easyDispenserCrafting.RecipeMapInvoker");
             }
