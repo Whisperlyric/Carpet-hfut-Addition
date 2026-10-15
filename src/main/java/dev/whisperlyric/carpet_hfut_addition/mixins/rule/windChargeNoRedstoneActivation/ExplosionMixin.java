@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -42,6 +43,7 @@ public abstract class ExplosionMixin {
     @Final
     private Entity source;
 
+    @Unique
     private boolean hfut$isRedstoneComponent(BlockState state) {
         return state.getBlock() instanceof ButtonBlock
                 || state.getBlock() instanceof LeverBlock

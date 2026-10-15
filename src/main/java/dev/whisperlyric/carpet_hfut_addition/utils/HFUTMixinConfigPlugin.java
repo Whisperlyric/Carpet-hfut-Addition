@@ -50,6 +50,9 @@ public class HFUTMixinConfigPlugin extends RestrictiveMixinConfigPlugin {
         } else {
             out.add("rule.stoneCutCobblestoneVariants.RecipeManagerMixin");
         }
+        if (!mc.startsWith("26.") || !minorAtLeast(mc, 3)) {
+            out.add("client.rule.mapPlayerIconRotation.MapDecorationMixin");
+        }
         return out;
     }
 

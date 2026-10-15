@@ -8,7 +8,6 @@ import dev.whisperlyric.carpet_hfut_addition.mixins.ServerPlayerLanguageAccessor
 import dev.whisperlyric.carpet_hfut_addition.utils.HFUTText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.ChestMenu;
@@ -59,7 +58,7 @@ public final class GcaInvertButton {
     private static ItemStack icon(Item item, EntityPlayerMPFake fake, String lang,
                                   boolean effective, boolean global) {
         ItemStack stack = new ItemStack(item);
-        stack.set(DataComponents.LORE, new ItemLore(List.<Component>of(
+        stack.set(DataComponents.LORE, new ItemLore(List.of(
                 HFUTText.forLang(lang, "hfut.fakePlayerTickStage.button.current",
                         boolText(effective), FakePlayerTickStage.stageDisplayFor(fake, effective)),
                 HFUTText.forLang(lang, "hfut.fakePlayerTickStage.button.global", boolText(global)),
