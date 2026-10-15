@@ -36,9 +36,11 @@ import java.util.UUID;
  * <p>Duping is prevented by exclusive access (one viewer at a time) and by
  * flushing at join ({@link #flushFor} runs at {@code placeNewPlayer} HEAD, so
  * a joining entity reads the just-written data) and on server stop
- * ({@link #flushAll}). Identities are addressed purely by their offline UUID
- * derivation - no auth-backend lookup is performed. Version branches mirror
- * vanilla's own login loader.
+ * ({@link #flushAll}). The target identity is resolved the way carpet spawns
+ * fake players - the profile cache (usercache.json) first, then the offline
+ * UUID derivation - and the on-disk playerdata is probed for each candidate,
+ * so a fake player stored under its authenticated UUID is still found. Version
+ * branches mirror vanilla's own login loader.
  */
 public final class FakePlayerStorageEditor {
     public enum Kind { INVENTORY, ENDER_CHEST }
@@ -108,14 +110,30 @@ public final class FakePlayerStorageEditor {
             return BeginResult.fail("hfut.fakePlayerOpen.no_server");
         }
         PlayerList list = server.getPlayerList();
-        ServerLevel level = server.overworld();
-        UUID uuid = UUIDUtil.createOfflinePlayerUUID(name);
-        ServerPlayer shadow = newShadow(server, level, uuid, name);
-        if (!loadPlayerData(list, shadow, uuid, name)) {
-            return BeginResult.fail("hfut.fakePlayerOpen.no_data", name);
-        }
-        if (list.getPlayer(uuid) != null) {
+        if (list.getPlayerByName(name) != null) {
             return BeginResult.fail("hfut.fakePlayerOpen.online", name);
+        }
+        ServerLevel level = server.overworld();
+        UUID cached = cachedIdentityId(name);
+        ServerPlayer shadow = null;
+        UUID uuid = null;
+        if (cached != null) {
+            ServerPlayer probe = newShadow(server, level, cached, name);
+            if (loadPlayerData(list, probe, cached, name)) {
+                shadow = probe;
+                uuid = cached;
+            }
+        }
+        if (shadow == null) {
+            UUID offline = UUIDUtil.createOfflinePlayerUUID(name);
+            ServerPlayer probe = newShadow(server, level, offline, name);
+            if (loadPlayerData(list, probe, offline, name)) {
+                shadow = probe;
+                uuid = offline;
+            }
+        }
+        if (shadow == null) {
+            return BeginResult.fail("hfut.fakePlayerOpen.no_data", name);
         }
         Session session = SESSIONS.get(uuid);
         if (session != null) {
@@ -132,6 +150,18 @@ public final class FakePlayerStorageEditor {
         session = new Session(uuid, name, shadow);
         SESSIONS.put(uuid, session);
         return BeginResult.ok(session);
+    }
+
+    /**
+     * The identity's UUID as cached by this server (profile cache / usercache),
+     * or {@code null} when unknown. Cache-only: never hits the auth backend.
+     */
+    private static UUID cachedIdentityId(String name) {
+        //#if MC >= 12110
+        //$$ return server.services().nameToIdCache().get(name).map(NameAndId::id).orElse(null);
+        //#else
+        return server.getProfileCache().get(name).map(GameProfile::getId).orElse(null);
+        //#endif
     }
 
     private static boolean loadPlayerData(PlayerList list, ServerPlayer shadow,

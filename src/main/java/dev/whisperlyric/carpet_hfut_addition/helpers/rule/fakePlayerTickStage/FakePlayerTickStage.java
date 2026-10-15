@@ -3,12 +3,11 @@ package dev.whisperlyric.carpet_hfut_addition.helpers.rule.fakePlayerTickStage;
 import carpet.patches.EntityPlayerMPFake;
 import dev.whisperlyric.carpet_hfut_addition.mixins.ServerPlayerLanguageAccessor;
 import dev.whisperlyric.carpet_hfut_addition.utils.HFUTText;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import dev.whisperlyric.carpet_hfut_addition.HFUTServer;
 import dev.whisperlyric.carpet_hfut_addition.FakePlayerTickStageSettings;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.level.ServerPlayer;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 import java.util.UUID;
@@ -74,11 +73,19 @@ public class FakePlayerTickStage {
         MODES.clear();
     }
 
-    /** The current phase with its code (network phase NU / entity phase EU). */
-    public static MutableComponent stageDisplayFor(ServerPlayer langHolder, boolean effective) {
-        String lang = ((ServerPlayerLanguageAccessor) langHolder).hfut$language();
-        return Component.literal(effective
-                ? HFUTText.forLang(lang, "hfut.fakePlayerTickStage.stage.network").getString()
-                : HFUTText.forLang(lang, "hfut.fakePlayerTickStage.stage.entity").getString());
+    /**
+     * The current phase with its code (network phase NU / entity phase EU), as
+     * plain text: callers drop it into our own {@code %s} templates, which would
+     * otherwise print the component's {@code toString()} form ({@code literal{...}}).
+     * A null holder means a non-player executor (console, command block, RCON);
+     * like {@link HFUTText#forViewer} those get the en_us text.
+     */
+    public static String stageDisplayFor(@Nullable ServerPlayer langHolder, boolean effective) {
+        String lang = langHolder != null
+                ? ((ServerPlayerLanguageAccessor) langHolder).hfut$language()
+                : "en_us";
+        return HFUTText.forLang(lang, effective
+                ? "hfut.fakePlayerTickStage.stage.network"
+                : "hfut.fakePlayerTickStage.stage.entity").getString();
     }
 }
