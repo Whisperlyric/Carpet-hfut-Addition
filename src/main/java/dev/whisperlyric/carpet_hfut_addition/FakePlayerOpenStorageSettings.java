@@ -5,12 +5,16 @@ import carpet.api.settings.RuleCategory;
 import dev.whisperlyric.carpet_hfut_addition.utils.HFUTRuleCategory;
 
 /**
- * Permission for {@code /player <player> open inventory|enderchest}, which is
- * self-contained and available with or without GCA.
+ * Permissions for {@code /player <player> open inventory|enderchest}.
  */
 public class FakePlayerOpenStorageSettings {
-    /** Permission for /player <player> open inventory|enderchest: true/false/ops/0-4. */
+    /** Permission while the target is online: true/false/ops/0-4. */
     @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.COMMAND, RuleCategory.FEATURE},
           options = {"true", "ops", "0", "1", "2", "3", "4", "false"}, strict = true)
-    public static String commandFakePlayerOpenStorage = "ops";
+    public static String commandFakePlayerRemoteOpenStorage = "ops";
+
+    /** Permission while the target is offline: true/false/ops/0-4. */
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.COMMAND, RuleCategory.FEATURE},
+          options = {"true", "ops", "0", "1", "2", "3", "4", "false"}, strict = true)
+    public static String commandOfflineFakePlayerOpenStorage = "ops";
 }

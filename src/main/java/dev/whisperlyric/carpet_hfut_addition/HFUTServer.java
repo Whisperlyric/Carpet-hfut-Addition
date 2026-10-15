@@ -64,11 +64,11 @@ public class HFUTServer implements CarpetExtension {
         } else {
             CarpetServer.settingsManager.parseSettingsClass(GhostPearlFixSettings.class);
         }
-        // /player <name> open inventory|enderchest: self-contained, no GCA required
+        // /player <name> open inventory|enderchest: remote open of a fake player's storage
         try {
             CarpetServer.settingsManager.parseSettingsClass(FakePlayerOpenStorageSettings.class);
         } catch (UnsupportedOperationException e) {
-            LOGGER.info("[HFUT] commandFakePlayerOpenStorage already provided elsewhere; skipping", e);
+            LOGGER.info("[HFUT] fake player open storage rules already provided elsewhere; skipping", e);
         }
         SettingsManager.registerGlobalRuleObserver((source, rule, newValue) -> {
             if ("fakePlayerTicksLikeRealPlayer".equals(rule.name())) {

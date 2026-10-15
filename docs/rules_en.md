@@ -20,9 +20,18 @@ Controls who may use `/hfut lazychunk`, which pins chunks at lazy (weakly loaded
 - Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - Categories: `HFUT`, `COMMAND`, `FEATURE`
 
-## Fake Player Open Storage Permission (commandFakePlayerOpenStorage)
+## Remote Fake Player Open Storage Permission (commandFakePlayerRemoteOpenStorage)
 
-Controls who may use `/player <name> open inventory|enderchest` to open a fake player's inventory or ender chest for editing while it is offline (see [commands](commands_en.md)). Carpet GugleCarpetAddition is not required.
+Controls who may use `/player <name> open inventory|enderchest` to open a fake player's inventory or ender chest for editing while it is online (see [commands](commands_en.md)).
+
+- Type: `string`
+- Default value: `ops`
+- Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- Categories: `HFUT`, `COMMAND`, `FEATURE`
+
+## Offline Fake Player Open Storage Permission (commandOfflineFakePlayerOpenStorage)
+
+Controls who may use `/player <name> open inventory|enderchest` to open a fake player's inventory or ender chest for editing while it is offline (see [commands](commands_en.md)).
 
 - Type: `string`
 - Default value: `ops`

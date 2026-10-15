@@ -91,17 +91,18 @@ Pins chunks at "lazy" (weakly loaded) strength: kept loaded, only block ticks ru
 - `query` shows 10 rows per page. Clicking a row fills the chat input with its `delete chunk` command; when there are multiple pages, gray `[< Prev]` / `[Next >]` arrows at the bottom turn the page on click. On a client that has this mod, turning the page replaces the previous page in chat instead of stacking the pages; this only affects the display, and every line is still kept in `logs/latest.log`.
 - Requires op (gated by `commandSimpleLazyChunk`).
 
-## Offline fake player storage (`/player <name> open`)
+## Fake player storage (`/player <name> open`)
 
-Opens a fake player's inventory or ender chest for editing **while it is offline**. Gated by `commandFakePlayerOpenStorage`; the menu ships with this mod, so Carpet GugleCarpetAddition is not required.
+Opens a fake player's inventory or ender chest for editing. Gated by `commandFakePlayerRemoteOpenStorage` while the fake player is online, and by `commandOfflineFakePlayerOpenStorage` while it is offline.
 
 ### Syntax
 - `/player <name> open inventory`: opens the inventory
 - `/player <name> open enderchest`: opens the ender chest
 
 ### Effect
-- The target's saved data is loaded into a shadow entity that never joins the world, and edits are written straight back to the playerdata: saved when the menu closes and on server stop.
-- Duping is prevented and access is exclusive, and opening is refused when the fake player has never been spawned (no playerdata). The inventory view is 5 rows (including head/chest/legs/feet and off-hand cells); the ender chest is 3 rows.
+- An online fake player has its storage opened; a real player as the target returns "Can only manipulate fake player".
+- With [GugleCarpetAddition](https://github.com/Gu-ZT/gugle-carpet-addition) (GCA) installed and its `openFakePlayerInventory` / `openFakePlayerEnderChest` rules enabled, opening an online fake player reuses GCA's own menu; otherwise the menu that ships with this mod is used.
+- An offline target's saved data is loaded into a shadow entity that never joins the world, and edits are written straight back to the playerdata: saved when the menu closes and on server stop. Duping is prevented and access is exclusive, and opening is refused when the fake player has never been spawned (no playerdata). This mod's own inventory menu is 5 rows (including head/chest/legs/feet and off-hand cells); its ender chest is 3 rows.
 
 ## Version (`/hfut version`)
 

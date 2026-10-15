@@ -20,7 +20,16 @@
 - 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `HFUT`, `COMMAND`, `FEATURE`
 
-## 假人离线开箱权限 (commandFakePlayerOpenStorage)
+## 假人远程开箱权限 (commandFakePlayerRemoteOpenStorage)
+
+设置谁可以使用 `/player <假人> open inventory|enderchest`：在假人在线时远程打开它的背包或末影箱进行编辑（见[命令](commands.md)）。
+
+- 类型: `string`
+- 默认值: `ops`
+- 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- 分类: `HFUT`, `COMMAND`, `FEATURE`
+
+## 假人离线开箱权限 (commandOfflineFakePlayerOpenStorage)
 
 设置谁可以使用 `/player <假人> open inventory|enderchest`：在假人不在线时打开它的背包或末影箱进行编辑（见[命令](commands.md)）。
 

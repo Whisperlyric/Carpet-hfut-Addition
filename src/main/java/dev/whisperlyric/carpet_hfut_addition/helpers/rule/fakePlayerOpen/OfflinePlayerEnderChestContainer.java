@@ -6,9 +6,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 /**
- * Read/write {@link Container} over an offline fake player's ender chest (3x9).
+ * Read/write {@link Container} over a fake player's ender chest (3x9).
  * All calls delegate to the player's ender chest inventory; {@link #stillValid(Player)}
- * always returns {@code true} so remote viewers are never disconnected.
+ * always returns {@code true} so the view never closes on distance.
  */
 public final class OfflinePlayerEnderChestContainer implements Container {
     private final Container enderChest;

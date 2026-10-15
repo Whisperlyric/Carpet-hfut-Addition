@@ -12,7 +12,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.CustomData;
 
 /**
- * Read/write {@link Container} over an offline fake player's inventory, shown as a
+ * Read/write {@link Container} over a fake player's inventory, shown as a
  * 5x9 chest: armor and off-hand in row 1, then the 36 real inventory slots.
  *
  * <p>Cells {@code 0/5/7/8} are inert placeholders carrying a plain-NBT
