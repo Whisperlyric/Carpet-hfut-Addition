@@ -5,7 +5,6 @@ import carpet.CarpetServer;
 import carpet.api.settings.Rule;
 import carpet.api.settings.SettingsManager;
 import com.mojang.brigadier.CommandDispatcher;
-import dev.whisperlyric.carpet_hfut_addition.FakePlayerOpenStorageSettings;
 import dev.whisperlyric.carpet_hfut_addition.commands.HFUTCommand;
 import dev.whisperlyric.carpet_hfut_addition.commands.PearlTraceCommand;
 import dev.whisperlyric.carpet_hfut_addition.commands.SimpleLazyChunkCommand;
