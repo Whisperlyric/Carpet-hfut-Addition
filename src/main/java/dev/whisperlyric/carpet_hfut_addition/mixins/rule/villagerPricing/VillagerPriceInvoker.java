@@ -8,13 +8,10 @@ import net.minecraft.world.entity.npc.Villager;
 import org.spongepowered.asm.mixin.Mixin;
 
 /**
- * Shared accessor for the two villager pricing rules (instant level-up and
- * live price sync): the three vanilla members both rules need, declared
- * once instead of in every mixin. The reset-then-update-then-resend
- * sequence itself lives in VillagerPriceHelper.reprice, which callers cast
- * to this interface - the same accessor + helper shape as
- * MobGoalSelectorAccessor. 26.3 owns all three natively, so the member set
- * is guarded and the interface is empty there.
+ * villagerPricing: shared accessor for the two villager pricing rules (instant
+ * level-up and live price sync), declaring the three vanilla members both need
+ * once. The reset-update-resend sequence lives in VillagerPriceHelper.reprice;
+ * 26.3 owns all three natively, so the member set is guarded and empty there.
  */
 @Mixin(Villager.class)
 public interface VillagerPriceInvoker {

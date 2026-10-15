@@ -19,10 +19,8 @@ import org.spongepowered.asm.mixin.Mixin;
  * villagerLivePriceSync (below 26.3): up to 26.2 a mid-trade price event
  * (restock, demand catch-up, gossip, reputation) stays invisible until the
  * screen is reopened; 26.3 reprices on each event, and the four RETURN
- * injections here do the same. The reset-update-resend triple lives in
- * VillagerPriceInvoker + VillagerPriceHelper, shared with
- * villagerInstantLevelUp. Plain class/gossip renames are left to the
- * preprocessor.
+ * injections here do the same. The pricing triple lives in VillagerPriceInvoker
+ * + VillagerPriceHelper, shared with villagerInstantLevelUp.
  */
 @Mixin(Villager.class)
 public abstract class VillagerMixin {

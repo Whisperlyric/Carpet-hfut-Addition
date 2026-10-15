@@ -25,11 +25,11 @@ import org.spongepowered.asm.mixin.Mixin;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 
 /**
- * mapPlayerIconRotation (below 26.3): port of the 26.3 map change - an
- * off-map player marker carries the player's real rotation instead of a
- * hardcoded 0; in-map markers always rotated and are untouched. On the
- * 1.21.1 node the decision sits inline in addDecoration, so the constructed
- * 0 byte is recomputed; 1.21.2+ re-implements playerDecorationTypeAndRotation.
+ * mapPlayerIconRotation (below 26.3): port of the 26.3 map change - an off-map
+ * player marker carries the player's real rotation instead of a hardcoded 0;
+ * in-map markers already rotated and are untouched. On 1.21.1 the decision sits
+ * inline in addDecoration, so the constructed 0 byte is recomputed; 1.21.2+
+ * re-implements playerDecorationTypeAndRotation.
  */
 @Mixin(MapItemSavedData.class)
 public abstract class MapItemSavedDataMixin {

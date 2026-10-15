@@ -18,13 +18,11 @@ import net.minecraft.world.entity.npc.Villager;
 import org.spongepowered.asm.mixin.Mixin;
 
 /**
- * villagerInstantLevelUp (below 26.3): up to 26.2 a qualifying trade only
- * arms a deferred level-up that runs while NOT trading, hence the "close and
- * reopen" dance; 26.3 levels up right in rewardTradeXp with a 10s regen I and
- * reprices a trading player. Reproduced here; off = passthrough, and 26.3 has
- * it natively so the whole member set is guarded. The pricing triple
- * (update/reset/resend) lives in VillagerPriceInvoker + VillagerPriceHelper,
- * shared with villagerLivePriceSync.
+ * villagerInstantLevelUp (below 26.3): up to 26.2 a qualifying trade only arms
+ * a deferred level-up that runs while not trading (the "close and reopen"
+ * dance); 26.3 levels up in rewardTradeXp with a 10s regen I and reprices the
+ * trading player, reproduced here. The pricing triple lives in
+ * VillagerPriceInvoker + VillagerPriceHelper, shared with villagerLivePriceSync.
  */
 @Mixin(Villager.class)
 public abstract class VillagerMixin {

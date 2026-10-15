@@ -28,10 +28,10 @@ import org.spongepowered.asm.mixin.Mixin;
 
 /**
  * windChargeNoRedstoneActivation, 1.21.1 shape: filters the five redstone
- * components in Explosion.finalizeExplosion's dispatch. On 1.21.2+ that
- * dispatch moved to ServerExplosion (sibling mixin); below 12102 this member
- * set is stripped and the mixin is restricted to <1.21.2 with a string target,
- * Explosion having become an interface.
+ * components in Explosion.finalizeExplosion's dispatch. On 1.21.2+ that dispatch
+ * moved to ServerExplosion (sibling mixin); Explosion became an interface, so
+ * below 12102 the member set is stripped and the mixin targets it by string
+ * under a <1.21.2 restriction.
  */
 @Restriction(require = @Condition(value = "minecraft", versionPredicates = "<1.21.2"))
 @Mixin(targets = "net.minecraft.world.level.Explosion")

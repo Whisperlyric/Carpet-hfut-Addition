@@ -15,11 +15,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * bonemealGrowMelons: vanilla rejects bone meal on mature stems outright
- * (age == 7), so fruit only comes from random ticks. With the rule on a
- * mature stem becomes a valid target and performBonemeal replays vanilla's
- * randomTick fruit placement - every placement detail stays vanilla because
- * the vanilla method does the work.
+ * bonemealGrowMelons: vanilla rejects bone meal on mature stems (age == 7), so
+ * fruit only comes from random ticks. With the rule on, a mature stem becomes a
+ * valid target and performBonemeal replays vanilla's randomTick fruit placement,
+ * so every placement detail stays vanilla.
  */
 @Mixin(StemBlock.class)
 public abstract class StemBlockMixin {

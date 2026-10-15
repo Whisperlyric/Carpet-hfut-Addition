@@ -15,11 +15,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * babyMobAvoidGoldenDandelion, tadpole anchor: tadpoles grow up without
- * being AgeableMob (their growth is AbstractFish's own), so the AgeableMob
- * registration misses them. Every tadpole counts as a baby - the injected
- * baby check is simply true. Guarded like the AgeableMob half; the Tadpole
- * class keeps its package on every 26.x version.
+ * babyMobAvoidGoldenDandelion, tadpole anchor: tadpoles grow up without being
+ * AgeableMob (their growth is AbstractFish's own), so the AgeableMob half
+ * misses them; every tadpole counts as a baby (the injected check is simply
+ * true). Guarded like the AgeableMob half.
  */
 @Mixin(Tadpole.class)
 public abstract class TadpoleMixin {

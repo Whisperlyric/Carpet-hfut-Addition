@@ -42,13 +42,10 @@ import org.spongepowered.asm.mixin.Mixin;
 
 /**
  * stoneCutCobblestoneVariants (below 26.1): registers the eight stonecutter
- * recipes 26.1 added natively - stone into cobblestone, its slab, stairs and
- * wall; deepslate into cobbled deepslate variants - straight into the loaded
- * recipe map, so the stonecutter UI, crafting checks and client sync all run
- * on vanilla paths. The reconcile re-fires on every recipe load, so toggling
- * the rule (which reruns the datapack reload, see HFUTServer) just works.
- * The whole class is compiled out on 26.1+; HFUTMixinConfigPlugin registers it
- * only on the versions that still ship it.
+ * recipes 26.1 added natively (stone/deepslate into cobblestone and cobbled
+ * deepslate variants) into the loaded recipe map, so UI, crafting checks and
+ * client sync all run on vanilla paths. The reconcile re-fires on every recipe
+ * load, and the class is compiled out on 26.1+.
  */
 @Mixin(RecipeManager.class)
 public abstract class RecipeManagerMixin {
@@ -82,8 +79,6 @@ public abstract class RecipeManagerMixin {
         }
         this.byType = byTypeBuilder.build();
 
-        // ImmutableMap's builder throws on duplicate keys, and a datapack could
-        // define our exact ids - drop any such entries before adding ours
         ImmutableMap.Builder<ResourceLocation, RecipeHolder<?>> byNameBuilder = ImmutableMap.builder();
         for (Map.Entry<ResourceLocation, RecipeHolder<?>> entry : this.byName.entrySet()) {
             if (!ourIds.contains(entry.getKey())) {

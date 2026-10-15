@@ -9,6 +9,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * fakePlayerTickStage, action-pack half: cancels carpet's own
+ * EntityPlayerActionPack#onUpdate tick while PlayerActionPackCanceller is set,
+ * i.e. for fake players whose action pack this rule defers to the async phase.
+ * Guarded by @Restriction(conflict = "carpet-tis-addition"), which handles the
+ * same case itself.
+ */
 @Restriction(conflict = @Condition("carpet-tis-addition"))
 @Mixin(EntityPlayerActionPack.class)
 public abstract class EntityPlayerActionPackMixin {

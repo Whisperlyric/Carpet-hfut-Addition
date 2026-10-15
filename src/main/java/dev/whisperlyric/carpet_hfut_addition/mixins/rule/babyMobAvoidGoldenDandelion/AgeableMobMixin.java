@@ -16,10 +16,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * babyMobAvoidGoldenDandelion: registers the avoidance goal only for the
- * whitelisted growable babies (AvoidGoldenDandelionGoal.GOLDEN_DAISY_BABIES,
- * matched by entity id); others pay nothing. Golden dandelion only exists on
- * 26.1+, so the registration is guarded. The id check stays string-based
- * because the entity type constants moved to EntityTypes in 26.2.
+ * whitelisted growable babies ({@code GOLDEN_DAISY_BABIES}, matched by entity
+ * id), nothing for others. The registration is guarded to 26.1+, where the
+ * golden dandelion exists, and the id check is string-based because the entity
+ * type constants moved to EntityTypes in 26.2.
  */
 @Mixin(AgeableMob.class)
 public abstract class AgeableMobMixin {

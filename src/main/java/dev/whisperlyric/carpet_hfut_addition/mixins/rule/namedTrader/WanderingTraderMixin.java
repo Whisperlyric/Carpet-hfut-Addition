@@ -14,13 +14,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * namedWanderingTraderPersistence: cancels the critical despawn tick (delay 1→0)
- * of a wandering trader whose custom name exactly matches the rule. Only that tick
- * is cancelled — the trader llama syncs its timer to despawnDelay-1 every tick, so
- * freezing earlier would extend the llama's life too.
- *
- * <p>Injection point and critical-tick approach based on
- * Carpet-Ice-Addition (LGPL-3.0, Ice2974); the string matching and
- * three-state rule are modeled after Carpet-Igny-Addition (LGPL-3.0).
+ * of a wandering trader whose custom name matches the rule. Freezing any earlier
+ * tick would also extend the trader llama's life, which syncs to despawnDelay-1.
+ * Injection after Carpet-Ice-Addition; string matching and the three-state rule
+ * after Carpet-Igny-Addition (both LGPL-3.0).
  */
 @Mixin(WanderingTrader.class)
 public abstract class WanderingTraderMixin {

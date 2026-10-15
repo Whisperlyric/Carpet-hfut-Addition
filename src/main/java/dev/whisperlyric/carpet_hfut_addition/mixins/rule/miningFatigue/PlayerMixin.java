@@ -8,10 +8,9 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 /**
  * miningFatigueDigSpeedFix (below 26.3): the dig-speed table under mining
- * fatigue holds 0.0027 / 8.1E-4 for amplifier 2 / 3+, ten times lower than
- * the intended 0.3^(amplifier+1). Patch the two wrong entries back to
- * 0.027 / 0.0081, matching the 26.3 fix. Each constant occurs exactly
- * once in this method on every version below 26.3.
+ * fatigue holds 0.0027 / 8.1E-4 for amplifier 2 / 3+, ten times lower than the
+ * intended 0.3^(amplifier+1). Patch the two entries to 0.027 / 0.0081, matching
+ * the 26.3 fix; each occurs exactly once in getDestroySpeed below 26.3.
  */
 @Mixin(Player.class)
 public abstract class PlayerMixin {

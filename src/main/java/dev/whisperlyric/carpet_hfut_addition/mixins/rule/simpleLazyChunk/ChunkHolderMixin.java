@@ -12,11 +12,9 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 /**
  * simpleLazyChunk clamp: every ticket-level assignment flows through
- * {@code setTicketLevel}, so marked chunks are held at BLOCK_TICKING here
- * instead of letting players, /forceload or portals promote them to entity
- * ticking. The holder's constructor takes the level directly, but creation is
- * only reachable with the anchor ticket already applied, which pins the level
- * at BLOCK_TICKING on its own.
+ * {@code setTicketLevel}, so marked chunks stay at BLOCK_TICKING instead of
+ * being promoted to entity ticking by players, /forceload or portals. Creation
+ * is only reachable with the anchor ticket already applied.
  */
 @Mixin(ChunkHolder.class)
 public abstract class ChunkHolderMixin {

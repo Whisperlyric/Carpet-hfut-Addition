@@ -53,10 +53,8 @@ import org.spongepowered.asm.mixin.Mixin;
 /**
  * easyDispenserCrafting: registers a shaped recipe - the bow recipe with a
  * dropper in its middle slot - into the loaded recipe map, so crafting and
- * recipe sync run on vanilla paths; it has no advancement, so it never shows
- * in the recipe book. Re-registering on every recipe load makes toggling the
- * rule (a datapack reload, see HFUTServer) work. Compiled raw on 1.21.1, so
- * other versions' code lives in //$$ lines.
+ * recipe sync run on vanilla paths; it has no advancement, so it never shows in
+ * the recipe book. Re-registering on every load makes toggling the rule work.
  */
 @Mixin(RecipeManager.class)
 public abstract class RecipeManagerMixin {
@@ -83,7 +81,6 @@ public abstract class RecipeManagerMixin {
         byTypeBuilder.put(RecipeType.CRAFTING, ours);
         this.byType = byTypeBuilder.build();
 
-        // a datapack could define our id; drop it first, ImmutableMap rejects duplicate keys
         ImmutableMap.Builder<ResourceLocation, RecipeHolder<?>> byNameBuilder = ImmutableMap.builder();
         for (Map.Entry<ResourceLocation, RecipeHolder<?>> entry : this.byName.entrySet()) {
             if (!ourIds.contains(entry.getKey())) {
