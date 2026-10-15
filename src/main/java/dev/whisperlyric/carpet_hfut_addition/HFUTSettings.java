@@ -264,10 +264,6 @@ public class HFUTSettings {
           options = {"true", "ops", "0", "1", "2", "3", "4", "false"}, strict = true)
     public static String commandSimpleLazyChunk = "ops";
 
-    /** Beacon effect area extends infinitely downwards (vanilla only extends it upwards): true/false. */
-    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
-    public static boolean beaconDownwardsInfiniteRange = false;
-
     //#if MC >= 12109
     //$$ /** Restores dolphins boarding boats (1.21.9 blacklisted them in cannot_be_pushed_onto_boats). */
     //$$ @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})

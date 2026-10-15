@@ -43,7 +43,6 @@
         "rule.fakePlayerOpen.PlayerListMixin",
         "rule.fakePlayerOpen.PlayerCloseMixin",
         "rule.fakePlayerOpen.PlayerListAccessor",
-        "rule.beaconDownwardsInfiniteRange.BeaconBlockEntityMixin",
         "rule.dolphinBoatRidingRestore.AbstractBoatMixin",
         "rule.resilientBuddingAmethyst.BlockStateBaseMixin",
         "rule.resilientBuddingAmethyst.BlockMixin",

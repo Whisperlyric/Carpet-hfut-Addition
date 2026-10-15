@@ -358,18 +358,6 @@ A wandering trader named with a matching custom name no longer despawns naturall
 - `true`: any custom-named trader persists
 - any other value: only traders named with that exact string persist
 
-## Beacon Effects Reach Downwards (beaconDownwardsInfiniteRange)
-
-The beacon's effect area extends downwards without limit; the horizontal range is unchanged.
-
-- Type: `boolean`
-- Default value: `false`
-- Suggested options: `false`, `true`
-- Categories: `HFUT`, `FEATURE`
-
-- `false`: disabled (vanilla behaviour — the effect area only grows upwards)
-- `true`: players at any depth directly below the beacon receive its effects
-
 ## [1.21.9+] Dolphin Boat Riding Restore (dolphinBoatRidingRestore) `MC>=1.21.9`
 
 Restores the pre-1.21.9 behaviour of dolphins entering boats.
