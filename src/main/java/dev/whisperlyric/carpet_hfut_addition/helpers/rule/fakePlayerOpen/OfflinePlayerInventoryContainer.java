@@ -23,6 +23,8 @@ import net.minecraft.world.item.component.CustomData;
 public final class OfflinePlayerInventoryContainer implements Container {
     private static final int SIZE = 45;
     private static final int[] PLACEHOLDER_SLOTS = {0, 5, 7, 8};
+    /** Plain-NBT marker on the placeholder cells, telling the client this is our 5x9 view. */
+    private static final String VIEW_TAG = "HfutStorageView";
 
     private final ServerPlayer player;
     private final NonNullList<ItemStack> placeholders;
@@ -44,8 +46,23 @@ public final class OfflinePlayerInventoryContainer implements Container {
         CompoundTag tag = new CompoundTag();
         tag.putBoolean("GcaClear", true);
         tag.putInt("GcaButton", slot);
+        tag.putBoolean(VIEW_TAG, true);
         CustomData.set(DataComponents.CUSTOM_DATA, stack, tag);
         return stack;
+    }
+
+    /**
+     * True when {@code container} is the client-side mirror of this view: a 45-slot
+     * container whose first cell carries the {@link #VIEW_TAG} marker. The client only
+     * ever sees a vanilla {@code SimpleContainer}, so the marker is the sole way to
+     * recognise our layout there.
+     */
+    public static boolean isStorageView(Container container) {
+        if (container.getContainerSize() != SIZE) {
+            return false;
+        }
+        CustomData data = container.getItem(0).get(DataComponents.CUSTOM_DATA);
+        return data != null && data.copyTag().contains(VIEW_TAG);
     }
 
     public static boolean isPlaceholder(int slot) {

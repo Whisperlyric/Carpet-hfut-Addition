@@ -1,5 +1,6 @@
 package dev.whisperlyric.carpet_hfut_addition.helpers.rule.fakePlayerOpen;
 
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -19,12 +20,15 @@ import java.util.function.IntPredicate;
 public final class FakePlayerStorageMenu extends AbstractContainerMenu {
     private static final int COLUMNS = 9;
 
+    private final FakePlayerStorageEditor.Kind kind;
     private final int storageSlots;
 
     public FakePlayerStorageMenu(MenuType<?> type, int id, Inventory viewerInventory,
-                                 Container storage, int rows, IntPredicate placeholder) {
+                                 FakePlayerStorageEditor.Kind kind, Container storage,
+                                 int rows, IntPredicate placeholder) {
         super(type, id);
         checkContainerSize(storage, rows * COLUMNS);
+        this.kind = kind;
         this.storageSlots = rows * COLUMNS;
 
         int offset = (rows - 4) * 18;
@@ -49,6 +53,14 @@ public final class FakePlayerStorageMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player player) {
         return true;
+    }
+
+    @Override
+    public void removed(Player player) {
+        super.removed(player);
+        if (player instanceof ServerPlayer serverPlayer) {
+            FakePlayerStorageEditor.onViewerClose(kind, this, serverPlayer);
+        }
     }
 
     @Override

@@ -44,7 +44,7 @@ public final class FakePlayerOpenCommand {
             return 0;
         }
         String name = StringArgumentType.getString(ctx, "player");
-        FakePlayerStorageEditor.BeginResult result = FakePlayerStorageEditor.begin(name);
+        FakePlayerStorageEditor.BeginResult result = FakePlayerStorageEditor.begin(name, kind);
         if (result.errorKey() != null) {
             source.sendFailure(HFUTText.forViewer(source, result.errorKey(), result.errorArgs()));
             return 0;
@@ -54,22 +54,22 @@ public final class FakePlayerOpenCommand {
         String titleKey = ender ? "hfut.fakePlayerOpen.title.enderchest" : "hfut.fakePlayerOpen.title.inventory";
         Component title = HFUTText.forViewer(source, titleKey, name);
         MenuProvider provider = new SimpleMenuProvider(
-                (id, inv, p) -> buildMenu(ender, id, viewer.getInventory(), shadow), title);
+                (id, inv, p) -> buildMenu(kind, id, viewer.getInventory(), shadow), title);
         viewer.openMenu(provider);
-        FakePlayerStorageEditor.attach(result.session(), viewer, viewer.containerMenu);
+        FakePlayerStorageEditor.attach(result.session(), kind, viewer, viewer.containerMenu);
         String openedKey = ender
                 ? "hfut.fakePlayerOpen.opened.enderchest" : "hfut.fakePlayerOpen.opened.inventory";
         source.sendSuccess(() -> HFUTText.forViewer(source, openedKey, name), false);
         return 1;
     }
 
-    private static AbstractContainerMenu buildMenu(boolean ender, int id,
+    private static AbstractContainerMenu buildMenu(FakePlayerStorageEditor.Kind kind, int id,
                                                    Inventory viewerInv, ServerPlayer shadow) {
-        if (ender) {
-            return new FakePlayerStorageMenu(MenuType.GENERIC_9x3, id, viewerInv,
+        if (kind == FakePlayerStorageEditor.Kind.ENDER_CHEST) {
+            return new FakePlayerStorageMenu(MenuType.GENERIC_9x3, id, viewerInv, kind,
                     new OfflinePlayerEnderChestContainer(shadow), 3, slot -> false);
         }
-        return new FakePlayerStorageMenu(MenuType.GENERIC_9x5, id, viewerInv,
+        return new FakePlayerStorageMenu(MenuType.GENERIC_9x5, id, viewerInv, kind,
                 new OfflinePlayerInventoryContainer(shadow), 5,
                 OfflinePlayerInventoryContainer::isPlaceholder);
     }

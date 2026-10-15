@@ -41,7 +41,6 @@
         "rule.bonemealMelon.StemBlockMixin",
         "rule.mapPlayerIconRotation.MapItemSavedDataMixin",
         "rule.fakePlayerOpen.PlayerListMixin",
-        "rule.fakePlayerOpen.PlayerCloseMixin",
         "rule.fakePlayerOpen.PlayerListAccessor",
         "rule.dolphinBoatRidingRestore.AbstractBoatMixin",
         "rule.resilientBuddingAmethyst.BlockStateBaseMixin",
@@ -72,6 +71,7 @@
     ],
     "client": [
         "client.ChatComponentMixin",
+        "client.rule.fakePlayerOpen.SlotMixin",
         "client.rule.hidePauseSocial.PauseScreenMixin",
         "client.rule.hidePauseSocial.TitleScreenMixin"
     ],

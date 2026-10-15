@@ -22,6 +22,7 @@ import net.minecraft.world.level.storage.PlayerDataStorage;
 //$$ import net.minecraft.world.level.storage.ValueInput;
 //#endif
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -33,25 +34,27 @@ import java.util.UUID;
  * shadow {@link ServerPlayer} that never joins the world, and every exit path
  * writes it back to disk before vanilla can read stale data.
  *
- * <p>Duping is prevented by exclusive access (one viewer at a time) and by
- * flushing at join ({@link #flushFor} runs at {@code placeNewPlayer} HEAD, so
- * a joining entity reads the just-written data) and on server stop
- * ({@link #flushAll}). The target identity is resolved the way carpet spawns
- * fake players - the profile cache (usercache.json) first, then the offline
- * UUID derivation - and the on-disk playerdata is probed for each candidate,
- * so a fake player stored under its authenticated UUID is still found. Version
- * branches mirror vanilla's own login loader.
+ * <p>Duping is prevented by exclusive access per view: the inventory and the
+ * ender chest of one identity are tracked independently, so each can have at
+ * most one viewer at a time. A single shadow player backs both views, and the
+ * shadow is written back whenever a view is released, at join
+ * ({@link #flushFor} runs at {@code placeNewPlayer} HEAD, so a joining entity
+ * reads the just-written data) and on server stop ({@link #flushAll}). The
+ * target identity is resolved the way carpet spawns fake players - the profile
+ * cache (usercache.json) first, then the offline UUID derivation - and the
+ * on-disk playerdata is probed for each candidate, so a fake player stored
+ * under its authenticated UUID is still found. Version branches mirror
+ * vanilla's own login loader.
  */
 public final class FakePlayerStorageEditor {
     public enum Kind { INVENTORY, ENDER_CHEST }
 
-    /** One open editing session: the shadow player plus its current viewer. */
+    /** One open editing session: the shadow player plus one viewer per open view. */
     public static final class Session {
         private final UUID uuid;
         private final String name;
         private final ServerPlayer shadow;
-        private ServerPlayer viewer;
-        private AbstractContainerMenu menu;
+        private final Map<Kind, Editor> editors = new EnumMap<>(Kind.class);
 
         Session(UUID uuid, String name, ServerPlayer shadow) {
             this.uuid = uuid;
@@ -70,6 +73,10 @@ public final class FakePlayerStorageEditor {
         public ServerPlayer shadow() {
             return shadow;
         }
+    }
+
+    /** The player currently viewing one {@link Kind} and the menu they hold. */
+    private record Editor(ServerPlayer viewer, AbstractContainerMenu menu) {
     }
 
     public record BeginResult(Session session, String errorKey, Object[] errorArgs) {
@@ -102,10 +109,11 @@ public final class FakePlayerStorageEditor {
     }
 
     /**
-     * Begins (or reuses) the editing session for {@code name}. Fails when the
-     * identity is online, someone else is viewing it, or no playerdata exists.
+     * Begins (or reuses) the editing session for {@code name} and reserves the
+     * given view. Fails when the identity is online, someone else is already
+     * viewing that view, or no playerdata exists.
      */
-    public static BeginResult begin(String name) {
+    public static BeginResult begin(String name, Kind kind) {
         if (server == null) {
             return BeginResult.fail("hfut.fakePlayerOpen.no_server");
         }
@@ -137,12 +145,13 @@ public final class FakePlayerStorageEditor {
         }
         Session session = SESSIONS.get(uuid);
         if (session != null) {
-            if (session.viewer != null) {
-                if (session.viewer.hasDisconnected()) {
-                    detach(session);
+            Editor editor = session.editors.get(kind);
+            if (editor != null) {
+                if (editor.viewer().hasDisconnected()) {
+                    release(session, kind);
                 } else {
                     return BeginResult.fail("hfut.fakePlayerOpen.in_use", name,
-                            session.viewer.getName().getString());
+                            editor.viewer().getName().getString());
                 }
             }
             return BeginResult.ok(session);
@@ -182,29 +191,29 @@ public final class FakePlayerStorageEditor {
         //#endif
     }
 
-    /** Registers the viewer and its menu on a begun session. */
-    public static void attach(Session session, ServerPlayer viewer, AbstractContainerMenu menu) {
-        session.viewer = viewer;
-        session.menu = menu;
+    /** Registers the viewer and its menu on a begun session for the given view. */
+    public static void attach(Session session, Kind kind, ServerPlayer viewer, AbstractContainerMenu menu) {
+        session.editors.put(kind, new Editor(viewer, menu));
     }
 
-    /** Viewer closed the editor (or had it closed for them): write the shadow back. */
-    public static void onViewerClose(AbstractContainerMenu menu, ServerPlayer player) {
+    /** Viewer closed a view (or had it closed for them): write the shadow back. */
+    public static void onViewerClose(Kind kind, AbstractContainerMenu menu, ServerPlayer player) {
         if (menu == null || server == null || SESSIONS.isEmpty()) {
             return;
         }
         for (Session session : SESSIONS.values()) {
-            if (session.menu == menu && session.viewer == player) {
-                detach(session);
+            Editor editor = session.editors.get(kind);
+            if (editor != null && editor.menu() == menu && editor.viewer() == player) {
+                release(session, kind);
                 return;
             }
         }
     }
 
-    private static void detach(Session session) {
-        session.viewer = null;
-        session.menu = null;
-        writeBack(session);
+    private static void release(Session session, Kind kind) {
+        if (session.editors.remove(kind) != null) {
+            writeBack(session);
+        }
     }
 
     private static void writeBack(Session session) {
@@ -223,12 +232,13 @@ public final class FakePlayerStorageEditor {
         if (server != null) {
             playerIo().save(session.shadow);
         }
-        ServerPlayer viewer = session.viewer;
-        session.viewer = null;
-        session.menu = null;
-        if (viewer != null && !viewer.hasDisconnected()) {
-            viewer.doCloseContainer();
+        for (Editor editor : session.editors.values()) {
+            ServerPlayer viewer = editor.viewer();
+            if (!viewer.hasDisconnected() && viewer.containerMenu == editor.menu()) {
+                viewer.doCloseContainer();
+            }
         }
+        session.editors.clear();
     }
 
     /** Server stop: persist every open session. */
