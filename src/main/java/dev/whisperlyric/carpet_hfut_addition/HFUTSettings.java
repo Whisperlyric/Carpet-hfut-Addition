@@ -295,4 +295,13 @@ public class HFUTSettings {
     @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
     public static boolean easyDispenserCrafting = false;
 
+    /**
+     * Phantom membranes spent in an anvil on a full-durability elytra add a
+     * consumable durability shield: damage drains the shield before the real
+     * durability. Each membrane grants 108 shield and costs one experience level;
+     * taking the result consumes the whole second slot.
+     */
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    public static boolean elytraMembraneShield = false;
+
 }

@@ -204,5 +204,8 @@
     "carpet.rule.easyDispenserCrafting.name": "Easy Dispenser Crafting",
     "carpet.rule.easyDispenserCrafting.desc": "Crafts a dispenser with the bow recipe and a dropper in its middle slot",
     "carpet.rule.lateralFlowingWaterNoBrittleIce.name": "No Brittle Ice From Lateral Flowing Water",
-    "carpet.rule.lateralFlowingWaterNoBrittleIce.desc": "[26.4-snapshot-4+]Lateral (sideways) flowing water no longer turns into brittle ice when it meets blue ice"
+    "carpet.rule.lateralFlowingWaterNoBrittleIce.desc": "[26.4-snapshot-4+]Lateral (sideways) flowing water no longer turns into brittle ice when it meets blue ice",
+    "carpet.rule.elytraMembraneShield.name": "Elytra Durability Shield",
+    "carpet.rule.elytraMembraneShield.desc": "Spending phantom membranes on a full-durability elytra in an anvil adds a consumable durability shield: damage drains the shield first and only then the real durability, and the shield never decays. Each membrane grants 108 shield and costs 1 experience level, and taking the result consumes every membrane in the second slot",
+    "carpet.rule.elytraMembraneShield.tooltip": "Elytra Durability Shield: %s"
 }

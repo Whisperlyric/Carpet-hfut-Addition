@@ -445,3 +445,17 @@ Since 26.4-snapshot-4, water whose horizontal neighbour is blue ice converts int
 
 - `false`: disabled
 - `true`: lateral flowing water does not convert into brittle ice on touching blue ice
+
+## Elytra Durability Shield (elytraMembraneShield)
+
+Spending phantom membranes on a full-durability elytra in an anvil adds a consumable durability shield. Damage drains the shield first and only then the real durability; the shield has no time limit and only disappears once it is used up.
+
+Place a full-durability elytra in the left slot and phantom membranes in the right slot to convert them. Each membrane grants 108 shield and costs 1 experience level; taking the result consumes every membrane in the second slot. An elytra that is not at full durability still repairs like vanilla. The shield is uncapped apart from the integer data type's own limit.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`
+
+- `false`: disabled
+- `true`: enables the anvil conversion and shield draining above; the item tooltip also shows the remaining shield
