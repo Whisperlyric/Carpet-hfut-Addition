@@ -47,6 +47,7 @@
         "rule.resilientBuddingAmethyst.BlockMixin",
         "rule.fragileGlass.ToolMixin",
         "rule.easyDispenserCrafting.RecipeManagerMixin",
+        "rule.creativeNoEntityCollision.EntityGetterMixin",
         "rule.creativeNoEntityCollision.EntityMixin",
         "rule.creativeNoEntityCollision.LivingEntityMixin",
         "rule.windChargeNoRedstoneActivation.ExplosionMixin",

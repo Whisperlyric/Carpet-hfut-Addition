@@ -1,36 +1,40 @@
 package dev.whisperlyric.carpet_hfut_addition.mixins.rule.creativeNoEntityCollision;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.whisperlyric.carpet_hfut_addition.HFUTSettings;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-
-import java.util.List;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * creativeNoEntityCollision, movement half: for a creative player with the rule
- * on, Entity.collide's single fetch of every entity collision shape returns an
- * empty list, so boats, shulkers and crowds are walked through - flying or
- * landed alike. Block collision is a separate path and untouched.
+ * creativeNoEntityCollision, push half.
+ *
+ * <p>Entity.push(Entity) is the generic shove used by mobs and boats via VehicleEntity.push.
+ * Cancelling at its entry when either side is a rule creative player disables pushes in both directions.
+ *
+ * <p>Movement (passing through boats, shulkers and crowds) is handled in EntityGetterMixin,
+ * which empties EntityGetter.getEntityCollisions. This avoids conflicts on Entity.collide
+ * call-site instructions also injected by other mods such as Lithium.
+ *
+ * <p>Entities bypassing Entity.push(Entity), e.g. minecarts calling Entity.push(double,double,double)
+ * for themselves and the player, are handled by pushEntities cancellation in LivingEntityMixin.
  */
 @Mixin(Entity.class)
 public abstract class EntityMixin {
 
-    @WrapOperation(method = "collide(Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;",
-                   at = @At(value = "INVOKE",
-                            target = "Lnet/minecraft/world/level/Level;getEntityCollisions(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/phys/AABB;)Ljava/util/List;"))
-    private List<VoxelShape> hfut$noEntityCollision(Level level, Entity mover, AABB box,
-                                                    Operation<List<VoxelShape>> original) {
+    @Inject(method = "push(Lnet/minecraft/world/entity/Entity;)V", at = @At("HEAD"), cancellable = true)
+    private void hfut$noEntityPush(Entity other, CallbackInfo ci) {
         if (HFUTSettings.creativeNoEntityCollision
-                && mover instanceof Player player && player.isCreative() && !player.isSpectator()) {
-            return List.of();
+                && (isRuleCreative((Entity) (Object) this) || isRuleCreative(other))) {
+            ci.cancel();
         }
-        return original.call(level, mover, box);
+    }
+
+    @Unique
+    private static boolean isRuleCreative(Entity entity) {
+        return entity instanceof Player player && player.isCreative() && !player.isSpectator();
     }
 }
