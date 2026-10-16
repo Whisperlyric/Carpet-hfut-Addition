@@ -4,6 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.tree.CommandNode;
 import dev.whisperlyric.carpet_hfut_addition.commands.TickingStageCommand;
 import dev.whisperlyric.carpet_hfut_addition.helpers.rule.fakePlayerOpen.FakePlayerOpenCommand;
+import dev.whisperlyric.carpet_hfut_addition.helpers.rule.singleFakePlayerLoadRange.FakePlayerLoadRangeCommand;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,8 +14,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * Attaches our {@code /player <player> ...} subcommands to carpet's own
- * {@code /player} command tree once carpet has built it: tickingStage and
- * {@code open inventory|enderchest}, both unconditional.
+ * {@code /player} command tree once carpet has built it: tickingStage,
+ * {@code open inventory|enderchest} and {@code loadRange}, all unconditional.
  */
 @Mixin(carpet.commands.PlayerCommand.class)
 public abstract class PlayerCommandMixin {
@@ -29,6 +30,7 @@ public abstract class PlayerCommandMixin {
         if (targets != null) {
             targets.addChild(TickingStageCommand.tickingStageNode().build());
             targets.addChild(FakePlayerOpenCommand.openNode().build());
+            targets.addChild(FakePlayerLoadRangeCommand.loadRangeNode().build());
         }
     }
 }

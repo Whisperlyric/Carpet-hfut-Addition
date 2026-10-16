@@ -38,6 +38,15 @@
 - 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `HFUT`, `COMMAND`, `FEATURE`
 
+## 假人加载范围权限 (commandSingleFakePlayerLoadRange)
+
+设置谁可以使用 `/player <假人> loadRange <加载范围>`：控制单个假人的区块加载范围（见[命令](commands.md)）。
+
+- 类型: `string`
+- 默认值: `ops`
+- 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- 分类: `HFUT`, `COMMAND`, `FEATURE`
+
 ## 交易序列操纵 (commandTradeSeq) `🐛Beta` `MC>=26.1`
 
 设置谁可以使用 `/tradeseq`：查询与移动村民交易刷新所用的命名随机序列（见[命令](commands.md)）。

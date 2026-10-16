@@ -38,6 +38,15 @@ Controls who may use `/player <name> open inventory|enderchest` to open a fake p
 - Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - Categories: `HFUT`, `COMMAND`, `FEATURE`
 
+## Single Fake Player Load Range Permission (commandSingleFakePlayerLoadRange)
+
+Controls who may use `/player <name> loadRange <range>`: adjusts a single fake player's chunk load range (see [commands](commands_en.md)).
+
+- Type: `string`
+- Default value: `ops`
+- Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- Categories: `HFUT`, `COMMAND`, `FEATURE`
+
 ## Trade Sequence Control (commandTradeSeq) `🐛Beta` `MC>=26.1`
 
 Controls who may use `/tradeseq`, which reads and moves the named random sequence a villager's trade refresh draws from (see [commands](commands_en.md)).

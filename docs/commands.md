@@ -19,6 +19,19 @@
 - `<假人>` 支持 Tab 补全（仅在线假人）。
 - 仅在本次开服期间有效：重新生成同一个假人仍会保持，重启服务器后重置。
 
+## 假人加载范围 (`/player <假人> loadRange`)
+
+用一张本模组自己的票据覆盖单个假人的区块加载范围（受 `commandSingleFakePlayerLoadRange` 控制）。
+
+### 语法
+- `/player <假人> loadRange <2-33>`：把该假人的加载半径设为指定格数
+- `/player <假人> loadRange reset`：清除设置，恢复为服务默认值
+
+### 效果
+- 设置期间原版假人玩家加载票被摘除，只保留本模组的假人玩家加载票。
+- 假人因任何原因被移除时，其设置与加载票一并清除。
+- `reset` 后该假人会在下一次区块更新（最多 10 tick）时自动恢复原版的加载范围。
+
 ## 幽灵珍珠反查 (`/pearltrace`) `MC>=1.21.2`
 
 > 需先开启规则 `ghostEnderPearlTrace` 才会有记录；`/pearltrace` 的使用权限由 `commandPearlTrace`（`list`/`show`）与 `commandPearlTracePurge`（`purge`）控制。

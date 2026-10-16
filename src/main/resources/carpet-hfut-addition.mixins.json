@@ -67,7 +67,9 @@
         "rule.elytraMembraneShield.ItemStackMixin",
         "compat.guglecarpetaddition.CustomMenuInvoker",
         "compat.guglecarpetaddition.PlayerContainerAccessor",
-        "compat.guglecarpetaddition.PlayerEnderChestContainerMixin"
+        "compat.guglecarpetaddition.PlayerEnderChestContainerMixin",
+        "rule.singleFakePlayerLoadRange.ChunkMapMixin",
+        "rule.singleFakePlayerLoadRange.PlayerListMixin"
     ],
     "client": [
         "client.ChatComponentMixin",

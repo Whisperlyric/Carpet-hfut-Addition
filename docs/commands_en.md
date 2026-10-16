@@ -18,6 +18,19 @@ Who may use them is controlled by permission rules (see [rules](rules_en.md)).
 - `<name>` supports Tab completion (online fake players only).
 - Lasts for the current server run only: re-spawning the same fake player keeps it, restarting the server resets it.
 
+## Fake player load range (`/player <name> loadRange`)
+
+Replaces one fake player's chunk loading with a ticket of this mod's own (gated by `commandSingleFakePlayerLoadRange`).
+
+### Syntax
+- `/player <name> loadRange <2-33>`: sets that fake player's load radius to the given number of chunks
+- `/player <name> loadRange reset`: clears the setting and restores the server default
+
+### Effect
+- While a range is set, vanilla's fake player ticket is dropped and only this mod's ticket remains.
+- When a fake player is removed for any reason, its setting and ticket are cleared with it.
+- After `reset` the fake player returns to vanilla's own range on its next chunk update (at most 10 ticks).
+
 ## Ghost pearl trace (`/pearltrace`) `MC>=1.21.2`
 
 > Recording requires the `ghostEnderPearlTrace` rule to be on first; access to `/pearltrace` is governed by `commandPearlTrace` (`list`/`show`) and `commandPearlTracePurge` (`purge`).

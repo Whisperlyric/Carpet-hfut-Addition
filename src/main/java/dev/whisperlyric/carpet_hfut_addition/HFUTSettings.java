@@ -17,6 +17,11 @@ public class HFUTSettings {
           options = {"true", "ops", "0", "1", "2", "3", "4", "false"}, strict = true)
     public static String commandPlayerTickingStage = "ops";
 
+    /** Permission for {@code /player <player> loadRange <n>|reset}: true/false/ops/0-4, like Carpet's command rules. */
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.COMMAND, RuleCategory.FEATURE},
+          options = {"true", "ops", "0", "1", "2", "3", "4", "false"}, strict = true)
+    public static String commandSingleFakePlayerLoadRange = "ops";
+
     /** Permission for the read-only {@code /pearltrace list|show}: true/false/ops/0-4; recording is gated by ghostEnderPearlTrace. */
     @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.COMMAND, RuleCategory.FEATURE},
           options = {"true", "ops", "0", "1", "2", "3", "4", "false"}, strict = true)

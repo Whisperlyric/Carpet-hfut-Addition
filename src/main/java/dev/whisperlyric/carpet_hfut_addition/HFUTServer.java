@@ -17,6 +17,7 @@ import dev.whisperlyric.carpet_hfut_addition.helpers.rule.fakePlayerOpen.FakePla
 import dev.whisperlyric.carpet_hfut_addition.helpers.rule.ghostPearl.GhostPearlGuard;
 import dev.whisperlyric.carpet_hfut_addition.helpers.rule.ghostPearl.PearlTraceStore;
 import dev.whisperlyric.carpet_hfut_addition.helpers.rule.simpleLazyChunk.SimpleLazyChunkManager;
+import dev.whisperlyric.carpet_hfut_addition.helpers.rule.singleFakePlayerLoadRange.SingleFakePlayerLoadRangeManager;
 import dev.whisperlyric.carpet_hfut_addition.logger.HFUTLoggers;
 import dev.whisperlyric.carpet_hfut_addition.network.HFUTNetwork;
 import dev.whisperlyric.carpet_hfut_addition.utils.Translations;
@@ -109,6 +110,7 @@ public class HFUTServer implements CarpetExtension {
         }
         PearlTraceStore.get().attach(server);
         SimpleLazyChunkManager.attach(server);
+        SingleFakePlayerLoadRangeManager.attach(server);
         FakePlayerStorageEditor.attach(server);
     }
 
@@ -118,6 +120,7 @@ public class HFUTServer implements CarpetExtension {
         PearlTraceStore.get().close();
         PearlTraceCommand.clearPending();
         SimpleLazyChunkManager.clear();
+        SingleFakePlayerLoadRangeManager.clear();
         FakePlayerStorageEditor.flushAll();
         FakePlayerStorageEditor.clear();
         //#if MC >= 260100
