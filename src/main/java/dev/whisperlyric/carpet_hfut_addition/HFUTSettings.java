@@ -227,6 +227,17 @@ public class HFUTSettings {
     public static boolean creativeNoEntityCollision = false;
 
     /**
+     * Boats (all variants) and shulkers stop blocking rule creative players.
+     * They override Entity.canBeCollidedWith, so the rule above misses them.
+     * Inert unless creativeNoEntityCollision is on. 1.21.6+ only; earlier
+     * versions are already covered by the rule above.
+     */
+    //#if MC >= 12106
+    //$$ @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    //$$ public static boolean standableEntitiesCreativeNoCollision = false;
+    //#endif
+
+    /**
      * Wind charge explosions no longer trigger buttons, levers, doors,
      * trapdoors or fence gates. No other explosion source is affected.
      */

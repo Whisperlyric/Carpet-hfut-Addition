@@ -318,6 +318,19 @@ It applies while not flying too, but non-collision interactions such as projecti
 - Suggested options: `false`, `true`
 - Categories: `HFUT`, `FEATURE`
 
+## Standable Entities Creative No Collision (standableEntitiesCreativeNoCollision) `MC>=1.21.6`
+
+Creative players are no longer stopped or bounced by boats (chest boats and rafts included) and shulkers.
+
+These entities stay solid by overriding `Entity.canBeCollidedWith`, which is why the parent rule misses them; this rule handles them on their own.
+It only applies while Creative No Entity Collision is on.
+Below 1.21.6 the rule is not registered: older `canBeCollidedWith` cannot tell who is moving, and both entities collide through the same entity collision list, so Creative No Entity Collision (creativeNoEntityCollision) already covers them there.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`
+
 ## Wind Charges Don't Trigger Redstone Components (windChargeNoRedstoneActivation)
 
 Wind charge explosions no longer trigger buttons, levers, doors, trapdoors and fence gates.
