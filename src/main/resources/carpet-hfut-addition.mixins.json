@@ -50,6 +50,8 @@
         "rule.creativeNoEntityCollision.EntityGetterMixin",
         "rule.creativeNoEntityCollision.EntityMixin",
         "rule.creativeNoEntityCollision.LivingEntityMixin",
+        "rule.creativeNoEntityCollision.AbstractBoatMixin",
+        "rule.creativeNoEntityCollision.ShulkerMixin",
         "rule.windChargeNoRedstoneActivation.ExplosionMixin",
         "rule.windChargeNoRedstoneActivation.ServerExplosionMixin",
         "rule.windChargeNoBeehiveAnger.ExplosionMixin",

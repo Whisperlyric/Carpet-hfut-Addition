@@ -300,6 +300,19 @@
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `FEATURE`
 
+## 可站立实体创造模式无碰撞 (standableEntitiesCreativeNoCollision) `MC>=1.21.6`
+
+创造模式玩家不再被船(含箱船、木筏等变体)与潜影贝挡住或弹开。
+
+这两个实体通过覆写 `Entity.canBeCollidedWith` 保持阻挡，父规则因此对它们无效，本条单独处理。
+仅在创造模式无实体碰撞开启时生效。
+1.21.6 以下不注册本条：更早版本的 `canBeCollidedWith` 无法得知碰撞时靠近者是谁，而这两类实体的碰撞同样出自实体碰撞列表，该行为已包含在创造模式无实体碰撞 (creativeNoEntityCollision) 中。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `HFUT`, `FEATURE`
+
 ## 风弹不触发红石元件 (windChargeNoRedstoneActivation)
 
 风弹爆炸不再触发按钮、拉杆、门、活板门与栅栏门。
