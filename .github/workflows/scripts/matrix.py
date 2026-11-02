@@ -19,6 +19,13 @@ def main():
 
 	if len(target_subprojects) == 0:
 		subprojects = settings['versions']
+		# Subprojects listed in settings.json's "release_excluded" (e.g. in-development
+		# versions) stay buildable locally but are skipped by the default full release
+		# matrix. Explicitly dispatched subprojects bypass the filter.
+		release_excluded = settings.get('release_excluded', [])
+		if release_excluded:
+			print('release excluded subprojects: {}'.format(release_excluded))
+			subprojects = [v for v in subprojects if v not in release_excluded]
 	else:
 		subprojects = []
 		for subproject in settings['versions']:
