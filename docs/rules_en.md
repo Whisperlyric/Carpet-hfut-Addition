@@ -490,3 +490,15 @@ Place a full-durability elytra in the left slot and phantom membranes in the rig
 
 - `false`: disabled
 - `true`: enables the anvil conversion and shield draining above; the item tooltip also shows the remaining shield
+
+## Placement Ignores Attachment (blockPlacementIgnoreAttachment) `🐛Beta`
+
+Blocks stop being picky about what they hang on.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`
+
+- `false`: disabled
+- `true`: placement no longer checks attachment

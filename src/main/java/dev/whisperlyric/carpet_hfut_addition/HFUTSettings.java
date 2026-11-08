@@ -320,4 +320,8 @@ public class HFUTSettings {
     @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
     public static boolean elytraMembraneShield = false;
 
+    /** Placement skips the block's own attachment test ({@code BlockState.canSurvive}). */
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    public static boolean blockPlacementIgnoreAttachment = false;
+
 }

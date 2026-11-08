@@ -72,7 +72,9 @@
         "compat.guglecarpetaddition.PlayerContainerAccessor",
         "compat.guglecarpetaddition.PlayerEnderChestContainerMixin",
         "rule.singleFakePlayerLoadRange.ChunkMapMixin",
-        "rule.singleFakePlayerLoadRange.PlayerListMixin"
+        "rule.singleFakePlayerLoadRange.PlayerListMixin",
+        "rule.blockPlacementIgnoreAttachment.BlockItemMixin",
+        "rule.blockPlacementIgnoreAttachment.BlockStateBaseMixin"
     ],
     "client": [
         "client.ChatComponentMixin",

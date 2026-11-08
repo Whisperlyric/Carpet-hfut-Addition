@@ -464,3 +464,15 @@
 
 - `false`：关闭
 - `true`：开启上述铁砧转换与护盾消耗行为，物品提示中会额外显示剩余护盾
+
+## 放置忽略附着检查 (blockPlacementIgnoreAttachment) `🐛Beta`
+
+放置方块时不再检测附着，即可以任意放置农作物和藤蔓、按钮等。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `HFUT`, `FEATURE`
+
+- `false`：关闭
+- `true`：放置时不再检查附着

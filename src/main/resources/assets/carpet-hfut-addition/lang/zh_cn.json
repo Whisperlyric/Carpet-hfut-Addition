@@ -223,5 +223,8 @@
     "carpet.rule.lateralFlowingWaterNoBrittleIce.desc": "[26.4-snapshot-4+]侧向流动的水接触到蓝冰时不再转化为脆冰",
     "carpet.rule.elytraMembraneShield.name": "鞘翅耐久护盾",
     "carpet.rule.elytraMembraneShield.desc": "在铁砧中为满耐久的鞘翅消耗幻翼膜，附加一层可消耗的护盾耐久：受损时先扣护盾，护盾耗尽后才扣真实耐久，护盾不会自行衰减。每块幻翼膜提供 108 点护盾并消耗 1 级经验，取出结果时消耗右侧槽内的全部幻翼膜",
-    "carpet.rule.elytraMembraneShield.tooltip": "鞘翅耐久护盾：%s"
+    "carpet.rule.elytraMembraneShield.tooltip": "鞘翅耐久护盾：%s",
+    "carpet.rule.blockPlacementIgnoreAttachment.name": "放置忽略附着检查",
+    "carpet.rule.blockPlacementIgnoreAttachment.desc": "放置方块时跳过方块自身的附着检查",
+    "carpet.rule.blockPlacementIgnoreAttachment.extra.0": "更新时依然会检查附着，推荐搭配 TIS 的『完全没有方块更新』(totallyNoBlockUpdate) 使用"
 }
