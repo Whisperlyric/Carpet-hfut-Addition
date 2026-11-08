@@ -74,7 +74,11 @@
         "rule.singleFakePlayerLoadRange.ChunkMapMixin",
         "rule.singleFakePlayerLoadRange.PlayerListMixin",
         "rule.blockPlacementIgnoreAttachment.BlockItemMixin",
-        "rule.blockPlacementIgnoreAttachment.BlockStateBaseMixin"
+        "rule.blockPlacementIgnoreAttachment.BlockStateBaseMixin",
+        "rule.blockPlacementIgnoreAttachment.MultifaceBlockMixin",
+        "rule.blockPlacementIgnoreAttachment.VineBlockMixin",
+        "rule.blockPlacementIgnoreAttachment.PointedDripstoneBlockMixin",
+        "rule.blockPlacementIgnoreAttachment.BambooStalkBlockMixin"
     ],
     "client": [
         "client.ChatComponentMixin",
