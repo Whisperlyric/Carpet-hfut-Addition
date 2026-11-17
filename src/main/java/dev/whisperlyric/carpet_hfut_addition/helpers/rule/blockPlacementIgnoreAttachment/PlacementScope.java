@@ -1,10 +1,6 @@
 package dev.whisperlyric.carpet_hfut_addition.helpers.rule.blockPlacementIgnoreAttachment;
 
-/**
- * Marks "a block is being placed right now", so attachment checks made along
- * the placement path can be skipped without touching the ones that run on
- * neighbour updates afterwards.
- */
+/** Marks "a block is being placed", so only placement-time attachment checks are skipped. */
 public final class PlacementScope {
     private static final ThreadLocal<int[]> DEPTH = ThreadLocal.withInitial(() -> new int[1]);
 

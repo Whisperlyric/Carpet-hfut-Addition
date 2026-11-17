@@ -11,9 +11,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * blockPlacementIgnoreAttachment: while the placement scope is open, every
- * attachment test answers yes. Outside it (neighbour updates, structure
- * placement) the vanilla check still runs.
+ * blockPlacementIgnoreAttachment: attachment tests answer yes only inside the
+ * placement scope; neighbour updates keep the vanilla check.
  */
 @Mixin(BlockBehaviour.BlockStateBase.class)
 public abstract class BlockStateBaseMixin {

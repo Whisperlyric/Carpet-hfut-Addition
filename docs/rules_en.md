@@ -502,3 +502,18 @@ Blocks stop being picky about what they hang on.
 
 - `false`: disabled
 - `true`: placement no longer checks attachment
+
+
+## Separate Map Mod Worlds (separateMapModWorlds) `🐛Beta`
+
+Sends a stable world identity to Xaero's Minimap/World Map and VoxelMap so different worlds served at the same address (same-seed saves, mirror servers, separate survival servers) stop sharing one map data set. Ported from Carpet RMS Addition, byte-compatible with the same protocol.
+
+`false`: disabled; map data is keyed by server address and dimension (vanilla).  
+`true`: same as `auto`.  
+`auto`: a UUID is generated and stored in the world root (`carpet-hfut-addition-map-world-id.txt`).  
+A custom value: used verbatim as the identity, up to 255 bytes; same id means same world.
+
+- Type: `string`
+- Default value: `false`
+- Suggested options: `false`, `true`, `auto`
+- Categories: `HFUT`, `FEATURE`

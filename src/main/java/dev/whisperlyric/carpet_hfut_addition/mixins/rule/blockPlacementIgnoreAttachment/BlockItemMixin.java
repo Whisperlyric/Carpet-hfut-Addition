@@ -10,9 +10,9 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import org.spongepowered.asm.mixin.Mixin;
 
 /**
- * blockPlacementIgnoreAttachment: opens the placement scope around the whole
- * placement, so both the block's own getStateForPlacement lookups and the
- * canSurvive check in canPlace are covered.
+ * blockPlacementIgnoreAttachment: brackets the whole placement so both the
+ * block's getStateForPlacement lookups and the canSurvive in canPlace are
+ * covered.
  */
 @Mixin(BlockItem.class)
 public abstract class BlockItemMixin {

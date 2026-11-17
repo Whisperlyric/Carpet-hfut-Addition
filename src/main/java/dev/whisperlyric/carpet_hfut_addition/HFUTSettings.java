@@ -324,4 +324,14 @@ public class HFUTSettings {
     @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
     public static boolean blockPlacementIgnoreAttachment = false;
 
+    /**
+     * Sends a stable world identity to Xaero's maps and VoxelMap so different
+     * worlds at the same address keep separate map data. {@code true} and
+     * {@code auto} store a UUID in the world root; any other non-empty value
+     * (max 255 UTF-8 bytes) is used verbatim.
+     */
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE},
+          options = {"false", "true", "auto"}, strict = false)
+    public static String separateMapModWorlds = "false";
+
 }

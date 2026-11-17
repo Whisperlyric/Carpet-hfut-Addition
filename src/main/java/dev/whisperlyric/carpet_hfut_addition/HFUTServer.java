@@ -16,6 +16,7 @@ import dev.whisperlyric.carpet_hfut_addition.helpers.rule.fakePlayerTickStage.Ti
 import dev.whisperlyric.carpet_hfut_addition.helpers.rule.fakePlayerOpen.FakePlayerStorageEditor;
 import dev.whisperlyric.carpet_hfut_addition.helpers.rule.ghostPearl.GhostPearlGuard;
 import dev.whisperlyric.carpet_hfut_addition.helpers.rule.ghostPearl.PearlTraceStore;
+import dev.whisperlyric.carpet_hfut_addition.helpers.rule.mapWorldIdentity.MapWorldIdentity;
 import dev.whisperlyric.carpet_hfut_addition.helpers.rule.simpleLazyChunk.SimpleLazyChunkManager;
 import dev.whisperlyric.carpet_hfut_addition.helpers.rule.singleFakePlayerLoadRange.SingleFakePlayerLoadRangeManager;
 import dev.whisperlyric.carpet_hfut_addition.logger.HFUTLoggers;
@@ -24,6 +25,7 @@ import dev.whisperlyric.carpet_hfut_addition.utils.Translations;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Arrays;
@@ -43,6 +45,8 @@ public class HFUTServer implements CarpetExtension {
         CarpetServer.manageExtension(INSTANCE);
         // both sides: the client needs the codec registered to send a page request
         HFUTNetwork.init();
+        // both sides: VoxelMap's query receiver plus the S2C id channels
+        MapWorldIdentity.registerNetworking();
     }
 
     @Override
@@ -79,6 +83,13 @@ public class HFUTServer implements CarpetExtension {
             // only exists below 26.1, its name is simply never matched there
             if ("easyDispenserCrafting".equals(rule.name()) || "stoneCutCobblestoneVariants".equals(rule.name())) {
                 reloadRecipeSets(source);
+            }
+            // map identity: push the new id to every online player at once,
+            // without waiting for a reconnect or dimension change
+            if ("separateMapModWorlds".equals(rule.name())) {
+                for (ServerPlayer player : source.getServer().getPlayerList().getPlayers()) {
+                    MapWorldIdentity.sendXaeroWorldInfo(player);
+                }
             }
         });
         long ruleCount = Arrays.stream(HFUTSettings.class.getDeclaredFields()).
@@ -126,6 +137,7 @@ public class HFUTServer implements CarpetExtension {
         //#if MC >= 260100
         //$$ TradeSeqCommand.clearState();
         //#endif
+        MapWorldIdentity.clear();
     }
 
     /** Reruns the datapack reload so a changed recipe set is rebuilt and re-synced to clients. */

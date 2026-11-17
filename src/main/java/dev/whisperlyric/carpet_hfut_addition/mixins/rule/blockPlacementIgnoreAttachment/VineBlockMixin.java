@@ -12,8 +12,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * blockPlacementIgnoreAttachment: vines pick their faces with canSupportAtFace
- * inside getStateForPlacement, so a floating vine never reaches canSurvive.
+ * blockPlacementIgnoreAttachment: vines pick faces with canSupportAtFace, which
+ * runs before canSurvive.
  */
 @Mixin(VineBlock.class)
 public abstract class VineBlockMixin {

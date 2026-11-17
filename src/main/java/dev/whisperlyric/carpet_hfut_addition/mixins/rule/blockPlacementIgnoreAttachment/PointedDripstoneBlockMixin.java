@@ -12,8 +12,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * blockPlacementIgnoreAttachment: pointed dripstone resolves its tip direction
- * through this check before canSurvive is ever consulted.
+ * blockPlacementIgnoreAttachment: dripstone resolves its tip direction with
+ * this check, before canSurvive.
  */
 @Mixin(PointedDripstoneBlock.class)
 public abstract class PointedDripstoneBlockMixin {

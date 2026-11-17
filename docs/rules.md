@@ -465,7 +465,7 @@
 - `false`：关闭
 - `true`：开启上述铁砧转换与护盾消耗行为，物品提示中会额外显示剩余护盾
 
-## 放置忽略附着检查 (blockPlacementIgnoreAttachment) `🐛Beta`
+## 放置忽略附着检查 (blockPlacementIgnoreAttachment)
 
 放置方块时不再检测附着，即可以任意放置农作物和藤蔓、按钮等。
 
@@ -476,3 +476,17 @@
 
 - `false`：关闭
 - `true`：放置时不再检查附着
+
+## 地图模组世界隔离 (separateMapModWorlds) `🐛Beta`
+
+（移植自 Carpet RMS Addition）向 Xaero 的小地图/世界地图与 VoxelMap 发送稳定的世界识别 ID，使同一服务器地址下的不同世界（相同种子的多个存档、镜像服、独立生存服）不再共享同一份地图数据。
+
+`false`: 关闭，地图数据按服务器地址与维度区分（原版行为）。  
+`true`: 等同于 `auto`。  
+`auto`: 在世界根目录生成并保存一个 UUID 作为识别 ID（`carpet-hfut-addition-map-world-id.txt`）。  
+自定义值: 直接作为识别 ID 使用，长度不超过 255 字节；相同 ID 视为同一世界。
+
+- 类型: `string`
+- 默认值: `false`
+- 参考选项: `false`, `true`, `auto`
+- 分类: `HFUT`, `FEATURE`

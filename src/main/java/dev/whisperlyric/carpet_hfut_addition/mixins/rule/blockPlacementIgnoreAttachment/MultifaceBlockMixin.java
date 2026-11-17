@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * blockPlacementIgnoreAttachment: glow lichen and sculk veins reject a face in
- * getStateForPlacement via isValidStateForPlacement, never reaching canSurvive.
+ * blockPlacementIgnoreAttachment: glow lichen and sculk veins pick faces with
+ * isValidStateForPlacement, which runs before canSurvive.
  */
 @Mixin(MultifaceBlock.class)
 public abstract class MultifaceBlockMixin {

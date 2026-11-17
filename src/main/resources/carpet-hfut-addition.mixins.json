@@ -73,12 +73,14 @@
         "compat.guglecarpetaddition.PlayerEnderChestContainerMixin",
         "rule.singleFakePlayerLoadRange.ChunkMapMixin",
         "rule.singleFakePlayerLoadRange.PlayerListMixin",
+        "rule.mapWorldIdentity.PlayerListMixin",
         "rule.blockPlacementIgnoreAttachment.BlockItemMixin",
         "rule.blockPlacementIgnoreAttachment.BlockStateBaseMixin",
         "rule.blockPlacementIgnoreAttachment.MultifaceBlockMixin",
         "rule.blockPlacementIgnoreAttachment.VineBlockMixin",
         "rule.blockPlacementIgnoreAttachment.PointedDripstoneBlockMixin",
-        "rule.blockPlacementIgnoreAttachment.BambooStalkBlockMixin"
+        "rule.blockPlacementIgnoreAttachment.BambooStalkBlockMixin",
+        "rule.blockPlacementIgnoreAttachment.WallSkullBlockMixin"
     ],
     "client": [
         "client.ChatComponentMixin",

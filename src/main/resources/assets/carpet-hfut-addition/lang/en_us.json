@@ -226,5 +226,8 @@
     "carpet.rule.elytraMembraneShield.tooltip": "Elytra Durability Shield: %s",
     "carpet.rule.blockPlacementIgnoreAttachment.name": "Placement Ignores Attachment",
     "carpet.rule.blockPlacementIgnoreAttachment.desc": "Skips the block's own attachment check on placement",
-    "carpet.rule.blockPlacementIgnoreAttachment.extra.0": "Attachment is still checked on updates, it's recommended to use this together with TIS's 'totallyNoBlockUpdate'"
+    "carpet.rule.blockPlacementIgnoreAttachment.extra.0": "Attachment is still checked on updates, it's recommended to use this together with TIS's 'totallyNoBlockUpdate'",
+    "carpet.rule.separateMapModWorlds.name": "Separate Map Mod Worlds",
+    "carpet.rule.separateMapModWorlds.desc": "Send a stable world identity to Xaero's Minimap/World Map and VoxelMap so maps of different worlds on the same address stay separate",
+    "carpet.rule.separateMapModWorlds.extra.0": "true / auto: generates and stores a UUID in the world root (carpet-hfut-addition-map-world-id.txt); any other non-empty value up to 255 UTF-8 bytes is used verbatim"
 }
