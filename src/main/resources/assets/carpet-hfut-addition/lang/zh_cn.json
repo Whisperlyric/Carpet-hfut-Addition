@@ -229,5 +229,8 @@
     "carpet.rule.blockPlacementIgnoreAttachment.extra.0": "更新时依然会检查附着，推荐搭配 TIS 的『完全没有方块更新』(totallyNoBlockUpdate) 使用",
     "carpet.rule.separateMapModWorlds.name": "地图模组世界隔离",
     "carpet.rule.separateMapModWorlds.desc": "向 Xaero 的小地图/世界地图与 VoxelMap 发送稳定的世界识别 ID，使同一地址下的不同世界不再共享地图数据",
-    "carpet.rule.separateMapModWorlds.extra.0": "true / auto：在世界根目录生成并保存 UUID（carpet-hfut-addition-map-world-id.txt）；其他非空值（≤255 字节）原样作为 ID"
+    "carpet.rule.separateMapModWorlds.extra.0": "true / auto：在世界根目录生成并保存 UUID（carpet-hfut-addition-map-world-id.txt）；其他非空值（≤255 字节）原样作为 ID",
+    "carpet.rule.kelpGrowOnlyIntoFullWater.name": "海带仅长入满格水",
+    "carpet.rule.kelpGrowOnlyIntoFullWater.desc": "海带只会长进水源或满格水（下落水），不再长进流动水中",
+    "carpet.rule.kelpGrowOnlyIntoFullWater.extra.0": "自然生长与骨粉催熟均受限；已存在的海带不会被移除"
 }

@@ -517,3 +517,16 @@ A custom value: used verbatim as the identity, up to 255 bytes; same id means sa
 - Default value: `false`
 - Suggested options: `false`, `true`, `auto`
 - Categories: `HFUT`, `FEATURE`
+
+## Kelp Grow Only Into Full Water (kelpGrowOnlyIntoFullWater) `🐛Beta`
+
+Kelp only grows into a water source or a full (falling) column, never into flowing water. Ported from Carpet Ayaka Addition.
+
+`false`: disabled; kelp can grow into water of any depth (vanilla).  
+`true`: only sources and full columns allow growth.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`
+Bonemeal is gated the same way.

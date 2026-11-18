@@ -490,3 +490,15 @@
 - 默认值: `false`
 - 参考选项: `false`, `true`, `auto`
 - 分类: `HFUT`, `FEATURE`
+
+## 海带仅长入满格水 (kelpGrowOnlyIntoFullWater)
+
+海带只会长进水源或满格水（下落水），不再长进流动水中。移植自 Carpet Ayaka Addition。
+
+`false`: 关闭，海带可以长进任意深度的水（原版行为）。  
+`true`: 只允许长进水源或满格水。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `HFUT`, `FEATURE`

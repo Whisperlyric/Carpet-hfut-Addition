@@ -334,4 +334,8 @@ public class HFUTSettings {
           options = {"false", "true", "auto"}, strict = false)
     public static String separateMapModWorlds = "false";
 
+    /** Kelp only grows into a water source or a full (falling) column, never into flowing water. */
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    public static boolean kelpGrowOnlyIntoFullWater = false;
+
 }
