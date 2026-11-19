@@ -75,6 +75,7 @@
         "rule.singleFakePlayerLoadRange.PlayerListMixin",
         "rule.mapWorldIdentity.PlayerListMixin",
         "rule.kelpGrowOnlyIntoFullWater.KelpBlockMixin",
+        "rule.silkTouchFrostedIce.SilkTouchFrostedIceMixin",
         "rule.blockPlacementIgnoreAttachment.BlockItemMixin",
         "rule.blockPlacementIgnoreAttachment.BlockStateBaseMixin",
         "rule.blockPlacementIgnoreAttachment.MultifaceBlockMixin",

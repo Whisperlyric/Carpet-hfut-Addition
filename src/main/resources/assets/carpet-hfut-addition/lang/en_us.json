@@ -232,5 +232,8 @@
     "carpet.rule.separateMapModWorlds.extra.0": "true / auto: generates and stores a UUID in the world root (carpet-hfut-addition-map-world-id.txt); any other non-empty value up to 255 UTF-8 bytes is used verbatim",
     "carpet.rule.kelpGrowOnlyIntoFullWater.name": "Kelp Grow Only Into Full Water",
     "carpet.rule.kelpGrowOnlyIntoFullWater.desc": "Kelp only grows into a water source or a full (falling) column, never into flowing water",
-    "carpet.rule.kelpGrowOnlyIntoFullWater.extra.0": "Gates random-tick growth and bonemeal alike; existing kelp is never removed"
+    "carpet.rule.kelpGrowOnlyIntoFullWater.extra.0": "Gates random-tick growth and bonemeal alike; existing kelp is never removed",
+    "carpet.rule.silkTouchFrostedIce.name": "Silk Touch Frosted Ice",
+    "carpet.rule.silkTouchFrostedIce.desc": "Breaking frosted ice with a Silk Touch tool drops one regular ice instead of melting away",
+    "carpet.rule.silkTouchFrostedIce.extra.0": "Creative players are exempt; frosted ice still melts back into water on its own schedule"
 }

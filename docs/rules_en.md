@@ -504,7 +504,7 @@ Blocks stop being picky about what they hang on.
 - `true`: placement no longer checks attachment
 
 
-## Separate Map Mod Worlds (separateMapModWorlds) `🐛Beta`
+## Separate Map Mod Worlds (separateMapModWorlds) `🐛Alpha`
 
 Sends a stable world identity to Xaero's Minimap/World Map and VoxelMap so different worlds served at the same address (same-seed saves, mirror servers, separate survival servers) stop sharing one map data set. Ported from Carpet RMS Addition, byte-compatible with the same protocol.
 
@@ -518,7 +518,7 @@ A custom value: used verbatim as the identity, up to 255 bytes; same id means sa
 - Suggested options: `false`, `true`, `auto`
 - Categories: `HFUT`, `FEATURE`
 
-## Kelp Grow Only Into Full Water (kelpGrowOnlyIntoFullWater) `🐛Beta`
+## Kelp Grow Only Into Full Water (kelpGrowOnlyIntoFullWater)
 
 Kelp only grows into a water source or a full (falling) column, never into flowing water. Ported from Carpet Ayaka Addition.
 
@@ -529,4 +529,15 @@ Kelp only grows into a water source or a full (falling) column, never into flowi
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `HFUT`, `FEATURE`
-Bonemeal is gated the same way.
+
+## Silk Touch Frosted Ice (silkTouchFrostedIce)
+
+Breaking frosted ice with a Silk Touch tool drops one regular ice instead of dropping nothing. Ported from Carpet Ice Addition.
+
+`false`: disabled; frosted ice cannot be harvested.  
+`true`: Silk Touch drops one regular ice.
+
+- Type: `boolean`
+- Default value: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`

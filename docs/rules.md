@@ -477,7 +477,7 @@
 - `false`：关闭
 - `true`：放置时不再检查附着
 
-## 地图模组世界隔离 (separateMapModWorlds) `🐛Beta`
+## 地图模组世界隔离 (separateMapModWorlds) `🐛Alpha`
 
 （移植自 Carpet RMS Addition）向 Xaero 的小地图/世界地图与 VoxelMap 发送稳定的世界识别 ID，使同一服务器地址下的不同世界（相同种子的多个存档、镜像服、独立生存服）不再共享同一份地图数据。
 
@@ -493,10 +493,22 @@
 
 ## 海带仅长入满格水 (kelpGrowOnlyIntoFullWater)
 
-海带只会长进水源或满格水（下落水），不再长进流动水中。移植自 Carpet Ayaka Addition。
+除玩家放置外，海带只会生长进水源或满格水（下落水），不再长进流动水中。移植自 Carpet Ayaka Addition。
 
 `false`: 关闭，海带可以长进任意深度的水（原版行为）。  
 `true`: 只允许长进水源或满格水。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `HFUT`, `FEATURE`
+
+## 精准采集可采集霜冰 (silkTouchFrostedIce)
+
+使用带精准采集附魔的工具破坏霜冰时，掉落一个普通冰，而不是什么都不掉。移植自 Carpet Ice Addition。
+
+`false`: 关闭，霜冰无法被采集。  
+`true`: 精准采集可掉落普通冰。
 
 - 类型: `boolean`
 - 默认值: `false`

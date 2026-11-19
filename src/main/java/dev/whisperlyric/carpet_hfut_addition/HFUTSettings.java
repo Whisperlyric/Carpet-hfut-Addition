@@ -338,4 +338,8 @@ public class HFUTSettings {
     @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
     public static boolean kelpGrowOnlyIntoFullWater = false;
 
+    /** Frosted ice broken with Silk Touch drops one regular ice instead of melting into nothing. */
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    public static boolean silkTouchFrostedIce = false;
+
 }

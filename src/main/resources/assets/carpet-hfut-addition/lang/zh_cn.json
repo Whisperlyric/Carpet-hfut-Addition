@@ -232,5 +232,8 @@
     "carpet.rule.separateMapModWorlds.extra.0": "true / auto：在世界根目录生成并保存 UUID（carpet-hfut-addition-map-world-id.txt）；其他非空值（≤255 字节）原样作为 ID",
     "carpet.rule.kelpGrowOnlyIntoFullWater.name": "海带仅长入满格水",
     "carpet.rule.kelpGrowOnlyIntoFullWater.desc": "海带只会长进水源或满格水（下落水），不再长进流动水中",
-    "carpet.rule.kelpGrowOnlyIntoFullWater.extra.0": "自然生长与骨粉催熟均受限；已存在的海带不会被移除"
+    "carpet.rule.kelpGrowOnlyIntoFullWater.extra.0": "自然生长与骨粉催熟均受此规则限制",
+    "carpet.rule.silkTouchFrostedIce.name": "精准采集可采集霜冰",
+    "carpet.rule.silkTouchFrostedIce.desc": "使用带精准采集附魔的工具破坏霜冰时，掉落一个普通冰，而不是化成空气",
+    "carpet.rule.silkTouchFrostedIce.extra.0": "创造模式玩家不受影响；霜冰仍会按原版节奏融化成水"
 }
