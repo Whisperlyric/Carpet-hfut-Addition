@@ -221,11 +221,12 @@
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `BUGFIX`
 
-## 末影龙垂直速度修复 (enderDragonVerticalVelocityFix)
+## [26.4-]末影龙垂直速度修复 (enderDragonVerticalVelocityFix) `MC<=26.4`
 
-修复末影龙飞向目标节点时垂直速度过低的问题(MC-272431)
+修复末影龙飞向目标节点时垂直速度过低的问题(MC-272431)。
 
 将末影龙的垂直加速度系数从19w08b(1.14)起的0.01改为0.1，从而恢复 1.13 及更早的末影龙飞行行为。
+
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false`, `true`

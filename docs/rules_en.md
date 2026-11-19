@@ -226,9 +226,9 @@ Fixes the mining fatigue dig-speed table: 0.027 was typed as 0.0027 and 0.0081 a
 - Suggested options: `false`, `true`
 - Categories: `HFUT`, `BUGFIX`
 
-## Ender Dragon Vertical Velocity Fix (enderDragonVerticalVelocityFix)
+## [26.4-] Ender Dragon Vertical Velocity Fix (enderDragonVerticalVelocityFix) `MC<=26.4`
 
-Fixes the ender dragon's vertical velocity when flying to a target node (MC-272431): since 19w08b (1.14) the vertical acceleration scale is 0.01 instead of 0.1, so the dragon can barely climb or dive and circles its target nodes.
+Fixes the ender dragon's vertical velocity when flying to a target node (MC-272431): since 19w08b (1.14) the vertical acceleration scale is 0.01 instead of 0.1, so the dragon can barely climb or dive and circles its target nodes. Still unfixed as of 26.4-snapshot-4.
 
 Restores the 1.13-and-earlier ender dragon flight behaviour, and also mitigates MC-271336, MC-271337 and MC-197201.
 

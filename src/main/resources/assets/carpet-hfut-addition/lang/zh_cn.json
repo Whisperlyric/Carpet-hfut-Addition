@@ -1,110 +1,140 @@
 {
     "carpet.category.hfut": "HFUT",
     "carpet.category.remotebugfix": "相关模组修复",
+
     "carpet.rule.commandPlayerTickingStage.name": "修改假人 tick 阶段权限",
     "carpet.rule.commandPlayerTickingStage.desc": "使用 /player <名字> tickingStage 修改假人 tick 阶段的权限",
     "carpet.rule.commandPlayerTickingStage.extra.0": "true：所有人；ops：权限等级 2 及以上；false：关闭；或填 0-4 指定最低权限等级",
+
     "carpet.rule.commandPearlTrace.name": "幽灵珍珠反查命令权限",
     "carpet.rule.commandPearlTrace.desc": "使用 /pearltrace list/show 查看幽灵珍珠残留的权限",
     "carpet.rule.commandPearlTrace.extra.0": "true：所有人；ops：权限等级 2 及以上；false：关闭；或填 0-4 指定最低权限等级",
     "carpet.rule.commandPearlTrace.extra.1": "只控制命令权限；记录开关是 ghostEnderPearlTrace。需先开启它才有记录可查，这里的 false 只是关闭命令，不等于关闭记录",
+
     "carpet.rule.commandPearlTracePurge.name": "幽灵珍珠清除命令权限",
     "carpet.rule.commandPearlTracePurge.desc": "使用 /pearltrace purge 从在线玩家身上清除幽灵珍珠的权限",
     "carpet.rule.commandPearlTracePurge.extra.0": "true：所有人；ops：权限等级 2 及以上；false：关闭；或填 0-4 指定最低权限等级",
     "carpet.rule.commandPearlTracePurge.extra.1": "只控制命令权限；记录开关是 ghostEnderPearlTrace。清除会改写玩家数据，故单独设一条更严的权限",
+
     "carpet.rule.tripwireIgnoreDepartures.name": "绊线行为修复",
     "carpet.rule.tripwireIgnoreDepartures.desc": "[1.21.9+]绊线扫掠计算修复",
     "carpet.rule.tripwireIgnoreDepartures.extra.0": "用较为激进的方案修复了绊线在实体穿过时多次触发上升沿的问题(MC-305475)",
     "carpet.rule.tripwireIgnoreDepartures.extra.1": "26.2+ 上需要 tripwireRestore=true 作为前置",
+
     "carpet.rule.tripwireRestore.name": "恢复绊线行为",
     "carpet.rule.tripwireRestore.desc": "[26.2+]绊线行为回退",
     "carpet.rule.tripwireRestore.extra.0": "false：当前版本的原版行为",
     "carpet.rule.tripwireRestore.extra.1": "true：回退 MC-305475 的修复",
     "carpet.rule.tripwireRestore.extra.2": "26.3：仅 26.2 有效，将绊线的 0t 计划刻改为 1t",
+
     "carpet.rule.fakePlayerTicksLikeRealPlayer.name": "假人像真人一样 tick",
     "carpet.rule.fakePlayerTicksLikeRealPlayer.desc": "让假人像真人一样 tick（tick 移到网络阶段，动作包移到异步任务阶段）",
     "carpet.rule.fakePlayerTicksLikeRealPlayer.extra.0": "可对单个假人覆盖：/player <假人> tickingStage（global/invert/origin/likeReal），或 GCA 假人菜单中的按钮",
     "carpet.rule.fakePlayerTicksLikeRealPlayer.extra.1": "覆盖在本次服务器运行内有效，重启后重置",
     "carpet.rule.fakePlayerTicksLikeRealPlayer.extra.2": "装有 carpet-tis-addition 时直接使用其机制，本模组只补充逐假人翻转逻辑",
+
     "carpet.rule.ghostEnderPearlFix.name": "幽灵末影珍珠修复",
     "carpet.rule.ghostEnderPearlFix.desc": "[1.21.2-26.x]幽灵末影珍珠修复",
     "carpet.rule.ghostEnderPearlFix.extra.0": "修复了线程竞态导致的末影珍珠双重持久化(MC-306936)",
     "carpet.rule.ghostEnderPearlFix.extra.1": "装有 carpet-igny-addition 时隐藏，由其同名规则接管",
+
     "carpet.rule.ghostEnderPearlTrace.name": "幽灵末影珍珠反查",
     "carpet.rule.ghostEnderPearlTrace.desc": "幽灵末影珍珠反查：记录每次传送及其来源，按珍珠 UUID 累计传送次数，并用 /pearltrace 查验或清除",
     "carpet.rule.ghostEnderPearlTrace.extra.0": "命令权限见 commandPearlTrace / commandPearlTracePurge",
+
     "carpet.rule.shulkerBulletPortalCleanup.name": "清除过门潜影弹",
     "carpet.rule.shulkerBulletPortalCleanup.desc": "让潜影弹在穿过传送门切换维度时被清除",
     "carpet.rule.shulkerBulletPortalCleanup.extra.0": "潜影弹的制导目标是跨维度解析的，过门后会朝切换维度前的坐标飞行",
     "carpet.rule.shulkerBulletPortalCleanup.extra.1": "在传送发生前清除，同时免去目的侧的区块加载",
+
     "carpet.rule.shulkerBulletWeakChunkCleanup.name": "清除弱加载区块潜影弹",
     "carpet.rule.shulkerBulletWeakChunkCleanup.desc": "触发式清除处于弱加载区块的潜影弹",
+
     "carpet.rule.witherSkullCleanup.name": "清除游荡凋灵头",
     "carpet.rule.witherSkullCleanup.desc": "触发式清除处于弱加载区块的凋灵头和蓝头",
+
     "carpet.rule.minecartAcceleration.name": "矿车加速",
     "carpet.rule.minecartAcceleration.desc": "[26.3+]重新引入 1.21.5-26.2 的矿车加速机制",
     "carpet.rule.minecartAcceleration.extra.0": "假人可以链式换乘矿车，从而一游戏刻内被多次 tick",
     "carpet.rule.minecartAcceleration.extra.1": "26.3 修复了矿车交互的返回值，假人骑矿车开始有 4t 使用间隔",
     "carpet.rule.minecartAcceleration.extra.2": "规则开启后成功上矿车的返回值改回 PASS，等价 26.2- 行为",
+
     "carpet.rule.attributeModifierRemovalDelay.name": "属性修饰符清除延迟",
     "carpet.rule.attributeModifierRemovalDelay.desc": "[26.3+]重新引入 MC-311022：快速切换装备时，属性修饰符的清除会晚 1 个游戏刻",
+
     "carpet.rule.mapRegistryLeakFix.name": "地图玩家记录泄漏修复",
     "carpet.rule.mapRegistryLeakFix.desc": "修复Lithium等导致的地图玩家记录泄漏源",
     "carpet.rule.mapRegistryLeakFix.extra.0": "carpet 假人不再记入地图玩家记录",
     "carpet.rule.mapRegistryLeakFix.extra.1": "玩家断开的瞬间，清除其在所有已加载地图中的记录",
     "carpet.rule.mapRegistryLeakFix.extra.2": "默认关闭，需要时手动开启",
+
     "carpet.rule.reloginAvatarLeakFix.name": "[26.x-]Relogin泄漏修复",
     "carpet.rule.reloginAvatarLeakFix.desc": "修复 Carpet-Org-Addition 1.21.x 线的 relogin 让旧假人残留在内存中的泄漏",
     "carpet.rule.reloginAvatarLeakFix.extra.0": "下线任务会跳过已标记移除的假人，旧假人的断开流程因此永远不会执行，旧假人便一直残留",
     "carpet.rule.reloginAvatarLeakFix.extra.1": "强制执行断开，同时跳过已移除假人的重复存档",
     "carpet.rule.reloginAvatarLeakFix.extra.2": "需要安装 carpet-org-addition；仅在 1.21.2～1.21.11 存在（org v1.46.0+ 已包含修复）",
+
     "carpet.rule.miningFatigueDigSpeedFix.name": "挖掘疲劳修复",
     "carpet.rule.miningFatigueDigSpeedFix.desc": "[26.2-]修复挖掘疲劳Ⅲ+的挖掘速度表",
     "carpet.rule.miningFatigueDigSpeedFix.extra.0": "修复了26.2及以下的挖掘疲劳Ⅲ起硬编码的挖掘速度多一个0的问题",
     "carpet.rule.miningFatigueDigSpeedFix.extra.1": "Ⅴ级及以上使用0.0081",
-    "carpet.rule.enderDragonVerticalVelocityFix.name": "末影龙垂直速度修复",
-    "carpet.rule.enderDragonVerticalVelocityFix.desc": "修复末影龙飞向目标节点时垂直速度过低的问题(MC-272431)",
+
+    "carpet.rule.enderDragonVerticalVelocityFix.name": "[26.4-]末影龙垂直速度修复",
+    "carpet.rule.enderDragonVerticalVelocityFix.desc": "修复末影龙飞向目标节点时垂直速度过低的问题(MC-272431)，26.4-snapshot-4 仍未修复",
     "carpet.rule.enderDragonVerticalVelocityFix.extra.0": "19w08b(1.14)起垂直加速度系数0.01(曾为0.1)，末影龙难以爬升和俯冲，在目标节点周围来回盘旋",
     "carpet.rule.enderDragonVerticalVelocityFix.extra.1": "恢复 1.13 及更早的末影龙飞行行为，同时缓解 MC-271336、MC-271337、MC-197201",
+
     "carpet.rule.villagerInstantLevelUp.name": "村民即时升级",
     "carpet.rule.villagerInstantLevelUp.desc": "[26.2-]向下移植 26.3 的村民交易升级行为",
     "carpet.rule.villagerInstantLevelUp.extra.0": "开启后无需关闭交易界面即可完成升级，且升级时立即重算价格",
+
     "carpet.rule.villagerLivePriceSync.name": "村民界面价格即时同步",
     "carpet.rule.villagerLivePriceSync.desc": "[26.2-]向下移植 26.3 的村民价格即时重算",
     "carpet.rule.villagerLivePriceSync.extra.0": "交易界面打开时补货、需求追平、流言传播、玩家声誉四类事件都会即时重算并修正交易价格",
+
     "carpet.rule.babyMobAvoidGoldenDandelion.name": "幼年生物回避金蒲公英",
     "carpet.rule.babyMobAvoidGoldenDandelion.desc": "[26.1+]能被金蒲公英抑制成长的幼年生物会远离金蒲公英（含盆栽、玩家手持），类似猪灵害怕灵魂火",
     "carpet.rule.babyMobAvoidGoldenDandelion.extra.0": "每 20 tick 扫描周围 6 格，发现后逃开约 8-12 格；成年个体不受影响",
+
     "carpet.rule.babyMobAvoidGoldenDandelionIgnoreAgeLocked.name": "已锁生长的幼年生物不回避金蒲公英",
     "carpet.rule.babyMobAvoidGoldenDandelionIgnoreAgeLocked.desc": "[26.1+]被金蒲公英锁住生长的幼年生物不再远离金蒲公英",
     "carpet.rule.babyMobAvoidGoldenDandelionIgnoreAgeLocked.extra.0": "需要先开启 babyMobAvoidGoldenDandelion",
+
     "carpet.rule.bonemealGrowMelons.name": "骨粉催熟出瓜",
     "carpet.rule.bonemealGrowMelons.desc": "对成熟(age=7)的西瓜/南瓜茎使用骨粉可直接结出瓜",
     "carpet.rule.bonemealGrowMelons.extra.0": "原版成熟茎会直接拒绝骨粉，开启后将视为有效目标并按原版随机刻逻辑放瓜",
     "carpet.rule.bonemealGrowMelons.extra.1": "瓜茎水平方向需要有可放置空间(最多尝试24个随机方向)",
+
     "carpet.rule.mapPlayerIconRotation.name": "地图玩家图标朝向",
     "carpet.rule.mapPlayerIconRotation.desc": "[26.2-]向下移植 26.3 的地图改动",
     "carpet.rule.mapPlayerIconRotation.extra.0": "地图中玩家的图标一直显示朝向",
+
     "carpet.rule.creativeNoEntityCollision.name": "创造模式无实体碰撞",
     "carpet.rule.creativeNoEntityCollision.desc": "创造模式玩家不再参与实体的碰撞计算",
     "carpet.rule.creativeNoEntityCollision.extra.0": "无论是否处于飞行状态都关闭所有实体碰撞",
     "carpet.rule.creativeNoEntityCollision.extra.1": "投射物命中、压力板触发等非碰撞交互不受影响",
+
     "carpet.rule.standableEntitiesCreativeNoCollision.name": "可站立实体创造模式无碰撞",
     "carpet.rule.standableEntitiesCreativeNoCollision.desc": "创造模式玩家不再被船(含箱船、木筏等变体)与潜影贝挡住或弹开",
     "carpet.rule.standableEntitiesCreativeNoCollision.extra.0": "仅在创造模式无实体碰撞开启时生效",
     "carpet.rule.standableEntitiesCreativeNoCollision.extra.1": "[1.21.6+]只对这两个可站立实体单独关闭碰撞，其余实体不受影响",
     "carpet.rule.standableEntitiesCreativeNoCollision.extra.2": "1.21.6 以下不注册本条，该行为包含在创造模式无实体碰撞中",
+
     "carpet.rule.windChargeNoRedstoneActivation.name": "风弹不触发红石元件",
     "carpet.rule.windChargeNoRedstoneActivation.desc": "风弹爆炸不再触发按钮、拉杆、门、活板门与栅栏门",
+
     "carpet.rule.windChargeNoBeehiveAnger.name": "风弹不激怒蜂群",
     "carpet.rule.windChargeNoBeehiveAnger.desc": "[1.21.2+]风弹爆炸不再因蜂箱激怒周围的蜜蜂",
+
     "carpet.rule.windChargeNoNonLivingKnockback.name": "风弹不影响非生物实体",
     "carpet.rule.windChargeNoNonLivingKnockback.desc": "风弹爆炸不再对非生物实体产生击退",
+
     "hfut.fakePlayerTickStage.not_fake": "%s 不是假人",
     "hfut.fakePlayerTickStage.button.name": "HFUT：tick 阶段反转",
     "hfut.fakePlayerTickStage.button.current": "当前生效：%s（%s）",
     "hfut.fakePlayerTickStage.button.global": "全局：%s",
     "hfut.fakePlayerTickStage.button.click": "点击反转",
+
     "hfut.pearltrace.list.header": "珍珠传送记录：共 %s 条（第 %s/%s 页）",
     "hfut.pearltrace.list.empty": "暂无珍珠传送记录（ghostEnderPearlTrace 是否开启？）",
     "hfut.pearltrace.list.row": "%s %s  %s  %s  来源:%s  次数:%s  %s",
@@ -125,10 +155,12 @@
     "hfut.pearltrace.purge.expired": "预览已超时（60 秒），请重新预览后再确认",
     "hfut.pearltrace.purge.stale": "该珍珠的传送次数在预览后发生了变化，原预览作废，请重新预览",
     "hfut.pearltrace.purge.done": "已从 %s 移除 %s 颗珍珠",
+
     "carpet.rule.soulSpeedNoBootDamage.name": "灵魂疾行不消耗靴子耐久",
     "carpet.rule.soulSpeedNoBootDamage.desc": "灵魂疾行附魔不再在使用时消耗靴子耐久",
     "carpet.rule.durabilityRngFollowsPlayer.name": "耐久序列回归玩家",
     "carpet.rule.durabilityRngFollowsPlayer.desc": "耐久附魔的耐久损耗判定使用玩家自己的随机序列而非世界随机序列",
+
     "hfut.tradeseq.no_trade_set": "找不到交易表 %s，无法读写其随机序列",
     "hfut.tradeseq.status": "随机序列 %s :\n距初态 %s 次刷新",
     "hfut.tradeseq.status.between": "随机序列 %s :\n位于第 %s 次与第 %s 次刷新之间",
@@ -149,13 +181,16 @@
     "hfut.tradeseq.cancelled": "计算已取消",
     "hfut.tradeseq.cancel.nothing": "当前没有正在进行的村民交易序列偏移计算",
     "hfut.tradeseq.cancel.requested": "已请求取消，正在进行的计算将很快停止",
+
     "carpet.rule.commandTradeSeq.name": "交易序列操纵",
     "carpet.rule.commandTradeSeq.desc": "允许使用 /tradeseq：查询与移动村民交易刷新所用的命名随机序列",
     "carpet.rule.commandTradeSeq.extra.0": "true：所有人；ops：权限等级 2 及以上；false：关闭；或填 0-4 指定最低权限等级",
     "carpet.rule.namedWanderingTraderPersistence.name": "命名流浪商人不消失",
     "carpet.rule.namedWanderingTraderPersistence.desc": "false 关闭；true 任意命名的流浪商人不消失；填其他值 被命名为该名字的流浪商人才不消失",
+
     "hfut.client.hidePauseSocial.hidden": "暂停菜单社交栏：已隐藏",
     "hfut.client.hidePauseSocial.shown": "暂停菜单社交栏：已显示",
+
     "hfut.lazychunk.added": "区块 [%s, %s] 已设为弱加载",
     "hfut.lazychunk.already_marked": "区块 [%s, %s] 已处于弱加载",
     "hfut.lazychunk.removed": "区块 [%s, %s] 已取消弱加载",
@@ -166,9 +201,11 @@
     "hfut.lazychunk.range_removed_none": "范围内没有添加的弱加载区块",
     "hfut.lazychunk.range_too_large": "该范围超过 %s 个区块",
     "hfut.lazychunk.query_none": "当前维度没有添加的弱加载区块",
+
     "carpet.rule.commandSimpleLazyChunk.name": "弱加载指令权限",
     "carpet.rule.commandSimpleLazyChunk.desc": "允许使用 /hfut lazychunk：将区块保持在弱加载状态，即使附近没有玩家也会保持加载，并阻止其升级为完全加载，服务器重启后失效",
     "carpet.rule.commandSimpleLazyChunk.extra.0": "true：所有人；ops：权限等级 2+；false：禁用；或最低权限等级 0-4",
+
     "hfut.lazychunk.coord_out_of_world": "区块坐标超出世界范围（区块 x/z 需在 +/-%s 以内）",
     "hfut.lazychunk.player_in_range": "玩家 %s 正在标记范围内：期间所在区块保持实体刻，离开的同一刻即转为弱加载",
     "hfut.lazychunk.player_more": "等 %s 人",
@@ -182,6 +219,7 @@
     "hfut.lazychunk.page_prev": "[< 上一页]",
     "hfut.lazychunk.page_next": "[下一页 >]",
     "hfut.lazychunk.cleared": "已移除本维度全部 %s 添加的弱加载标记，对应区块恢复正常卸载",
+
     "hfut.fakePlayerOpen.title.inventory": "%s 的背包",
     "hfut.fakePlayerOpen.title.enderchest": "%s 的末影箱",
     "hfut.fakePlayerOpen.opened.inventory": "已打开 %s 的背包",
@@ -193,49 +231,66 @@
     "hfut.fakePlayerOpen.no_server": "编辑器尚未就绪",
     "hfut.fakePlayerOpen.no_permission": "你没有权限使用该命令",
     "hfut.fakePlayerOpen.not_fake": "Can only manipulate fake player",
+
     "carpet.rule.commandFakePlayerRemoteOpenStorage.name": "假人远程开箱权限",
     "carpet.rule.commandFakePlayerRemoteOpenStorage.desc": "允许使用 /player <假人> open inventory|enderchest 在假人在线时远程打开其背包或末影箱进行编辑",
     "carpet.rule.commandFakePlayerRemoteOpenStorage.extra.0": "true：所有人；ops：权限等级 2+；false：禁用；或最低权限等级 0-4",
+
     "carpet.rule.commandOfflineFakePlayerOpenStorage.name": "假人离线开箱权限",
     "carpet.rule.commandOfflineFakePlayerOpenStorage.desc": "允许使用 /player <假人> open inventory|enderchest 在假人不在线时打开其背包或末影箱进行编辑",
     "carpet.rule.commandOfflineFakePlayerOpenStorage.extra.0": "true：所有人；ops：权限等级 2+；false：禁用；或最低权限等级 0-4",
+
     "carpet.rule.commandSingleFakePlayerLoadRange.name": "假人加载范围权限",
     "carpet.rule.commandSingleFakePlayerLoadRange.desc": "允许使用 /player <假人> loadRange <2-33> 用一张自定义票据覆盖该假人的区块加载范围（完全加载 / 方块刻 / 实体刻三圈一并调整）；loadRange reset 清除该设置并恢复为服务默认值",
     "carpet.rule.commandSingleFakePlayerLoadRange.extra.0": "true：所有人；ops：权限等级 2+；false：禁用；或最低权限等级 0-4",
+
     "hfut.fakePlayerLoadRange.set": "已将假人 %s 的加载范围设为 %s 格",
     "hfut.fakePlayerLoadRange.reset": "已清除假人 %s 的加载范围覆盖",
     "hfut.fakePlayerLoadRange.not_fake": "Can only manipulate fake player",
+
     "carpet.rule.dolphinBoatRidingRestore.name": "海豚上船恢复",
     "carpet.rule.dolphinBoatRidingRestore.desc": "[1.21.9+]恢复 1.21.9 前海豚可进入船的行为",
+
     "hfut.fakePlayerTickStage.adjusted": "假人 %s 的 tick 阶段已调整：%s，全局规则为 %s",
     "hfut.fakePlayerTickStage.query": "假人 %s 的 tick 阶段当前为：%s",
     "hfut.fakePlayerTickStage.stage.network": "网络阶段NU",
     "hfut.fakePlayerTickStage.stage.entity": "实体阶段EU",
+
     "carpet.rule.resilientBuddingAmethyst.name": "坚毅紫水晶母岩",
     "carpet.rule.resilientBuddingAmethyst.desc": "将紫水晶母岩的硬度与爆炸抗性改为 1557",
+
     "carpet.rule.fragileGlass.name": "易碎玻璃",
     "carpet.rule.fragileGlass.desc": "将玻璃、染色玻璃、遮光玻璃和玻璃板的合适挖掘工具设为锄头",
+
     "carpet.rule.stoneCutCobblestoneVariants.name": "石头可切圆石变种",
     "carpet.rule.stoneCutCobblestoneVariants.desc": "[1.21.x]在切石机中，石头和深板岩可切出相应的圆石及其圆石变种建筑方块",
+
     "carpet.rule.easyDispenserCrafting.name": "便捷发射器合成",
     "carpet.rule.easyDispenserCrafting.desc": "使用弓的合成配方并在其中间空位放置投掷器，即可合成发射器",
+
     "carpet.rule.lateralFlowingWaterNoBrittleIce.name": "侧向流动水不生成脆冰",
     "carpet.rule.lateralFlowingWaterNoBrittleIce.desc": "[26.4-snapshot-4+]侧向流动的水接触到蓝冰时不再转化为脆冰",
+
     "carpet.rule.elytraMembraneShield.name": "鞘翅耐久护盾",
     "carpet.rule.elytraMembraneShield.desc": "在铁砧中为满耐久的鞘翅消耗幻翼膜，附加一层可消耗的护盾耐久：受损时先扣护盾，护盾耗尽后才扣真实耐久，护盾不会自行衰减。每块幻翼膜提供 108 点护盾并消耗 1 级经验，取出结果时消耗右侧槽内的全部幻翼膜",
     "carpet.rule.elytraMembraneShield.tooltip": "鞘翅耐久护盾：%s",
+
     "carpet.rule.blockPlacementIgnoreAttachment.name": "放置忽略附着检查",
     "carpet.rule.blockPlacementIgnoreAttachment.desc": "放置方块时跳过方块自身的附着检查",
     "carpet.rule.blockPlacementIgnoreAttachment.extra.0": "更新时依然会检查附着，推荐搭配 TIS 的『完全没有方块更新』(totallyNoBlockUpdate) 使用",
+
     "carpet.rule.separateMapModWorlds.name": "地图模组世界隔离",
     "carpet.rule.separateMapModWorlds.desc": "向 Xaero 的小地图/世界地图与 VoxelMap 发送稳定的世界识别 ID，使同一地址下的不同世界不再共享地图数据",
     "carpet.rule.separateMapModWorlds.extra.0": "true / auto：在世界根目录生成并保存 UUID（carpet-hfut-addition-map-world-id.txt）；其他非空值（≤255 字节）原样作为 ID",
+
     "carpet.rule.kelpGrowOnlyIntoFullWater.name": "海带仅长入满格水",
     "carpet.rule.kelpGrowOnlyIntoFullWater.desc": "海带只会长进水源或满格水（下落水），不再长进流动水中",
     "carpet.rule.kelpGrowOnlyIntoFullWater.extra.0": "自然生长与骨粉催熟均受此规则限制",
+
     "carpet.rule.silkTouchFrostedIce.name": "精准采集可采集霜冰",
     "carpet.rule.silkTouchFrostedIce.desc": "使用带精准采集附魔的工具破坏霜冰时，掉落一个普通冰，而不是化成空气",
     "carpet.rule.silkTouchFrostedIce.extra.0": "创造模式玩家不受影响；霜冰仍会按原版节奏融化成水",
+
     "carpet.rule.portableInfiniteWater.name": "便携无限水",
     "carpet.rule.portableInfiniteWater.desc": "主副手同时持有原版水桶时，用水桶放置不会消耗桶",
     "carpet.rule.portableInfiniteWater.extra.0": "仅对原版水桶生效；机制限定为水，不适用于熔岩"
