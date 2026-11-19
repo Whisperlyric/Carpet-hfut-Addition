@@ -221,7 +221,7 @@
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `BUGFIX`
 
-## [26.4-]末影龙垂直速度修复 (enderDragonVerticalVelocityFix) `MC<=26.4`
+## [26.4-snapshot-9-]末影龙垂直速度修复 (enderDragonVerticalVelocityFix) `MC<=26.3`
 
 修复末影龙飞向目标节点时垂直速度过低的问题(MC-272431)。
 

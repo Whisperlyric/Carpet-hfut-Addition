@@ -7,6 +7,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
+//#if MC >= 260400
+//$$ import net.minecraft.world.inventory.Slot.Section;
+//#endif
 import net.minecraft.world.item.ItemStack;
 
 import java.util.function.IntPredicate;
@@ -16,6 +19,10 @@ import java.util.function.IntPredicate;
  * (so the client renders a normal chest) but supporting inert placeholder cells:
  * placeholder slots reject both placing and picking up, keeping them out of
  * shift-click transfers. {@link #stillValid(Player)} is unconditional.
+ * <p>
+ * From 26.4-snapshot-10 {@code Slot} also takes a {@code Section} tag; the
+ * 26.4 node passes the matching viewer-inventory section, older nodes use the
+ * four-argument constructor.
  */
 public final class FakePlayerStorageMenu extends AbstractContainerMenu {
     private static final int COLUMNS = 9;
@@ -41,14 +48,34 @@ public final class FakePlayerStorageMenu extends AbstractContainerMenu {
         }
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < COLUMNS; col++) {
+                //#if MC >= 260400
+                //$$ addSlot(new Slot(viewerInventory, col + row * COLUMNS + 9,
+                //$$         8 + col * 18, 103 + row * 18 + offset,
+                //$$         viewerSection(col + row * COLUMNS + 9)));
+                //#else
                 addSlot(new Slot(viewerInventory, col + row * COLUMNS + 9,
                         8 + col * 18, 103 + row * 18 + offset));
+                //#endif
             }
         }
         for (int col = 0; col < COLUMNS; col++) {
+            //#if MC >= 260400
+            //$$ addSlot(new Slot(viewerInventory, col, 8 + col * 18, 161 + offset,
+            //$$         Section.HOTBAR));
+            //#else
             addSlot(new Slot(viewerInventory, col, 8 + col * 18, 161 + offset));
+            //#endif
         }
     }
+
+    //#if MC >= 260400
+    //$$ /** Maps a viewer-inventory index (9-35 main, 0-8 hotbar) to its slot section. */
+    //$$ private static Section viewerSection(int index) {
+    //$$     return index >= Inventory.getSelectionSize()
+    //$$             ? Section.INVENTORY
+    //$$             : Section.HOTBAR;
+    //$$ }
+    //#endif
 
     @Override
     public boolean stillValid(Player player) {
@@ -90,7 +117,11 @@ public final class FakePlayerStorageMenu extends AbstractContainerMenu {
         private final boolean placeholder;
 
         StorageSlot(Container container, int slot, int x, int y, boolean placeholder) {
+            //#if MC >= 260400
+            //$$ super(container, slot, x, y, Section.CONTAINER);
+            //#else
             super(container, slot, x, y);
+            //#endif
             this.placeholder = placeholder;
         }
 

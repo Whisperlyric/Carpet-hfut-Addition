@@ -1,6 +1,9 @@
 package dev.whisperlyric.carpet_hfut_addition.utils;
 
 import net.minecraft.commands.CommandSourceStack;
+//#if MC >= 260400
+//$$ import net.minecraft.commands.CommandPermissionLevels;
+//#endif
 import net.minecraft.commands.Commands;
 
 import java.util.Locale;
@@ -32,7 +35,16 @@ public final class CommandUtil {
     }
 
     private static boolean checkLevel(CommandSourceStack source, int level) {
-        //#if MC >= 12111
+        //#if MC >= 260400
+        //$$ net.minecraft.server.permissions.PermissionCheck check = switch (level) {
+        //$$     case 0 -> CommandPermissionLevels.LEVEL_ALL;
+        //$$     case 1 -> CommandPermissionLevels.LEVEL_MODERATORS;
+        //$$     case 3 -> CommandPermissionLevels.LEVEL_ADMINS;
+        //$$     case 4 -> CommandPermissionLevels.LEVEL_OWNERS;
+        //$$     default -> CommandPermissionLevels.LEVEL_GAMEMASTERS;
+        //$$ };
+        //$$ return check.check(source.permissions());
+        //#elseif MC >= 12111
         //$$ net.minecraft.server.permissions.PermissionCheck check = switch (level) {
         //$$     case 0 -> Commands.LEVEL_ALL;
         //$$     case 1 -> Commands.LEVEL_MODERATORS;

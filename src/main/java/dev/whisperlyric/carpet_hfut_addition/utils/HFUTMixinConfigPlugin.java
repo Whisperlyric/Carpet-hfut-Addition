@@ -50,6 +50,11 @@ public class HFUTMixinConfigPlugin extends RestrictiveMixinConfigPlugin {
         } else {
             out.add("rule.stoneCutCobblestoneVariants.RecipeManagerMixin");
         }
+        // the dragon mixin is compiled only up to 26.3 (snapshot-10 of the 26.4
+        // cycle restored the 0.1 acceleration natively, MC-272431)
+        if (!mc.startsWith("26.") || !minorAtLeast(mc, 4)) {
+            out.add("rule.enderDragonFlight.EnderDragonMixin");
+        }
         if (!mc.startsWith("26.") || !minorAtLeast(mc, 3)) {
             out.add("client.rule.mapPlayerIconRotation.MapDecorationMixin");
         }

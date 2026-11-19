@@ -161,10 +161,13 @@ public class HFUTSettings {
     /**
      * Fix MC-272431: since 19w08b the dragon's vertical acceleration toward
      * its target node is scaled by 0.01 instead of 0.1 (1.12 had 0.1), so
-     * it can barely climb or dive. Unfixed in every supported version.
+     * it can barely climb or dive. 26.4-snapshot-10 restored 0.1 natively,
+     * so the fix only exists on nodes up to 26.3.
      */
+    //#if MC <= 260300
     @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.BUGFIX})
     public static boolean enderDragonVerticalVelocityFix = false;
+    //#endif
 
     /**
      * Port of the 26.3 villager trade change: a qualifying trade levels the

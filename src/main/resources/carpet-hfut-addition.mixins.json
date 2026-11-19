@@ -31,7 +31,6 @@
         "rule.reloginLeak.ReLoginTaskMixin",
         "rule.reloginLeak.PlayerListSaveSkipMixin",
         "rule.miningFatigue.PlayerMixin",
-        "rule.enderDragonFlight.EnderDragonMixin",
         "rule.villagerInstantLevelUp.VillagerMixin",
         "rule.villagerLivePriceSync.VillagerMixin",
         "rule.villagerPricing.VillagerPriceInvoker",

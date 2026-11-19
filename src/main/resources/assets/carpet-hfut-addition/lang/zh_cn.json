@@ -79,7 +79,7 @@
     "carpet.rule.miningFatigueDigSpeedFix.extra.0": "修复了26.2及以下的挖掘疲劳Ⅲ起硬编码的挖掘速度多一个0的问题",
     "carpet.rule.miningFatigueDigSpeedFix.extra.1": "Ⅴ级及以上使用0.0081",
 
-    "carpet.rule.enderDragonVerticalVelocityFix.name": "[26.4-]末影龙垂直速度修复",
+    "carpet.rule.enderDragonVerticalVelocityFix.name": "[26.4-snapshot-9-]末影龙垂直速度修复",
     "carpet.rule.enderDragonVerticalVelocityFix.desc": "修复末影龙飞向目标节点时垂直速度过低的问题(MC-272431)，26.4-snapshot-4 仍未修复",
     "carpet.rule.enderDragonVerticalVelocityFix.extra.0": "19w08b(1.14)起垂直加速度系数0.01(曾为0.1)，末影龙难以爬升和俯冲，在目标节点周围来回盘旋",
     "carpet.rule.enderDragonVerticalVelocityFix.extra.1": "恢复 1.13 及更早的末影龙飞行行为，同时缓解 MC-271336、MC-271337、MC-197201",

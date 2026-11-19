@@ -102,7 +102,7 @@ dependencies {
 	def gcaJarVariant = [
 			"1.21.3"         : "mc1.21.2",
 			"1.21.8"         : "mc1.21.6",
-			"26.4-snapshot-4": "mc26.4-snapshot-3",
+			"26.4-snapshot-10": "mc26.4-snapshot-5",
 	].getOrDefault(project.minecraft_version, "mc${project.minecraft_version}")
 	autoCompileOnly(name: "gugle-carpet-addition-${gcaJarVariant}", version: "${project.gca_compile_version}") { transitive = false }
 }

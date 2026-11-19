@@ -78,7 +78,7 @@
     "carpet.rule.miningFatigueDigSpeedFix.extra.0": "On 26.2 and below the hardcoded dig speed from fatigue III up has an extra zero",
     "carpet.rule.miningFatigueDigSpeedFix.extra.1": "Level V and above use 0.0081",
 
-    "carpet.rule.enderDragonVerticalVelocityFix.name": "[26.4-] Ender Dragon Vertical Velocity Fix",
+    "carpet.rule.enderDragonVerticalVelocityFix.name": "[26.4-snapshot-9-] Ender Dragon Vertical Velocity Fix",
     "carpet.rule.enderDragonVerticalVelocityFix.desc": "Fix the ender dragon's vertical velocity when flying to a target node (MC-272431); still unfixed as of 26.4-snapshot-4",
     "carpet.rule.enderDragonVerticalVelocityFix.extra.0": "Since 19w08b (1.14) the vertical acceleration scale is 0.01 (used to be 0.1), so the dragon can barely climb or dive and circles its target nodes",
     "carpet.rule.enderDragonVerticalVelocityFix.extra.1": "Restores 1.13-and-earlier ender dragon flight behaviour and also mitigates MC-271336, MC-271337 and MC-197201",
