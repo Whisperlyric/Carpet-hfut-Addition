@@ -514,3 +514,15 @@
 - 默认值: `false`
 - 参考选项: `false`, `true`
 - 分类: `HFUT`, `FEATURE`
+
+## 便携无限水 (portableInfiniteWater)
+
+主副手同时持有原版水桶时，用水桶放置水源不会消耗桶——随身携带的便携无限水源。移植自 Carpet Ice Addition。
+
+`false`: 关闭，水桶放置后正常变为空桶（原版行为）。  
+`true`: 主副手均为原版水桶时放置不消耗。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `HFUT`, `FEATURE`

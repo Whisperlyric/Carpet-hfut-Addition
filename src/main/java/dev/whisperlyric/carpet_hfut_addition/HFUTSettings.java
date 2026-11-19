@@ -338,6 +338,10 @@ public class HFUTSettings {
     @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
     public static boolean kelpGrowOnlyIntoFullWater = false;
 
+    /** Holding a vanilla water bucket in both hands keeps the bucket full on use - a portable water source. */
+    @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
+    public static boolean portableInfiniteWater = false;
+
     /** Frosted ice broken with Silk Touch drops one regular ice instead of melting into nothing. */
     @Rule(categories = {HFUTRuleCategory.HFUT, RuleCategory.FEATURE})
     public static boolean silkTouchFrostedIce = false;

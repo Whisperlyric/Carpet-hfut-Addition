@@ -541,3 +541,15 @@ Breaking frosted ice with a Silk Touch tool drops one regular ice instead of dro
 - Default value: `false`
 - Suggested options: `false`, `true`
 - Categories: `HFUT`, `FEATURE`
+
+## Portable Infinite Water (portableInfiniteWater)
+
+With a vanilla water bucket in both hands, placing a water source no longer consumes the bucket - a portable infinite water source. Ported from Carpet Ice Addition.
+
+`false`: disabled; the bucket empties on use as usual (vanilla).  
+`true`: placements keep the bucket full while both hands hold vanilla water buckets.
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false`, `true`
+- Categories: `HFUT`, `FEATURE`

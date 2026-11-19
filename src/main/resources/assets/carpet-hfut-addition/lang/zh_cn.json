@@ -235,5 +235,8 @@
     "carpet.rule.kelpGrowOnlyIntoFullWater.extra.0": "自然生长与骨粉催熟均受此规则限制",
     "carpet.rule.silkTouchFrostedIce.name": "精准采集可采集霜冰",
     "carpet.rule.silkTouchFrostedIce.desc": "使用带精准采集附魔的工具破坏霜冰时，掉落一个普通冰，而不是化成空气",
-    "carpet.rule.silkTouchFrostedIce.extra.0": "创造模式玩家不受影响；霜冰仍会按原版节奏融化成水"
+    "carpet.rule.silkTouchFrostedIce.extra.0": "创造模式玩家不受影响；霜冰仍会按原版节奏融化成水",
+    "carpet.rule.portableInfiniteWater.name": "便携无限水",
+    "carpet.rule.portableInfiniteWater.desc": "主副手同时持有原版水桶时，用水桶放置不会消耗桶",
+    "carpet.rule.portableInfiniteWater.extra.0": "仅对原版水桶生效；机制限定为水，不适用于熔岩"
 }

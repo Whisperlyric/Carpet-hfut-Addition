@@ -235,5 +235,8 @@
     "carpet.rule.kelpGrowOnlyIntoFullWater.extra.0": "Gates random-tick growth and bonemeal alike; existing kelp is never removed",
     "carpet.rule.silkTouchFrostedIce.name": "Silk Touch Frosted Ice",
     "carpet.rule.silkTouchFrostedIce.desc": "Breaking frosted ice with a Silk Touch tool drops one regular ice instead of melting away",
-    "carpet.rule.silkTouchFrostedIce.extra.0": "Creative players are exempt; frosted ice still melts back into water on its own schedule"
+    "carpet.rule.silkTouchFrostedIce.extra.0": "Creative players are exempt; frosted ice still melts back into water on its own schedule",
+    "carpet.rule.portableInfiniteWater.name": "Portable Infinite Water",
+    "carpet.rule.portableInfiniteWater.desc": "Holding a vanilla water bucket in both hands keeps the bucket full on use",
+    "carpet.rule.portableInfiniteWater.extra.0": "Only vanilla water buckets are affected; the mechanic is limited to water, not lava"
 }
