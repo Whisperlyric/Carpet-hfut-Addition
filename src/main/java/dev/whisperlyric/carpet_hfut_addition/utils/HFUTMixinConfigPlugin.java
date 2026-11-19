@@ -55,6 +55,14 @@ public class HFUTMixinConfigPlugin extends RestrictiveMixinConfigPlugin {
         if (!mc.startsWith("26.") || !minorAtLeast(mc, 4)) {
             out.add("rule.enderDragonFlight.EnderDragonMixin");
         }
+        // dripstone placement check: PointedDripstoneBlock declares it up to
+        // 26.1.2; from 26.2 it lives on the SpeleothemBlock superclass
+        if (!mc.startsWith("26.") || !minorAtLeast(mc, 2)) {
+            out.add("rule.blockPlacementIgnoreAttachment.PointedDripstoneBlockMixin");
+        }
+        if (mc.startsWith("26.") && minorAtLeast(mc, 2)) {
+            out.add("rule.blockPlacementIgnoreAttachment.SpeleothemBlockMixin");
+        }
         if (!mc.startsWith("26.") || !minorAtLeast(mc, 3)) {
             out.add("client.rule.mapPlayerIconRotation.MapDecorationMixin");
         }

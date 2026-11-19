@@ -80,7 +80,6 @@
         "rule.blockPlacementIgnoreAttachment.BlockStateBaseMixin",
         "rule.blockPlacementIgnoreAttachment.MultifaceBlockMixin",
         "rule.blockPlacementIgnoreAttachment.VineBlockMixin",
-        "rule.blockPlacementIgnoreAttachment.PointedDripstoneBlockMixin",
         "rule.blockPlacementIgnoreAttachment.BambooStalkBlockMixin",
         "rule.blockPlacementIgnoreAttachment.WallSkullBlockMixin"
     ],
